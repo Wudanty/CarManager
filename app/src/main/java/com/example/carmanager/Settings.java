@@ -9,16 +9,17 @@ import android.widget.Button;
 
 import java.util.Objects;
 
+public class Settings extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity {
-
+    //Toolbar-----------------------------------------------
     public androidx.appcompat.widget.Toolbar toolbar;
     Button btnCar, btnMoreActivities, btnHistory, btnSettings, btnMainActivity;
+    //Toolbar-----------------------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_settings);
 
         //Toolbar-----------------------------------------------
         btnCar = findViewById(R.id.car);
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         btnCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(MainActivity.this, Car.class);
+                Intent intentSP = new Intent(Settings.this, Car.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
             }
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         btnMainActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(MainActivity.this, MainActivity.class);
+                Intent intentSP = new Intent(Settings.this, MainActivity.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
             }
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         btnHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(MainActivity.this, History.class);
+                Intent intentSP = new Intent(Settings.this, History.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
             }
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         btnMoreActivities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(MainActivity.this, MoreActivities.class);
+                Intent intentSP = new Intent(Settings.this, MoreActivities.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
             }
@@ -66,16 +67,11 @@ public class MainActivity extends AppCompatActivity {
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(MainActivity.this, Settings.class);
+                Intent intentSP = new Intent(Settings.this, Settings.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
             }
         });
         //Toolbar-----------------------------------------------
-
-
-
-
     }
-
 }
