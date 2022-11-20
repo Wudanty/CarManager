@@ -13,7 +13,7 @@
             android:name=".MoreActivities"
             android:exported="false" />
         <activity
-            android:name=".Car"
+            android:name=".CarActivity"
             android:exported="false" />
         <activity
             android:name=".History"
