@@ -1,10 +1,11 @@
 package com.example.carmanager.models;
 
 import java.sql.Blob;
-
-import lombok.Data;
+import java.util.ArrayList;
 
 public class Car {
+    public static ArrayList<Car> listOfCars = new ArrayList<>();
+
     private Integer carId;
     private String brand;
     private String model;
@@ -16,6 +17,19 @@ public class Car {
     private Blob picture;
     private String registry;
     private String carNickname;
+
+    public Car(Integer carId, String brand, String model, Integer productionDate, Double tankVolume, String vin, String description, String fuelType, String registry, String carNickname) {
+        this.carId = carId;
+        this.brand = brand;
+        this.model = model;
+        this.productionDate = productionDate;
+        this.tankVolume = tankVolume;
+        this.vin = vin;
+        this.description = description;
+        this.fuelType = fuelType;
+        this.registry = registry;
+        this.carNickname = carNickname;
+    }
 
     public Integer getCarId() {
         return carId;
