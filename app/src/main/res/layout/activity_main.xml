@@ -10,21 +10,14 @@
     <include layout="@layout/toolbar" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="STRONA DOMOWA"
-        android:textSize="20dp"
-        android:textStyle="bold" />
-
-    <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15px"
         android:layout_marginBottom="15px"
         android:text="Nazwa samochodu"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="20sp" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -42,7 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="15px">
 
             <TextView
                 android:id="@+id/textView2"
@@ -88,7 +82,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingRight="15px">
 
             <TextView
                 android:id="@+id/textView3"
