@@ -78,6 +78,14 @@
                 android:text="Rok:" />
 
             <TextView
+                android:id="@+id/tv_polisa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15px"
+                android:background="@drawable/my_border"
+                android:text="Nr polisy:" />
+
+            <TextView
                 android:id="@+id/tv_vin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -126,6 +134,14 @@
 
             <TextView
                 android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15px"
+                android:background="@drawable/my_border"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15px"
