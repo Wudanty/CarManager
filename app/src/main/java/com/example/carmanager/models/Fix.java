@@ -1,6 +1,10 @@
 package com.example.carmanager.models;
 
+import java.util.ArrayList;
+
 public class Fix {
+    public static ArrayList<Fix> listOfFix = new ArrayList<>();
+
     private Integer fixId;
     private Integer carId;
     private String dateOfFix;
@@ -8,6 +12,16 @@ public class Fix {
     private String warnings;
     private Double price;
     private String placeOfFix;
+
+    public Fix(Integer fixId, Integer carId, String dateOfFix, String fixDescription, String warnings, Double price, String placeOfFix) {
+        this.fixId = fixId;
+        this.carId = carId;
+        this.dateOfFix = dateOfFix;
+        this.fixDescription = fixDescription;
+        this.warnings = warnings;
+        this.price = price;
+        this.placeOfFix = placeOfFix;
+    }
 
     public Integer getFixId() {
         return fixId;

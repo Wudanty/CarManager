@@ -1,6 +1,10 @@
 package com.example.carmanager.models;
 
+import java.util.ArrayList;
+
 public class FuelFill {
+    public static ArrayList<FuelFill> listOfFuelFill = new ArrayList<>();
+
     private Integer fillId;
     private Integer carId;
     private String fillDate;
@@ -8,7 +12,18 @@ public class FuelFill {
     private Double price;
     private String stationName;
     private Double literAmount;
-    private Integer fuelType;
+    private String fuelType;
+
+    public FuelFill(Integer fillId, Integer carId, String fillDate, Double pricePerLiter, Double price, String stationName, Double literAmount, String fuelType) {
+        this.fillId = fillId;
+        this.carId = carId;
+        this.fillDate = fillDate;
+        this.pricePerLiter = pricePerLiter;
+        this.price = price;
+        this.stationName = stationName;
+        this.literAmount = literAmount;
+        this.fuelType = fuelType;
+    }
 
     public Integer getFillId() {
         return fillId;
@@ -66,11 +81,11 @@ public class FuelFill {
         this.literAmount = literAmount;
     }
 
-    public Integer getFuelType() {
+    public String  getFuelType() {
         return fuelType;
     }
 
-    public void setFuelType(Integer fuelType) {
+    public void setFuelType(String fuelType) {
         this.fuelType = fuelType;
     }
 }

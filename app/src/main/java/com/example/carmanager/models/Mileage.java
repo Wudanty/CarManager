@@ -1,12 +1,25 @@
 package com.example.carmanager.models;
 
+import java.util.ArrayList;
+
 public class Mileage {
+    public static ArrayList<Mileage> listOfMIleage = new ArrayList<>();
+
     private Integer mileageId;
     private Integer carId;
     private Integer actionId; //What is this?
     private String mileageCheckDate;
     private Integer mileageValue;
     private Integer actionType;
+
+    public Mileage(Integer mileageId, Integer carId, Integer actionId, String mileageCheckDate, Integer mileageValue, Integer actionType) {
+        this.mileageId = mileageId;
+        this.carId = carId;
+        this.actionId = actionId;
+        this.mileageCheckDate = mileageCheckDate;
+        this.mileageValue = mileageValue;
+        this.actionType = actionType;
+    }
 
     public Integer getMileageId() {
         return mileageId;

@@ -1,14 +1,29 @@
 package com.example.carmanager.models;
 
+import java.util.ArrayList;
+
 public class Insurance {
+    public static ArrayList<Insurance> listOfInsurance = new ArrayList<>();
+
     private Integer insuranceId;
     private Integer carId;
     private String startDate;
     private String expirationDate;
     private String provider;
-    private String price;
-    private Integer insuranceType;
+    private Double price;
+    private String insuranceType;
     private String insuranceNumber;
+
+    public Insurance(Integer insuranceId, Integer carId, String startDate, String expirationDate, String provider, Double price, String insuranceType, String insuranceNumber) {
+        this.insuranceId = insuranceId;
+        this.carId = carId;
+        this.startDate = startDate;
+        this.expirationDate = expirationDate;
+        this.provider = provider;
+        this.price = price;
+        this.insuranceType = insuranceType;
+        this.insuranceNumber = insuranceNumber;
+    }
 
     public Integer getInsuranceId() {
         return insuranceId;
@@ -50,19 +65,19 @@ public class Insurance {
         this.provider = provider;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public Integer getInsuranceType() {
+    public String getInsuranceType() {
         return insuranceType;
     }
 
-    public void setInsuranceType(Integer insuranceType) {
+    public void setInsuranceType(String insuranceType) {
         this.insuranceType = insuranceType;
     }
 
