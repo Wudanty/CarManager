@@ -1,6 +1,10 @@
 package com.example.carmanager.models;
 
+import java.util.ArrayList;
+
 public class Checkup {
+    public static ArrayList<Checkup> listOfCheckup = new ArrayList<>();
+
     private Integer checkupId;
     private Integer carId;
     private Integer mileageId;
@@ -8,8 +12,20 @@ public class Checkup {
     private String expirationDate;
     private String checkupLocation;
     private Double price;
-    private Boolean isPassed;
+    private Integer isPassed;
     private String description;
+
+    public Checkup(Integer checkupId, Integer carId, Integer mileageId, String date, String expirationDate, String checkupLocation, Double price, Integer isPassed, String description) {
+        this.checkupId = checkupId;
+        this.carId = carId;
+        this.mileageId = mileageId;
+        this.date = date;
+        this.expirationDate = expirationDate;
+        this.checkupLocation = checkupLocation;
+        this.price = price;
+        this.isPassed = isPassed;
+        this.description = description;
+    }
 
     public Integer getCheckupId() {
         return checkupId;
@@ -67,11 +83,11 @@ public class Checkup {
         this.price = price;
     }
 
-    public Boolean getPassed() {
+    public Integer getPassed() {
         return isPassed;
     }
 
-    public void setPassed(Boolean passed) {
+    public void setPassed(Integer passed) {
         isPassed = passed;
     }
 

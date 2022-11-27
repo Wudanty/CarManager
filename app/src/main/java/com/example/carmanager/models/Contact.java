@@ -1,11 +1,23 @@
 package com.example.carmanager.models;
 
+import java.util.ArrayList;
+
 public class Contact {
+    public static ArrayList<Contact> listOfContact = new ArrayList<>();
+
     private Integer contactId;
     private String contactName;
     private String phoneNumber;
     private String email;
     private String address;
+
+    public Contact(Integer contactId, String contactName, String phoneNumber, String email, String address) {
+        this.contactId = contactId;
+        this.contactName = contactName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+    }
 
     public Integer getContactId() {
         return contactId;

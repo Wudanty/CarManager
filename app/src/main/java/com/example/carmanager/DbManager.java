@@ -8,8 +8,17 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.carmanager.models.Action;
 import com.example.carmanager.models.Car;
 import com.example.carmanager.models.CarTodo;
+import com.example.carmanager.models.Checkup;
+import com.example.carmanager.models.Contact;
+import com.example.carmanager.models.Fix;
+import com.example.carmanager.models.FuelFill;
+import com.example.carmanager.models.Insurance;
+import com.example.carmanager.models.Maintenance;
+import com.example.carmanager.models.Mileage;
+import com.example.carmanager.models.Notification;
 
 public class DbManager extends SQLiteOpenHelper {
     private static DbManager dbManager;
@@ -148,8 +157,8 @@ public class DbManager extends SQLiteOpenHelper {
                 .append(" TEXT, ")
                 .append(AUTO_PALIWO)
                 .append(" TEXT, ")
-//                .append(AUTO_ZDJECIE)
-//                .append(" BLOB, ")
+                .append(AUTO_ZDJECIE)
+                .append(" BLOB, ")
                 .append(AUTO_NUMER_DOWODU_REJESTRACYJNEGO)
                 .append(" TEXT, ")
                 .append(AUTO_NAZWA_WLASNA)
@@ -352,6 +361,7 @@ public class DbManager extends SQLiteOpenHelper {
         contentValues.put(AUTO_VIN, car.getVin());
         contentValues.put(AUTO_OPIS, car.getDescription());
         contentValues.put(AUTO_PALIWO, car.getFuelType());
+        contentValues.put(AUTO_ZDJECIE,car.getPicture());
         contentValues.put(AUTO_NUMER_DOWODU_REJESTRACYJNEGO, car.getRegistry());
         contentValues.put(AUTO_NAZWA_WLASNA, car.getCarNickname());
 
@@ -373,9 +383,10 @@ public class DbManager extends SQLiteOpenHelper {
                     String vin = result.getString(5);
                     String description = result.getString(6);
                     String fuelType = result.getString(7);
-                    String registery = result.getString(8);
-                    String carNickname = result.getString(9);
-                    Car car = new Car(id, brand, model, productionDate, tankVolume, vin, description, fuelType, registery, carNickname);
+                    byte[] image= result.getBlob(8);
+                    String registery = result.getString(9);
+                    String carNickname = result.getString(10);
+                    Car car = new Car(id,brand,model,productionDate,tankVolume,vin,description,fuelType,image,registery,carNickname);
                     Car.listOfCars.add(car);
                 }
             }
@@ -413,7 +424,6 @@ public class DbManager extends SQLiteOpenHelper {
         contentValues.put(DO_ZROBIENIA_ID_AUTA, carTodo.getCarId());
         contentValues.put(DO_ZROBIENIA_OPIS, carTodo.getDescription());
         contentValues.put(DO_ZROBIENIA_NAZWA, carTodo.getName());
-
 
         sqLiteDatabase.insert(TABLE_DO_ZROBIENIA, null, contentValues);
     }
@@ -456,4 +466,506 @@ public class DbManager extends SQLiteOpenHelper {
         sqLiteDatabase.delete(TABLE_DO_ZROBIENIA, ID + " =? ", new String[]{String.valueOf(carTodo.getCarId())});
     }
 
+    //MAINTENANCE
+    public void addMaintenanceToDb(Maintenance maintenance) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(EKSPLOATACYJNE_OPIS, maintenance.getDescription());
+        contentValues.put(EKSPLOATACYJNE_CO, maintenance.getMaintenanceTarget());
+        contentValues.put(EKSPLOATACYJNE_DATA, maintenance.getMaintenanceDate());
+        contentValues.put(EKSPLOATACYJNE_GDZIE, maintenance.getPlace());
+        contentValues.put(EKSPLOATACYJNE_KWOTA, maintenance.getPrice());
+        contentValues.put(EKSPLOATACYJNE_NAST_DATA, maintenance.getNextMaintenanceDate());
+        contentValues.put(EKSPLOATACYJNE_NAST_PRZEBIEG, maintenance.getNextMileage());
+        contentValues.put(EKSPLOATACYJNE_ID_AUTA, maintenance.getCarId());
+    }
+
+    public void fillMaintenanceArrayList() {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        Maintenance.listOfMaintance.clear();
+
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_EKSPLOATACYJNE, null)) {
+            if (result.getCount() != 0) {
+                while (result.moveToNext()) {
+                    int id = result.getInt(0);
+                    String description = result.getString(1);
+                    String target = result.getString(2);
+                    String date = result.getString(3);
+                    String where = result.getString(4);
+                    Double price = result.getDouble(5);
+                    String nextDate = result.getString(6);
+                    Double nextMileage = result.getDouble(7);
+                    int carId = result.getInt(8);
+
+                    Maintenance maintenance = new Maintenance(id, carId, date, target, nextDate, nextMileage, price, description, where);
+                    Maintenance.listOfMaintance.add(maintenance);
+
+                }
+            }
+        }
+    }
+
+    public void updateMaintenanceInDb(Maintenance maintenance) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(EKSPLOATACYJNE_OPIS, maintenance.getDescription());
+        contentValues.put(EKSPLOATACYJNE_CO, maintenance.getMaintenanceTarget());
+        contentValues.put(EKSPLOATACYJNE_DATA, maintenance.getMaintenanceDate());
+        contentValues.put(EKSPLOATACYJNE_GDZIE, maintenance.getPlace());
+        contentValues.put(EKSPLOATACYJNE_KWOTA, maintenance.getPrice());
+        contentValues.put(EKSPLOATACYJNE_NAST_DATA, maintenance.getNextMaintenanceDate());
+        contentValues.put(EKSPLOATACYJNE_NAST_PRZEBIEG, maintenance.getNextMileage());
+        contentValues.put(EKSPLOATACYJNE_ID_AUTA, maintenance.getCarId());
+
+        sqLiteDatabase.update(TABLE_EKSPLOATACYJNE, contentValues, ID + " =? ", new String[]{String.valueOf(maintenance.getMaintenanceId())});
+    }
+
+    public void deleteMaintenance(Maintenance maintenance) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        sqLiteDatabase.delete(TABLE_EKSPLOATACYJNE, ID + " =? ", new String[]{String.valueOf(maintenance.getMaintenanceId())});
+    }
+
+    //CONTACT
+    public void addContactToDb(Contact contact) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(KONTAKT_NAZWA, contact.getContactName());
+        contentValues.put(KONTAKT_NUMER, contact.getPhoneNumber());
+        contentValues.put(KONTAKT_ADRES, contact.getAddress());
+        contentValues.put(KONTAKT_EMAIL, contact.getEmail());
+
+        sqLiteDatabase.insert(TABLE_KONTAKT, null, contentValues);
+    }
+
+    public void fillContactArrayList() {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        Contact.listOfContact.clear();
+
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_KONTAKT, null)) {
+            if (result.getCount() != 0) {
+                while (result.moveToNext()) {
+                    int id = result.getInt(0);
+                    String name = result.getString(1);
+                    String number = result.getString(2);
+                    String address = result.getString(3);
+                    String email = result.getString(4);
+
+                    Contact contact = new Contact(id, name, number, email, address);
+                    Contact.listOfContact.add(contact);
+                }
+            }
+        }
+    }
+
+    public void updateContactInDb(Contact contact) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(KONTAKT_NAZWA, contact.getContactName());
+        contentValues.put(KONTAKT_NUMER, contact.getPhoneNumber());
+        contentValues.put(KONTAKT_ADRES, contact.getAddress());
+        contentValues.put(KONTAKT_EMAIL, contact.getEmail());
+
+        sqLiteDatabase.update(TABLE_KONTAKT, contentValues, ID + " =? ", new String[]{String.valueOf(contact.getContactId())});
+    }
+
+    public void deleteContactInDb(Contact contact) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        sqLiteDatabase.delete(TABLE_KONTAKT, ID + " =? ", new String[]{String.valueOf(contact.getContactId())});
+    }
+
+    //FIX
+    public void addFixToDb(Fix fix) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(NAPRAWA_ID_AUTA, fix.getCarId());
+        contentValues.put(NAPRAWA_DATA, fix.getDateOfFix());
+        contentValues.put(NAPRAWA_CO, fix.getFixDescription());
+        contentValues.put(NAPRAWA_UWAGI, fix.getWarnings());
+        contentValues.put(NAPRAWA_CENA, fix.getPrice());
+        contentValues.put(NAPRAWA_GDZIE, fix.getPlaceOfFix());
+
+        sqLiteDatabase.insert(TABLE_NAPRAWA, null, contentValues);
+    }
+
+    public void fillFixArrayList() {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        Fix.listOfFix.clear();
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_KONTAKT, null)) {
+            if (result.getCount() != 0) {
+                while (result.moveToNext()) {
+                    int id = result.getInt(0);
+                    int carId = result.getInt(1);
+                    String date = result.getString(2);
+                    String description = result.getString(3);
+                    String warnings = result.getString(4);
+                    Double price = result.getDouble(5);
+                    String where = result.getString(6);
+
+                    Fix fix = new Fix(id, carId, date, description, warnings, price, where);
+                    Fix.listOfFix.add(fix);
+
+                }
+            }
+        }
+    }
+
+    public void updateFixInDb(Fix fix) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(NAPRAWA_ID_AUTA, fix.getCarId());
+        contentValues.put(NAPRAWA_DATA, fix.getDateOfFix());
+        contentValues.put(NAPRAWA_CO, fix.getFixDescription());
+        contentValues.put(NAPRAWA_UWAGI, fix.getWarnings());
+        contentValues.put(NAPRAWA_CENA, fix.getPrice());
+        contentValues.put(NAPRAWA_GDZIE, fix.getPlaceOfFix());
+
+        sqLiteDatabase.update(TABLE_NAPRAWA, contentValues, ID + " =? ", new String[]{String.valueOf(fix.getFixId())});
+    }
+
+    public void deleteFixInDb(Fix fix) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        sqLiteDatabase.delete(TABLE_NAPRAWA, ID + " =? ", new String[]{String.valueOf(fix.getFixId())});
+    }
+
+    //NOTIFICATION
+    public void addNotificationToDb(Notification notification) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(POWIADOMIENIA_ID_AUTA, notification.getCarId());
+        contentValues.put(POWIADOMIENIA_KIEDY, notification.getDate());
+        contentValues.put(POWIADOMIENIA_OPIS, notification.getDescription());
+        contentValues.put(POWIADOMIENIA_STOPIEN_WAZNOSCI, notification.getImportance());
+        contentValues.put(POWIADOMIENIA_TYP_POWIADOMIENIA, notification.getNotificationType());
+
+        sqLiteDatabase.insert(TABLE_POWIADOMIENIA, null, contentValues);
+    }
+
+    public void fillNotificationArrayList() {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        Notification.listOfNotification.clear();
+
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_POWIADOMIENIA, null)) {
+            if (result.getCount() != 0) {
+                while (result.moveToNext()) {
+                    int id = result.getInt(0);
+                    int carId = result.getInt(1);
+                    String date = result.getString(2);
+                    String description = result.getString(3);
+                    int importance = result.getInt(4);
+                    int type = result.getInt(5);
+
+                    Notification notification = new Notification(id, carId, date, description, importance, type);
+                    Notification.listOfNotification.add(notification);
+                }
+            }
+        }
+    }
+
+    public void updateNotificationInDb(Notification notification) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(POWIADOMIENIA_ID_AUTA, notification.getCarId());
+        contentValues.put(POWIADOMIENIA_KIEDY, notification.getDate());
+        contentValues.put(POWIADOMIENIA_OPIS, notification.getDescription());
+        contentValues.put(POWIADOMIENIA_STOPIEN_WAZNOSCI, notification.getImportance());
+        contentValues.put(POWIADOMIENIA_TYP_POWIADOMIENIA, notification.getNotificationType());
+
+        sqLiteDatabase.update(TABLE_POWIADOMIENIA, contentValues, ID + " =? ", new String[]{String.valueOf(notification.getNotificationId())});
+    }
+
+    public void deleteNotificationInDb(Notification notification) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        sqLiteDatabase.delete(TABLE_POWIADOMIENIA, ID + " =? ", new String[]{String.valueOf(notification.getNotificationId())});
+    }
+
+    //MILEAGE
+    public void addMileageToDb(Mileage mileage) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(PRZEBIEG_ID_AUTA, mileage.getCarId());
+        contentValues.put(PRZEBIEG_ID_AKCJI, mileage.getActionId());
+        contentValues.put(PRZEBIEG_DATA, mileage.getMileageCheckDate());
+        contentValues.put(PRZEBIEG_ILE, mileage.getMileageValue());
+
+        sqLiteDatabase.insert(TABLE_PRZEBIEG, null, contentValues);
+    }
+
+    public void fillMileageArrayList() {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        Mileage.listOfMIleage.clear();
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEBIEG, null)) {
+            if (result.getCount() != 0) {
+                while (result.moveToNext()) {
+                    int id = result.getInt(0);
+                    int carId = result.getInt(1);
+                    int actionId = result.getInt(2);
+                    String date = result.getString(3);
+                    int mileageValue = result.getInt(4);
+
+                    Mileage mileage = new Mileage(id, carId, actionId, date, mileageValue, actionId);
+                    Mileage.listOfMIleage.add(mileage);
+
+                }
+            }
+        }
+    }
+
+    public void updateMileageInDb(Mileage mileage) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(PRZEBIEG_ID_AUTA, mileage.getCarId());
+        contentValues.put(PRZEBIEG_ID_AKCJI, mileage.getActionId());
+        contentValues.put(PRZEBIEG_DATA, mileage.getMileageCheckDate());
+        contentValues.put(PRZEBIEG_ILE, mileage.getMileageValue());
+        sqLiteDatabase.update(TABLE_PRZEBIEG, contentValues, ID + " =? ", new String[]{String.valueOf(mileage.getMileageId())});
+    }
+
+    public void deleteMileageInDb(Mileage mileage) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        sqLiteDatabase.delete(TABLE_PRZEBIEG, ID + " =? ", new String[]{String.valueOf(mileage.getMileageId())});
+    }
+
+    //CHECKUP
+    public void addCheckupToDb(Checkup checkup) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(PRZEBIEG_ID_AUTA, checkup.getCarId());
+        contentValues.put(PRZEGLAD_ID_PRZEBIEG, checkup.getMileageId());
+        contentValues.put(PRZEGLAD_KIEDY, checkup.getDate());
+        contentValues.put(PRZEGLAD_DO_KIEDY, checkup.getExpirationDate());
+        contentValues.put(PRZEGLAD_GDZIE, checkup.getCheckupLocation());
+        contentValues.put(PRZEGLAD_CENA, checkup.getPrice());
+        contentValues.put(PRZEGLAD_POZYTYWNY, checkup.getPassed());
+        contentValues.put(PRZEGLAD_OPIS, checkup.getDescription());
+
+        sqLiteDatabase.insert(TABLE_PRZEGLAD, null, contentValues);
+    }
+
+    public void fillCheckupArrayList() {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Checkup.listOfCheckup.clear();
+
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEGLAD, null)) {
+            if (result.getCount() != 0) {
+                while (result.moveToNext()) {
+                    int id = result.getInt(0);
+                    int carId = result.getInt(1);
+                    int mileageId = result.getInt(2);
+                    String date = result.getString(3);
+                    String expirationDate = result.getString(4);
+                    String place = result.getString(5);
+                    Double price = result.getDouble(6);
+                    int passed = result.getInt(7);
+                    String description = result.getString(8);
+
+                    Checkup checkup = new Checkup(id, carId, mileageId, date, expirationDate, place, price, passed, description);
+                    Checkup.listOfCheckup.add(checkup);
+                }
+            }
+        }
+    }
+
+    public void updateCheckupInDb(Checkup checkup) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(PRZEBIEG_ID_AUTA, checkup.getCarId());
+        contentValues.put(PRZEGLAD_ID_PRZEBIEG, checkup.getMileageId());
+        contentValues.put(PRZEGLAD_KIEDY, checkup.getDate());
+        contentValues.put(PRZEGLAD_DO_KIEDY, checkup.getExpirationDate());
+        contentValues.put(PRZEGLAD_GDZIE, checkup.getCheckupLocation());
+        contentValues.put(PRZEGLAD_CENA, checkup.getPrice());
+        contentValues.put(PRZEGLAD_POZYTYWNY, checkup.getPassed());
+        contentValues.put(PRZEGLAD_OPIS, checkup.getDescription());
+
+        sqLiteDatabase.update(TABLE_PRZEGLAD, contentValues, ID + " =? ", new String[]{String.valueOf(checkup.getCheckupId())});
+    }
+
+    public void deleteCheckupInDb(Checkup checkup) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        sqLiteDatabase.delete(TABLE_PRZEGLAD, ID + " =? ", new String[]{String.valueOf(checkup.getCheckupId())});
+    }
+
+    //ACTION
+    public void addActionToDb(Action action) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(SLOWNIKA_AKCJI_NAZWA_AKCJI, action.getName());
+
+        sqLiteDatabase.insert(TABLE_SLOWNIK_AKCJI, null, contentValues);
+    }
+
+    public void fillActionArrayList() {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Action.listOfActions.clear();
+
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_SLOWNIK_AKCJI, null)) {
+            if (result.getCount() != 0) {
+                while (result.moveToNext()) {
+                    int id = result.getInt(0);
+                    String name = result.getString(1);
+
+                    Action action = new Action(id, name);
+                    Action.listOfActions.add(action);
+                }
+            }
+        }
+    }
+
+    public void updateActionInDb(Action action) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(SLOWNIKA_AKCJI_NAZWA_AKCJI, action.getName());
+        sqLiteDatabase.update(TABLE_SLOWNIK_AKCJI, contentValues, ID + " =? ", new String[]{String.valueOf(action.getActionId())});
+    }
+
+    public void deleteActionInDb(Action action) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        sqLiteDatabase.delete(TABLE_SLOWNIK_AKCJI, ID + " =? ", new String[]{String.valueOf(action.getActionId())});
+    }
+
+    //FUEL FILL
+    public void addFuelFIllToDb(FuelFill fuelFill) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(TANKOWANIE_ID_AUTA, fuelFill.getCarId());
+        contentValues.put(TANKOWANIE_DATA, fuelFill.getFillDate());
+        contentValues.put(TANKOWANIE_CENAZALITR, fuelFill.getPricePerLiter());
+        contentValues.put(TANKOWANIE_KWOTA, fuelFill.getPrice());
+        contentValues.put(TANKOWANIE_NAZWA_STACJI, fuelFill.getStationName());
+        contentValues.put(TANKOWANIE_ILOSC, fuelFill.getLiterAmount());
+        contentValues.put(TANKOWANIE_JAKIE_PALIWO, fuelFill.getFuelType());
+
+        sqLiteDatabase.insert(TABLE_TANKOWANIE, null, contentValues);
+    }
+
+    public void fillFuelFillArrayList() {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        FuelFill.listOfFuelFill.clear();
+
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_TANKOWANIE, null)) {
+            if (result.getCount() != 0) {
+                while (result.moveToNext()) {
+                    int id = result.getInt(0);
+                    int carId = result.getInt(1);
+                    String date = result.getString(2);
+                    Double pricePerLiter = result.getDouble(3);
+                    Double price = result.getDouble(4);
+                    String stationName = result.getString(5);
+                    Double amount = result.getDouble(6);
+                    String fuelType = result.getString(7);
+
+                    FuelFill fuelFill = new FuelFill(id, carId, date, pricePerLiter, price, stationName, amount, fuelType);
+
+                    FuelFill.listOfFuelFill.add(fuelFill);
+                }
+            }
+        }
+    }
+
+    public void updateFuelFillInDb(FuelFill fuelFill) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(TANKOWANIE_ID_AUTA, fuelFill.getCarId());
+        contentValues.put(TANKOWANIE_DATA, fuelFill.getFillDate());
+        contentValues.put(TANKOWANIE_CENAZALITR, fuelFill.getPricePerLiter());
+        contentValues.put(TANKOWANIE_KWOTA, fuelFill.getPrice());
+        contentValues.put(TANKOWANIE_NAZWA_STACJI, fuelFill.getStationName());
+        contentValues.put(TANKOWANIE_ILOSC, fuelFill.getLiterAmount());
+        contentValues.put(TANKOWANIE_JAKIE_PALIWO, fuelFill.getFuelType());
+
+        sqLiteDatabase.update(TABLE_TANKOWANIE, contentValues, ID + " =? ", new String[]{String.valueOf(fuelFill.getFillId())});
+    }
+
+    public void deleteFuelFillInDb(FuelFill fuelFill) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.delete(TABLE_TANKOWANIE, ID + " =? ", new String[]{String.valueOf(fuelFill.getFillId())});
+    }
+
+    //INSURANCE
+    public void addInsuranceToDb(Insurance insurance) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(UBEZPIECZENIE_ID_AUTA, insurance.getCarId());
+        contentValues.put(UBEZPIECZENIE_KIEDY, insurance.getStartDate());
+        contentValues.put(UBEZPIECZENIE_DO_KIEDY, insurance.getExpirationDate());
+        contentValues.put(UBEZPIECZENIE_UBEZPIECZYCIEL, insurance.getProvider());
+        contentValues.put(UBEZPIECZENIE_CENA, insurance.getPrice());
+        contentValues.put(UBEZPIECZENIE_RODZAJ, insurance.getInsuranceType());
+        contentValues.put(UBEZPIECZENIE_NR_POLISY, insurance.getInsuranceNumber());
+
+        sqLiteDatabase.insert(TABLE_UBEZPIECZENIE, null, contentValues);
+    }
+
+    public void fillInsuranceArrayList() {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Insurance.listOfInsurance.clear();
+
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_UBEZPIECZENIE, null)) {
+            if (result.getCount() != 0) {
+                while (result.moveToNext()) {
+                    int id = result.getInt(0);
+                    int carId = result.getInt(1);
+                    String startDate = result.getString(2);
+                    String endDate = result.getString(3);
+                    String provider = result.getString(4);
+                    Double price = result.getDouble(5);
+                    String insuranceType = result.getString(6);
+                    String insuranceNumber = result.getString(7);
+
+                    Insurance insurance = new Insurance(id, carId, startDate, endDate, provider, price, insuranceType, insuranceNumber);
+                    Insurance.listOfInsurance.add(insurance);
+
+                }
+            }
+        }
+    }
+
+    public void updateInsuranceInDb(Insurance insurance) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(UBEZPIECZENIE_ID_AUTA, insurance.getCarId());
+        contentValues.put(UBEZPIECZENIE_KIEDY, insurance.getStartDate());
+        contentValues.put(UBEZPIECZENIE_DO_KIEDY, insurance.getExpirationDate());
+        contentValues.put(UBEZPIECZENIE_UBEZPIECZYCIEL, insurance.getProvider());
+        contentValues.put(UBEZPIECZENIE_CENA, insurance.getPrice());
+        contentValues.put(UBEZPIECZENIE_RODZAJ, insurance.getInsuranceType());
+        contentValues.put(UBEZPIECZENIE_NR_POLISY, insurance.getInsuranceNumber());
+
+        sqLiteDatabase.update(TABLE_UBEZPIECZENIE, contentValues, ID + " =? ", new String[]{String.valueOf(insurance.getInsuranceId())});
+    }
+
+    public void deleteInsuranceInDb(Insurance insurance) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.delete(TABLE_UBEZPIECZENIE, ID + " =? ", new String[]{String.valueOf(insurance.getInsuranceId())});
+    }
 }

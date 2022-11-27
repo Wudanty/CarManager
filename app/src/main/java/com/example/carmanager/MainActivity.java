@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentSP = new Intent(MainActivity.this, Settings.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
-                Maintenance maintenance = new Maintenance();
+              //  Maintenance maintenance = new Maintenance();
 
 
             }
