@@ -38,7 +38,15 @@
             android:paddingLeft="15px">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tv_nazwa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15px"
+                android:background="@drawable/my_border"
+                android:text="Nazwa:" />
+
+            <TextView
+                android:id="@+id/tv_marka"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15px"
@@ -46,7 +54,7 @@
                 android:text="Marka:" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/tv_model"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15px"
@@ -54,7 +62,7 @@
                 android:text="Model:" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/tv_tablica"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15px"
@@ -62,7 +70,7 @@
                 android:text="Tablica rejestracyjna:" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/tv_rok"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15px"
@@ -70,7 +78,7 @@
                 android:text="Rok:" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/tv_vin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/my_border"
@@ -86,6 +94,14 @@
 
             <TextView
                 android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15px"
+                android:background="@drawable/my_border"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15px"
