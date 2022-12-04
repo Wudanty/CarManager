@@ -8,6 +8,38 @@
     android:orientation="vertical">
     <include layout="@layout/toolbar"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/buttonFuel"
+            android:layout_width="0dp"
+            android:layout_height="37dp"
+            android:layout_weight="1"
+            android:textSize="8dp"
+            android:text="Dane"
+            app:cornerRadius="0sp"/>
+
+        <Button
+            android:id="@+id/buttonFix"
+            android:layout_width="0dp"
+            android:textSize="8dp"
+            android:layout_height="37dp"
+            android:layout_weight="1"
+            android:text="Detale"
+            app:cornerRadius="0sp"/>
+
+        <Button
+            android:id="@+id/buttonMaintenance"
+            android:layout_width="0dp"
+            android:layout_height="37dp"
+            android:layout_weight="1"
+            app:cornerRadius="0sp"
+            android:text="Statystyki"
+            android:textSize="8dp" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
