@@ -27,8 +27,8 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     public androidx.appcompat.widget.Toolbar toolbar;
-    Button btnCar, btnMoreActivities, btnHistory, btnSettings, btnMainActivity;
-
+    Button btnCar, btnMoreActivities, btnHistory, btnSettings, btnMainActivity,btnDataCar,btnDetailsCar,btnStatisticsCar;
+    LinearLayout dataLayout, detailsLayout, statisticsLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
         btnSettings = findViewById(R.id.settings);
         btnMainActivity = findViewById(R.id.mainActivity);
         btnHistory = findViewById(R.id.history);
+        btnDataCar = findViewById(R.id.button_data);
+        btnDetailsCar = findViewById(R.id.button_details);
+        btnStatisticsCar = findViewById(R.id.button_statistics);
+        dataLayout = findViewById(R.id.ll_car_data);
+        detailsLayout = findViewById(R.id.ll_details);
+        statisticsLayout = findViewById(R.id.ll_statistics);
+        dataLayout.setVisibility(View.VISIBLE);
 
         toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -88,11 +95,28 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        btnDataCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                additions(null);
+                dataLayout.setVisibility(View.VISIBLE);
+                detailsLayout.setVisibility(View.GONE);
+                statisticsLayout.setVisibility(View.GONE);
+            }
+        });
+        btnDetailsCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                detailsLayout.setVisibility(View.VISIBLE);
+                dataLayout.setVisibility(View.GONE);
+                statisticsLayout.setVisibility(View.GONE);
+            }
+        });
+        btnStatisticsCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                statisticsLayout.setVisibility(View.VISIBLE);
+                detailsLayout.setVisibility(View.GONE);
+                dataLayout.setVisibility(View.GONE);
             }
         });
 
