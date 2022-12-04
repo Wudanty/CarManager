@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(MainActivity.this, Settings.class);
+                Intent intentSP = new Intent(MainActivity.this, Notifications.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
             }
