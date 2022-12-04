@@ -13,6 +13,10 @@ public class Action {
         this.name = name;
     }
 
+    public Action(String name) {
+        this.name = name;
+    }
+
     public Integer getActionId() {
         return actionId;
     }

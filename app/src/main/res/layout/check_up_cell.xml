@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewCheckDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Data"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/textViewCheckExpiration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Do kiedy"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/textViewCheckGdzie"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Gdzie"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/textViewCheckPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Cena"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/textViewCheckWynik"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Wynik"
+        android:textStyle="bold"/>
+
+
+</LinearLayout>

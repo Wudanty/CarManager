@@ -19,6 +19,13 @@ public class Contact {
         this.address = address;
     }
 
+    public Contact(String contactName, String phoneNumber, String email, String address) {
+        this.contactName = contactName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+    }
+
     public Integer getContactId() {
         return contactId;
     }
