@@ -1,13 +1,25 @@
 package com.example.carmanager;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.carmanager.models.Maintenance;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
 
@@ -76,8 +88,82 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                additions(null);
+            }
+        });
+
+
         //Toolbar-----------------------------------------------
 
+
+
+
+    }
+    public void additions(View view) {
+        final LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.addition_menu, null);
+        Button btnFuel = (Button) linearLayout.findViewById(R.id.btnFuel);
+        Button btnMileage = (Button) linearLayout.findViewById(R.id.btnMileage);
+        Button btnRepairs = (Button) linearLayout.findViewById(R.id.btnRepairs);
+        Button btnCarInspection = (Button) linearLayout.findViewById(R.id.btnCarInspection);
+        Button btnOperatingElements = (Button) linearLayout.findViewById(R.id.btnOperatingElements);
+
+        final AlertDialog builder = new AlertDialog.Builder(this)
+                .setView(linearLayout)
+                .setCancelable(true)
+                .create();
+        builder.show();
+        //builder.getWindow().setLayout(600, 530);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(builder.getWindow().getAttributes());
+        lp.width = 600;
+        lp.height = 790;
+        lp.gravity = Gravity.BOTTOM | Gravity.END;
+        lp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        builder.getWindow().setAttributes(lp);
+
+
+
+
+        btnFuel.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AddictionFuel.class);
+                startActivity(intent);
+            }
+        });
+        btnMileage.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        btnRepairs.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        btnCarInspection.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        btnOperatingElements.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
 
 
