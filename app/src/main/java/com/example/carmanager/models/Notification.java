@@ -1,12 +1,24 @@
 package com.example.carmanager.models;
 
+import java.util.ArrayList;
+
 public class Notification {
+    public static ArrayList<Notification> listOfNotification = new ArrayList<>();
     private Integer notificationId;
     private Integer carId;
     private String date;
     private String description;
     private Integer importance;
     private Integer notificationType;
+
+    public Notification(Integer notificationId, Integer carId, String date, String description, Integer importance, Integer notificationType) {
+        this.notificationId = notificationId;
+        this.carId = carId;
+        this.date = date;
+        this.description = description;
+        this.importance = importance;
+        this.notificationType = notificationType;
+    }
 
     public Integer getNotificationId() {
         return notificationId;

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+  >
+
+    <Button
+        android:id="@+id/btnFuel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Paliwo"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="0dp"
+        android:textColor="@color/white"
+        android:background="@null" />
+    <Button
+        android:id="@+id/btnMileage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Przebieg"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="0dp"
+        android:textColor="@color/white" />
+    <Button
+        android:id="@+id/btnRepairs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Naprawy"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="0dp"
+        android:textColor="@color/white"/>
+    <Button
+        android:id="@+id/btnOperatingElements"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Elementy Eksploatacyjne"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="0dp"
+        android:textColor="@color/white"/>
+    <Button
+        android:id="@+id/btnCarInspection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Przegląd"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="0dp"
+        android:textColor="@color/white"/>
+
+</LinearLayout>

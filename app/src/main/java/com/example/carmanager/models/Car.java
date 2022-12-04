@@ -14,11 +14,13 @@ public class Car {
     private String vin;
     private String description;
     private String fuelType;
-    private Blob picture;
+    private byte[] picture;
     private String registry;
     private String carNickname;
 
-    public Car(Integer carId, String brand, String model, Integer productionDate, Double tankVolume, String vin, String description, String fuelType, String registry, String carNickname) {
+
+    public Car(Integer carId, String brand, String model, Integer productionDate, Double tankVolume, String vin, String description, String fuelType, byte[] picture, String registry, String carNickname) {
+
         this.carId = carId;
         this.brand = brand;
         this.model = model;
@@ -27,6 +29,7 @@ public class Car {
         this.vin = vin;
         this.description = description;
         this.fuelType = fuelType;
+        this.picture = picture;
         this.registry = registry;
         this.carNickname = carNickname;
     }
@@ -95,11 +98,11 @@ public class Car {
         this.fuelType = fuelType;
     }
 
-    public Blob getPicture() {
+    public byte[] getPicture() {
         return picture;
     }
 
-    public void setPicture(Blob picture) {
+    public void setPicture(byte[] picture) {
         this.picture = picture;
     }
 
