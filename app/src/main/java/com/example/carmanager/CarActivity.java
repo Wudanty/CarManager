@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 
 import java.util.Objects;
 
-public class Car extends AppCompatActivity {
+public class CarActivity extends AppCompatActivity {
 
     //Toolbar-----------------------------------------------
     public androidx.appcompat.widget.Toolbar toolbar;
@@ -43,7 +43,7 @@ public class Car extends AppCompatActivity {
         btnCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(Car.this, Car.class);
+                Intent intentSP = new Intent(CarActivity.this, CarActivity.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
             }
@@ -51,7 +51,7 @@ public class Car extends AppCompatActivity {
         btnMainActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(Car.this, MainActivity.class);
+                Intent intentSP = new Intent(CarActivity.this, MainActivity.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
             }
@@ -59,7 +59,7 @@ public class Car extends AppCompatActivity {
         btnHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(Car.this, History.class);
+                Intent intentSP = new Intent(CarActivity.this, History.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
             }
@@ -67,7 +67,7 @@ public class Car extends AppCompatActivity {
         btnMoreActivities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(Car.this, MoreActivities.class);
+                Intent intentSP = new Intent(CarActivity.this, MoreActivities.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
             }
@@ -75,7 +75,7 @@ public class Car extends AppCompatActivity {
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(Car.this, Settings.class);
+                Intent intentSP = new Intent(CarActivity.this, Settings.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
             }
