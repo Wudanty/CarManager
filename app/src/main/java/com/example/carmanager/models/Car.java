@@ -18,7 +18,9 @@ public class Car {
     private String registry;
     private String carNickname;
 
+
     public Car(Integer carId, String brand, String model, Integer productionDate, Double tankVolume, String vin, String description, String fuelType, byte[] picture, String registry, String carNickname) {
+
         this.carId = carId;
         this.brand = brand;
         this.model = model;

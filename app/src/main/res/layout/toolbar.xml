@@ -1,41 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.Toolbar
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#CD5C5C"
+    android:layout_height="48dp"
+    android:background="@color/white"
     android:minHeight="?actionBarSize"
     android:theme="?actionBarTheme"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/toolbar"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Toolbar">
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="⚙"
-        android:id="@+id/settings"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="📅"
-        android:id="@+id/history"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="🏠"
-        android:id="@+id/mainActivity"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="🚗"
-        android:id="@+id/car"/>
-        #android:onClick="btnCar"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="W"
-        android:id="@+id/more"/>
+    app:contentInsetStart="0dp"
+    app:contentInsetStartWithNavigation="0dp"
+    app:titleMargin="0dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/settings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="⚙"
+            app:cornerRadius="0dp" />
+
+        <Button
+            android:id="@+id/history"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="📅"
+            app:cornerRadius="0dp" />
+
+        <Button
+            android:id="@+id/mainActivity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="🏠"
+            app:cornerRadius="0dp" />
+
+        <Button
+            android:id="@+id/car"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="🚗"
+            app:cornerRadius="0dp" />
+        #android:onClick="btnCar"/>
+
+        <Button
+            android:id="@+id/more"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="W"
+            app:cornerRadius="0dp" />
+    </LinearLayout>
 
 
 </androidx.appcompat.widget.Toolbar>

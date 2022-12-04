@@ -20,6 +20,7 @@ import com.example.carmanager.models.Maintenance;
 import com.example.carmanager.models.Mileage;
 import com.example.carmanager.models.Notification;
 
+
 public class DbManager extends SQLiteOpenHelper {
     private static DbManager dbManager;
     private static String DB_NAME = "CarData";
@@ -387,6 +388,7 @@ public class DbManager extends SQLiteOpenHelper {
                     String registery = result.getString(9);
                     String carNickname = result.getString(10);
                     Car car = new Car(id, brand, model, productionDate, tankVolume, vin, description, fuelType, image, registery, carNickname);
+
                     Car.listOfCars.add(car);
                 }
             }
@@ -424,6 +426,7 @@ public class DbManager extends SQLiteOpenHelper {
         contentValues.put(DO_ZROBIENIA_ID_AUTA, carTodo.getCarId());
         contentValues.put(DO_ZROBIENIA_OPIS, carTodo.getDescription());
         contentValues.put(DO_ZROBIENIA_NAZWA, carTodo.getName());
+
 
         sqLiteDatabase.insert(TABLE_DO_ZROBIENIA, null, contentValues);
     }
@@ -465,6 +468,7 @@ public class DbManager extends SQLiteOpenHelper {
 
         sqLiteDatabase.delete(TABLE_DO_ZROBIENIA, ID + " =? ", new String[]{String.valueOf(carTodo.getCarId())});
     }
+
 
     //MAINTENANCE
     public void addMaintenanceToDb(Maintenance maintenance) {
