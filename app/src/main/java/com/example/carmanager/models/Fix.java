@@ -23,6 +23,15 @@ public class Fix {
         this.placeOfFix = placeOfFix;
     }
 
+    public Fix(Integer carId, String dateOfFix, String fixDescription, String warnings, Double price, String placeOfFix) {
+        this.carId = carId;
+        this.dateOfFix = dateOfFix;
+        this.fixDescription = fixDescription;
+        this.warnings = warnings;
+        this.price = price;
+        this.placeOfFix = placeOfFix;
+    }
+
     public Integer getFixId() {
         return fixId;
     }

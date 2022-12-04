@@ -9,16 +9,30 @@ public class Mileage {
     private Integer carId;
     private Integer actionId; //What is this?
     private String mileageCheckDate;
-    private Integer mileageValue;
+    private Double mileageValue;
     private Integer actionType;
 
-    public Mileage(Integer mileageId, Integer carId, Integer actionId, String mileageCheckDate, Integer mileageValue, Integer actionType) {
+    public Mileage(Integer mileageId, Integer carId, Integer actionId, String mileageCheckDate, Double mileageValue, Integer actionType) {
         this.mileageId = mileageId;
         this.carId = carId;
         this.actionId = actionId;
         this.mileageCheckDate = mileageCheckDate;
         this.mileageValue = mileageValue;
         this.actionType = actionType;
+    }
+
+    public Mileage(Integer carId, Integer actionId, String mileageCheckDate, Double mileageValue, Integer actionType) {
+        this.carId = carId;
+        this.actionId = actionId;
+        this.mileageCheckDate = mileageCheckDate;
+        this.mileageValue = mileageValue;
+        this.actionType = actionType;
+    }
+
+    public Mileage(Integer carId, String mileageCheckDate, Double mileageValue) {
+        this.carId = carId;
+        this.mileageCheckDate = mileageCheckDate;
+        this.mileageValue = mileageValue;
     }
 
     public Integer getMileageId() {
@@ -53,11 +67,11 @@ public class Mileage {
         this.mileageCheckDate = mileageCheckDate;
     }
 
-    public Integer getMileageValue() {
+    public Double getMileageValue() {
         return mileageValue;
     }
 
-    public void setMileageValue(Integer mileageValue) {
+    public void setMileageValue(Double mileageValue) {
         this.mileageValue = mileageValue;
     }
 

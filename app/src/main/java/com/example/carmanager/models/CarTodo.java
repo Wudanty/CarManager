@@ -18,6 +18,12 @@ public class CarTodo {
         this.description = description;
     }
 
+    public CarTodo(Integer carId, String name, String description) {
+        this.carId = carId;
+        this.name = name;
+        this.description = description;
+    }
+
     public Integer getCarTodoId() {
         return carTodoId;
     }
