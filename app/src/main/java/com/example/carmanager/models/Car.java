@@ -34,6 +34,9 @@ public class Car {
         this.carNickname = carNickname;
     }
 
+    public Car() {
+    }
+
     public Integer getCarId() {
         return carId;
     }
