@@ -480,6 +480,37 @@ public class DbManager extends SQLiteOpenHelper {
         sqLiteDatabase.insert(TABLE_AUTO, null, contentValues);
     }
 
+    public void getCarById(int carID) {
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        Car.listOfCars.clear();
+
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_AUTO + " WHERE " + ID + " = " + carID, null)) {
+            if (result.getCount() != 0) {
+                while (result.moveToNext()) {
+                    int id = result.getInt(0);
+                    String brand = result.getString(1);
+                    String model = result.getString(2);
+                    int productionDate = result.getInt(3);
+                    Double tankVolume = result.getDouble(4);
+                    String vin = result.getString(5);
+                    String description = result.getString(6);
+                    String fuelType = result.getString(7);
+                    byte[] image = result.getBlob(8);
+                    String registery = result.getString(9);
+                    String carNickname = result.getString(10);
+                    Double engineCapacity = result.getDouble(11);
+                    String colour = result.getString(12);
+                    Double weight = result.getDouble(13);
+                    String bodyType = result.getString(14);
+                    String shifterType = result.getString(15);
+                    int enginePower = result.getInt(16);
+                    Car car = new Car(id, brand, model, productionDate, tankVolume, engineCapacity, enginePower, weight, vin, bodyType, colour, shifterType, description, fuelType, image, registery, carNickname);
+                    Car.listOfCars.add(car);
+                }
+            }
+        }
+    }
+
     public void fillCarArrayList() {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Car.listOfCars.clear();
@@ -504,7 +535,7 @@ public class DbManager extends SQLiteOpenHelper {
                     String bodyType = result.getString(14);
                     String shifterType = result.getString(15);
                     int enginePower = result.getInt(16);
-                    Car car = new Car(id,brand,model,productionDate,tankVolume,engineCapacity,enginePower,weight,vin,bodyType,colour,shifterType,description,fuelType,image,registery,carNickname);
+                    Car car = new Car(id, brand, model, productionDate, tankVolume, engineCapacity, enginePower, weight, vin, bodyType, colour, shifterType, description, fuelType, image, registery, carNickname);
                     Car.listOfCars.add(car);
                 }
             }
@@ -525,11 +556,11 @@ public class DbManager extends SQLiteOpenHelper {
         contentValues.put(AUTO_NUMER_DOWODU_REJESTRACYJNEGO, car.getRegistry());
         contentValues.put(AUTO_NAZWA_WLASNA, car.getCarNickname());
         contentValues.put(AUTO_POJEMNOSC_BAKU, car.getTankVolume());
-        contentValues.put(AUTO_KOLOR,car.getColour());
-        contentValues.put(AUTO_WAGA,car.getWeight());
-        contentValues.put(AUTO_RODZAJ_NADWOZIA,car.getBodyType());
-        contentValues.put(AUTO_SKRZYNIA_BIEGOW,car.getShifterType());
-        contentValues.put(AUTO_MOC_SILNIKA,car.getEnginePower());
+        contentValues.put(AUTO_KOLOR, car.getColour());
+        contentValues.put(AUTO_WAGA, car.getWeight());
+        contentValues.put(AUTO_RODZAJ_NADWOZIA, car.getBodyType());
+        contentValues.put(AUTO_SKRZYNIA_BIEGOW, car.getShifterType());
+        contentValues.put(AUTO_MOC_SILNIKA, car.getEnginePower());
 
         sqLiteDatabase.update(TABLE_AUTO, contentValues, ID + " =? ", new String[]{String.valueOf(car.getCarId())});
     }
