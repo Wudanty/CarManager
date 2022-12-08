@@ -21,6 +21,7 @@ public class Mileage {
         this.actionType = actionType;
     }
 
+
     public Mileage(Integer carId, Integer actionId, String mileageCheckDate, Double mileageValue, Integer actionType) {
         this.carId = carId;
         this.actionId = actionId;
@@ -30,6 +31,7 @@ public class Mileage {
     }
 
     public Mileage(Integer carId, String mileageCheckDate, Double mileageValue) {
+
         this.carId = carId;
         this.mileageCheckDate = mileageCheckDate;
         this.mileageValue = mileageValue;

@@ -11,11 +11,18 @@
         android:theme="@style/Theme.CarManager">
 
         <activity
-            android:name=".AddictionFuel"
+            android:name=".AdditionOperatingElements"
             android:exported="false" />
         <activity
-            android:name=".DetailsActivity"
+            android:name=".AdditionRepairs"
             android:exported="false" />
+        <activity
+            android:name=".AdditionMileage"
+            android:exported="false" />
+        <activity
+            android:name=".AddictionFuel"
+            android:exported="false" />
+
         <activity
             android:name=".MoreActivities"
             android:exported="false" />

@@ -24,14 +24,12 @@ public class FuelFill {
         this.literAmount = literAmount;
         this.fuelType = fuelType;
     }
-
     public FuelFill(String fillDate, Double price, String stationName, Double literAmount) {
         this.fillDate = fillDate;
         this.price = price;
         this.stationName = stationName;
         this.literAmount = literAmount;
     }
-
     public FuelFill(Integer carId, String fillDate, Double pricePerLiter, Double price, String stationName, Double literAmount, String fuelType) {
         this.carId = carId;
         this.fillDate = fillDate;
