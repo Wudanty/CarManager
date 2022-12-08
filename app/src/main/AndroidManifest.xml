@@ -22,7 +22,6 @@
         <activity
             android:name=".AddictionFuel"
             android:exported="false" />
-
         <activity
             android:name=".MoreActivities"
             android:exported="false" />

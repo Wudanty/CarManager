@@ -469,20 +469,25 @@ public class DbManager extends SQLiteOpenHelper {
         contentValues.put(AUTO_MARKA, car.getBrand());
         contentValues.put(AUTO_MODEL, car.getModel());
         contentValues.put(AUTO_ROCZNIK, car.getProductionDate());
-        contentValues.put(AUTO_POJ_SILNIKA, car.getEngineCapacity());
+        contentValues.put(AUTO_POJ_SILNIKA, car.getTankVolume());
         contentValues.put(AUTO_VIN, car.getVin());
         contentValues.put(AUTO_OPIS, car.getDescription());
         contentValues.put(AUTO_PALIWO, car.getFuelType());
-        contentValues.put(AUTO_ZDJECIE, car.getPicture());
         contentValues.put(AUTO_NUMER_DOWODU_REJESTRACYJNEGO, car.getRegistry());
         contentValues.put(AUTO_NAZWA_WLASNA, car.getCarNickname());
+        contentValues.put(AUTO_POJEMNOSC_BAKU, car.getTankVolume());
+        contentValues.put(AUTO_KOLOR, car.getColour());
+        contentValues.put(AUTO_WAGA, car.getWeight());
+        contentValues.put(AUTO_RODZAJ_NADWOZIA, car.getBodyType());
+        contentValues.put(AUTO_SKRZYNIA_BIEGOW, car.getShifterType());
+        contentValues.put(AUTO_MOC_SILNIKA, car.getEnginePower());
 
         sqLiteDatabase.insert(TABLE_AUTO, null, contentValues);
     }
 
-    public void getCarById(int carID) {
+    public Car getCarById(int carID) {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-        Car.listOfCars.clear();
+        Car car=null;
 
         try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_AUTO + " WHERE " + ID + " = " + carID, null)) {
             if (result.getCount() != 0) {
@@ -504,11 +509,11 @@ public class DbManager extends SQLiteOpenHelper {
                     String bodyType = result.getString(14);
                     String shifterType = result.getString(15);
                     int enginePower = result.getInt(16);
-                    Car car = new Car(id, brand, model, productionDate, tankVolume, engineCapacity, enginePower, weight, vin, bodyType, colour, shifterType, description, fuelType, image, registery, carNickname);
-                    Car.listOfCars.add(car);
+                    car = new Car(id, brand, model, productionDate, tankVolume, engineCapacity, enginePower, weight, vin, bodyType, colour, shifterType, description, fuelType, image, registery, carNickname);
                 }
             }
         }
+        return car;
     }
 
     public void fillCarArrayList() {

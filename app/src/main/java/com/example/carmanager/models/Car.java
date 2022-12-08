@@ -44,12 +44,18 @@ public class Car {
         this.carNickname = carNickname;
     }
 
-    public Car(String brand, String model, Integer productionDate, Double tankVolume, String vin, String description, String fuelType, byte[] picture, String registry, String carNickname) {
+    public Car(String brand, String model, Integer productionDate, Double tankVolume, Double engineCapacity, int enginePower, Double weight, String vin, String bodyType, String colour, String shifterType, String description, String fuelType, byte[] picture, String registry, String carNickname) {
         this.brand = brand;
         this.model = model;
         this.productionDate = productionDate;
         this.tankVolume = tankVolume;
+        this.engineCapacity = engineCapacity;
+        this.enginePower = enginePower;
+        this.weight = weight;
         this.vin = vin;
+        this.bodyType = bodyType;
+        this.colour = colour;
+        this.shifterType = shifterType;
         this.description = description;
         this.fuelType = fuelType;
         this.picture = picture;
