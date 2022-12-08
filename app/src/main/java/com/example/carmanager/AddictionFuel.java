@@ -11,13 +11,18 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.carmanager.models.FuelFill;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
 public class AddictionFuel extends AppCompatActivity {
-
+    DbManager dbManager;
+    FuelFill fuelFill;
     Button btnSave, btnExit;
     TextView tvFuelDate;
     EditText etFuelAmount, etFuelPrice,etFuelFullPrice,etFuelWhere;
@@ -29,6 +34,7 @@ public class AddictionFuel extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addiction_fuel);
+        dbManager = new DbManager(this);
 
         btnSave = findViewById(R.id.btnSave);
         btnExit = findViewById(R.id.btnExit);
@@ -46,6 +52,8 @@ public class AddictionFuel extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, listFuelTypes);
         spinnerFuelType.setAdapter(adapter);
+
+
     }
 
     public void Exit(View view) {
@@ -53,16 +61,25 @@ public class AddictionFuel extends AppCompatActivity {
     }
 
     public void Save(View view) {
-        String fuelType, fuelDate, fuelPrice, fuelFullPrice, fuelAmount, fuelWhere;
-
-        fuelPrice = etFuelPrice.getText().toString();
-        fuelFullPrice = etFuelFullPrice.getText().toString();
+        String fuelType, fuelDate,   fuelWhere;
+        Double fuelPrice, fuelFullPrice,fuelAmount;
+        fuelPrice = Double.parseDouble(etFuelPrice.getText().toString());
+        fuelFullPrice = Double.parseDouble(etFuelFullPrice.getText().toString());
         fuelWhere = etFuelWhere.getText().toString();
-        fuelAmount = etFuelAmount.getText().toString();
+        fuelAmount = Double.parseDouble(etFuelAmount.getText().toString());
         fuelDate = ldt.toString();
         fuelType = spinnerFuelType.getSelectedItem().toString();
 
+        fuelFill = new FuelFill(1, fuelDate,fuelPrice,fuelFullPrice,fuelWhere,fuelAmount,fuelType);
+        dbManager.addFuelFIllToDb(fuelFill);
 
+    }
+    public Double FuelFullPrice(Double amount, Double price){
+        BigDecimal bdAmount = BigDecimal.valueOf(amount);
+        BigDecimal bdPrice = BigDecimal.valueOf(price);
+        bdPrice = bdPrice.multiply(bdAmount).setScale(2);
+
+        return Double.valueOf(String.valueOf(bdPrice));
     }
 
     public void FuelDate(View view) {

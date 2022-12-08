@@ -25,6 +25,16 @@ public class Insurance {
         this.insuranceNumber = insuranceNumber;
     }
 
+    public Insurance(Integer carId, String startDate, String expirationDate, String provider, Double price, String insuranceType, String insuranceNumber) {
+        this.carId = carId;
+        this.startDate = startDate;
+        this.expirationDate = expirationDate;
+        this.provider = provider;
+        this.price = price;
+        this.insuranceType = insuranceType;
+        this.insuranceNumber = insuranceNumber;
+    }
+
     public Integer getInsuranceId() {
         return insuranceId;
     }

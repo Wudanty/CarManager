@@ -20,6 +20,14 @@ public class Notification {
         this.notificationType = notificationType;
     }
 
+    public Notification(Integer carId, String date, String description, Integer importance, Integer notificationType) {
+        this.carId = carId;
+        this.date = date;
+        this.description = description;
+        this.importance = importance;
+        this.notificationType = notificationType;
+    }
+
     public Integer getNotificationId() {
         return notificationId;
     }

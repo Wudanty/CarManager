@@ -27,6 +27,17 @@ public class Checkup {
         this.description = description;
     }
 
+    public Checkup(Integer carId, Integer mileageId, String date, String expirationDate, String checkupLocation, Double price, Integer isPassed, String description) {
+        this.carId = carId;
+        this.mileageId = mileageId;
+        this.date = date;
+        this.expirationDate = expirationDate;
+        this.checkupLocation = checkupLocation;
+        this.price = price;
+        this.isPassed = isPassed;
+        this.description = description;
+    }
+
     public Integer getCheckupId() {
         return checkupId;
     }

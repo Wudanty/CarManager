@@ -57,7 +57,6 @@
             android:insetBottom="0dp"
             android:text="🚗"
             app:cornerRadius="0dp" />
-        #android:onClick="btnCar"/>
 
         <Button
             android:id="@+id/more"
