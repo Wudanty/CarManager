@@ -39,10 +39,10 @@ public class AdditionMileage extends AppCompatActivity {
     }
 
     public void Save(View view) {
-        int intMileage;
+        Double intMileage;
         String strMileageDate;
         strMileageDate = ldt.toString();
-        intMileage = Integer.parseInt(etMileage.getText().toString());
+        intMileage = Double.parseDouble(etMileage.getText().toString());
 
         mileage = new Mileage(0, strMileageDate, intMileage);
         dbManager.addMileageToDb(mileage);

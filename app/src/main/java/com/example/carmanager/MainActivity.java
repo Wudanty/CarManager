@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         DbManager dbManager = DbManager.instanceOfDatabase(this);
         Car object = dbManager.getCarById(1);
         //Toolbar-----------------------------------------------
-        btnToolbarAdd = findViewById(R.id.btnToolbarAdd);
         btnCar = findViewById(R.id.car);
         btnMoreActivities = findViewById(R.id.more);
         btnSettings = findViewById(R.id.settings);

@@ -57,7 +57,6 @@
             android:insetBottom="0dp"
             android:text="🚗"
             app:cornerRadius="0dp" />
-        #android:onClick="btnCar"/>
 
         <Button
             android:id="@+id/more"
@@ -67,14 +66,6 @@
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="W"
-            app:cornerRadius="0dp" />
-        <Button
-            android:id="@+id/btnToolbarAdd"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:insetTop="0dp"
-            android:text="+"
             app:cornerRadius="0dp" />
     </LinearLayout>
 
