@@ -34,15 +34,6 @@
             android:textSize="11sp"
             app:cornerRadius="0sp" />
 
-        <Button
-            android:id="@+id/button_statistics"
-            android:layout_width="0dp"
-            android:layout_height="37dp"
-            android:layout_weight="1"
-            android:insetTop="0dp"
-            android:text="Statystyki"
-            android:textSize="11sp"
-            app:cornerRadius="0sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -222,7 +213,7 @@
             android:textSize="20sp" />
 
         <ImageView
-            android:id="@+id/image_car3"
+            android:id="@+id/image_car2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15px"
@@ -373,90 +364,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/my_border"
                     android:text="TextView" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_statistics"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15px"
-            android:layout_marginBottom="15px"
-            android:text="Nazwa samochodu"
-            android:textAlignment="center"
-            android:textSize="20sp" />
-
-        <ImageView
-            android:id="@+id/image_car2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15px"
-            app:srcCompat="@drawable/images" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingLeft="15px">
-
-                <TextView
-                    android:id="@+id/tv_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15px"
-                    android:background="@drawable/my_border"
-                    android:text="Poj. silnika:" />
-
-                <TextView
-                    android:id="@+id/tv_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15px"
-                    android:background="@drawable/my_border"
-                    android:text="Moc silnika:" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingRight="15px">
-
-                <TextView
-                    android:id="@+id/textView123"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15px"
-                    android:background="@drawable/my_border"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/textView133"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15px"
-                    android:background="@drawable/my_border"
-                    android:text="TextView" />
-
-
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

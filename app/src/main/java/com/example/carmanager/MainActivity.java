@@ -1,30 +1,23 @@
 package com.example.carmanager;
 
-import androidx.annotation.NonUiContext;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.carmanager.models.Car;
-import com.example.carmanager.models.Maintenance;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
 
@@ -32,8 +25,8 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     public androidx.appcompat.widget.Toolbar toolbar;
-    Button btnCar, btnMoreActivities, btnHistory, btnSettings, btnMainActivity,btnDataCar,btnDetailsCar,btnStatisticsCar;
-    LinearLayout dataLayout, detailsLayout, statisticsLayout;
+    Button btnCar, btnMoreActivities, btnHistory, btnSettings, btnMainActivity,btnDataCar,btnDetailsCar;
+    LinearLayout dataLayout, detailsLayout;
     FloatingActionButton floatingButton;
     TextView text_nazwa,text_marka,text_model,text_tablica,text_rok,text_polisa,text_vin;
     TextView text_poj,text_moc,text_przebieg,text_waga,text_paliwo,text_nadwozie,text_kolor,text_skrzynia;
@@ -43,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DbManager dbManager = DbManager.instanceOfDatabase(this);
-        dbManager.fillCarArrayList();
+        Car object = dbManager.getCarById(1);
         //Toolbar-----------------------------------------------
         btnCar = findViewById(R.id.car);
         btnMoreActivities = findViewById(R.id.more);
@@ -52,12 +45,9 @@ public class MainActivity extends AppCompatActivity {
         btnHistory = findViewById(R.id.history);
         btnDataCar = findViewById(R.id.button_data);
         btnDetailsCar = findViewById(R.id.button_details);
-        btnStatisticsCar = findViewById(R.id.button_statistics);
         dataLayout = findViewById(R.id.ll_car_data);
         detailsLayout = findViewById(R.id.ll_details);
-        statisticsLayout = findViewById(R.id.ll_statistics);
         floatingButton = findViewById(R.id.fab);
-        Car object = Car.listOfCars.get(5);
 
         imageCar1 = findViewById(R.id.image_car1);
         text_nazwa = findViewById(R.id.nazwa_v);
@@ -78,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         text_kolor = findViewById(R.id.kolor_v);
         text_skrzynia = findViewById(R.id.skrzynia_v);
 
-        imageCar3 = findViewById(R.id.image_car3);
+        imageCar3 = findViewById(R.id.image_car2);
 
         try {
             imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
@@ -106,9 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnDataCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_700));
         btnDetailsCar.setBackgroundColor(btnDetailsCar.getContext().getResources().getColor(R.color.purple_500));
-        btnStatisticsCar.setBackgroundColor(btnStatisticsCar.getContext().getResources().getColor(R.color.purple_500));
         detailsLayout.setVisibility(View.GONE);
-        statisticsLayout.setVisibility(View.GONE);
 
 
 
@@ -164,10 +152,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 btnDataCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_700));
                 btnDetailsCar.setBackgroundColor(btnDetailsCar.getContext().getResources().getColor(R.color.purple_500));
-                btnStatisticsCar.setBackgroundColor(btnStatisticsCar.getContext().getResources().getColor(R.color.purple_500));
                 dataLayout.setVisibility(View.VISIBLE);
                 detailsLayout.setVisibility(View.GONE);
-                statisticsLayout.setVisibility(View.GONE);
             }
         });
         btnDetailsCar.setOnClickListener(new View.OnClickListener() {
@@ -175,20 +161,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 btnDataCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_500));
                 btnDetailsCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_700));
-                btnStatisticsCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_500));
                 detailsLayout.setVisibility(View.VISIBLE);
-                dataLayout.setVisibility(View.GONE);
-                statisticsLayout.setVisibility(View.GONE);
-            }
-        });
-        btnStatisticsCar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnDataCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_500));
-                btnDetailsCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_500));
-                btnStatisticsCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_700));
-                statisticsLayout.setVisibility(View.VISIBLE);
-                detailsLayout.setVisibility(View.GONE);
                 dataLayout.setVisibility(View.GONE);
             }
         });
