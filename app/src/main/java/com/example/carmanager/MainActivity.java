@@ -15,10 +15,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.example.carmanager.models.Car;
+import com.example.carmanager.models.Maintenance;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.Objects;
 
 
@@ -38,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         DbManager dbManager = DbManager.instanceOfDatabase(this);
         Car object = dbManager.getCarById(1);
         //Toolbar-----------------------------------------------
+        btnToolbarAdd = findViewById(R.id.btnToolbarAdd);
         btnCar = findViewById(R.id.car);
         btnMoreActivities = findViewById(R.id.more);
         btnSettings = findViewById(R.id.settings);
@@ -104,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle(null);
 
+
+
         btnCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -165,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
                 dataLayout.setVisibility(View.GONE);
             }
         });
+
         floatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -196,13 +199,13 @@ public class MainActivity extends AppCompatActivity {
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(builder.getWindow().getAttributes());
         lp.width = 600;
-        lp.height = 790;
+        lp.x=25;
+        lp.y=25;
+
         lp.gravity = Gravity.BOTTOM | Gravity.END;
         lp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        builder.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         builder.getWindow().setAttributes(lp);
-
-
-
 
         btnFuel.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -210,20 +213,26 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddictionFuel.class);
                 startActivity(intent);
+                builder.cancel();
             }
         });
         btnMileage.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MainActivity.this, AdditionMileage.class);
+                startActivity(intent);
+                builder.cancel();
             }
         });
         btnRepairs.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AdditionRepairs.class);
+                startActivity(intent);
 
+                builder.cancel();
             }
         });
         btnCarInspection.setOnClickListener(new View.OnClickListener() {
@@ -231,18 +240,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
+                builder.cancel();
             }
         });
         btnOperatingElements.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AdditionOperatingElements.class);
+                startActivity(intent);
 
+                builder.cancel();
             }
         });
-
-
-
     }
-
 }
