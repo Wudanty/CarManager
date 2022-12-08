@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.carmanager.models.Car;
 
@@ -33,8 +34,8 @@ public class CarActivity extends AppCompatActivity {
     Spinner selectCarSpinner;
     String selectedCarName;
     Car selectedCar;
-    TextView modelTextView, brandTextView;
-    Button selectActiveCar;
+    TextView modelTextView, brandTextView, plateNumber, nicknameTextView;
+    Button selectActiveCar, deleteCar, addCar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,12 @@ public class CarActivity extends AppCompatActivity {
         selectCarSpinner = findViewById(R.id.spinnerSelectCar);
         modelTextView = findViewById(R.id.modelTextView);
         brandTextView = findViewById(R.id.brandTextView);
+        plateNumber = findViewById(R.id.plateNumberTextView);
+        nicknameTextView = findViewById(R.id.nicknameTextView);
         selectActiveCar = findViewById(R.id.selectActiveCarButton);
+        deleteCar = findViewById(R.id.deleteCarButton);
+        addCar = findViewById(R.id.addCarButton);
+
 
         dbManager.fillCarArrayList();
 
@@ -71,6 +77,8 @@ public class CarActivity extends AppCompatActivity {
                 selectedCar = getCarByNickname(selectedCarName);
                 modelTextView.setText(selectedCar.getModel());
                 brandTextView.setText(selectedCar.getBrand());
+                nicknameTextView.setText("\""+selectedCar.getCarNickname()+"\"");
+                plateNumber.setText(selectedCar.getRegistry());
                 Log.d("Selected car",selectedCarName);
 
             }
@@ -85,11 +93,38 @@ public class CarActivity extends AppCompatActivity {
         selectActiveCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editor.putInt("currentCar", selectedCar.getCarId());
+                editor.putInt("activeCarId", selectedCar.getCarId());
+                editor.putString("activeCarNickname",selectedCar.getCarNickname());
                 editor.apply();
                 SharedPreferences sh = getSharedPreferences("activeCar", MODE_PRIVATE);
 
-                Log.d("Test", String.valueOf(sh.getInt("currentCar",0)));
+                Log.d("CAR ID", String.valueOf(sh.getInt("activeCarId",0)));
+                Log.d("CAR NICKNAME", sh.getString("activeCarNickname",""));
+
+            }
+        });
+
+        addCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        deleteCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dbManager.deleteCar(selectedCar);
+                Toast.makeText(getApplicationContext(),"Usunięto samochód.",Toast.LENGTH_SHORT).show();
+                carNames.remove(selectedCarName);
+                selectedCarAdapter.notifyDataSetChanged();
+                selectCarSpinner.setAdapter(selectedCarAdapter);
+
+
+                modelTextView.setText(selectedCar.getModel());
+                brandTextView.setText(selectedCar.getBrand());
+                nicknameTextView.setText("\""+selectedCar.getCarNickname()+"\"");
+                plateNumber.setText(selectedCar.getRegistry());
 
             }
         });
