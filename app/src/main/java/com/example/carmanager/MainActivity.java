@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         DbManager dbManager = DbManager.instanceOfDatabase(this);
         Car object = dbManager.getCarById(1);
         //Toolbar-----------------------------------------------
-        btnToolbarAdd = findViewById(R.id.btnToolbarAdd);
         btnCar = findViewById(R.id.car);
         btnMoreActivities = findViewById(R.id.more);
         btnSettings = findViewById(R.id.settings);
@@ -73,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
         } catch (Exception e) {
-        }
+        }/*
         text_nazwa.setText(object.getCarNickname());
         text_marka.setText(object.getBrand());
         text_model.setText(object.getModel());
@@ -81,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
         text_rok.setText(object.getProductionDate().toString());
         text_polisa.setText(object.getTankVolume().toString());
         text_vin.setText(object.getVin());
-
 
         text_poj.setText(object.getEngineCapacity().toString());
         text_moc.setText(String.valueOf(object.getEnginePower()));
@@ -91,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         text_nadwozie.setText(object.getBodyType());
         text_kolor.setText(object.getColour());
         text_skrzynia.setText(object.getShifterType());
-
+*/
 
 
         btnDataCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_700));
