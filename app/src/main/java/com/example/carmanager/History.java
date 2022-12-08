@@ -109,14 +109,31 @@ public class History extends AppCompatActivity {
         ListViewHistory.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                FuelFill object = (FuelFill) ListViewHistory.getItemAtPosition(i);
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(History.this);
                 builder.setTitle("Co chcesz zrobić?");
 
                 builder.setPositiveButton("Usuń", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        deleteFuelFill(object);
+                        if (number == 1) {
+                            FuelFill object = (FuelFill) ListViewHistory.getItemAtPosition(i);
+                            deleteFuelFill(object);
+                        } else if (number == 2) {
+                            Fix object = (Fix) ListViewHistory.getItemAtPosition(i);
+                            deleteFix(object);
+                        } else if (number == 3) {
+                            Maintenance object = (Maintenance) ListViewHistory.getItemAtPosition(i);
+                            deleteMaintenance(object);
+                        } else if (number == 4) {
+                            Mileage object = (Mileage) ListViewHistory.getItemAtPosition(i);
+                            deleteMileage(object);
+                        } else if (number == 5) {
+                            Checkup object = (Checkup) ListViewHistory.getItemAtPosition(i);
+                            deleteCheckUp(object);
+                        }
+
+
                     }
                 });
 
@@ -124,7 +141,21 @@ public class History extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        updateFuelFill(object);
+                        if (number == 1) {
+                            FuelFill object = (FuelFill) ListViewHistory.getItemAtPosition(i);
+                        } else if (number == 2) {
+                            Fix object = (Fix) ListViewHistory.getItemAtPosition(i);
+
+                        } else if (number == 3) {
+                            Maintenance object = (Maintenance) ListViewHistory.getItemAtPosition(i);
+
+                        } else if (number == 4) {
+                            Mileage object = (Mileage) ListViewHistory.getItemAtPosition(i);
+
+                        } else if (number == 5) {
+                            Checkup object = (Checkup) ListViewHistory.getItemAtPosition(i);
+
+                        }
                     }
                 });
                 builder.show();
@@ -211,36 +242,37 @@ public class History extends AppCompatActivity {
         if (type == 1) {
             number = 1;
             dbManager.fillFuelFillArrayList();
-            AdapterHistoryFuelFill adapter = new AdapterHistoryFuelFill(getApplicationContext(), FuelFill.listOfFuelFill);
+            AdapterHistoryFuelFill adapter1 = new AdapterHistoryFuelFill(getApplicationContext(), FuelFill.listOfFuelFill);
             columns = getLayoutInflater().inflate(R.layout.fuell_fill_cell, null);
-            ListViewHistory.setAdapter(adapter);
+            ListViewHistory.setAdapter(adapter1);
 
         } else if (type == 2) {
             number = 2;
             dbManager.fillFixArrayList();
-            AdapterFix adapter = new AdapterFix(getApplicationContext(), Fix.listOfFix);
+            AdapterFix adapter2 = new AdapterFix(getApplicationContext(), Fix.listOfFix);
             columns = getLayoutInflater().inflate(R.layout.fix_cell, null);
-            ListViewHistory.setAdapter(adapter);
+            ListViewHistory.setAdapter(adapter2);
 
         } else if (type == 3) {
             number = 3;
             dbManager.fillMaintenanceArrayList();
-            AdapterMaintenance adapter = new AdapterMaintenance(getApplicationContext(), Maintenance.listOfMaintance);
+            AdapterMaintenance adapter3 = new AdapterMaintenance(getApplicationContext(), Maintenance.listOfMaintance);
             columns = getLayoutInflater().inflate(R.layout.maintenance_cell, null);
-            ListViewHistory.setAdapter(adapter);
+            ListViewHistory.setAdapter(adapter3);
         } else if (type == 4) {
             number = 4;
-            AdapterMileage adapter = new AdapterMileage(getApplicationContext(), Mileage.listOfMIleage);
+            AdapterMileage adapter4 = new AdapterMileage(getApplicationContext(), Mileage.listOfMIleage);
             columns = getLayoutInflater().inflate(R.layout.mileage_cell, null);
             dbManager.fillMileageArrayList();
-            ListViewHistory.setAdapter(adapter);
+            ListViewHistory.setAdapter(adapter4);
         } else if (type == 5) {
             number = 5;
-            AdapterCheckUp adapter = new AdapterCheckUp(getApplicationContext(), Checkup.listOfCheckup);
+            AdapterCheckUp adapter5 = new AdapterCheckUp(getApplicationContext(), Checkup.listOfCheckup);
             columns = getLayoutInflater().inflate(R.layout.check_up_cell, null);
             dbManager.fillCheckupArrayList();
-            ListViewHistory.setAdapter(adapter);
+            ListViewHistory.setAdapter(adapter5);
         }
+
 
         layoutColumnNames.removeAllViews();
         layoutColumnNames.addView(columns);
@@ -251,6 +283,27 @@ public class History extends AppCompatActivity {
         dbManager.fillFuelFillArrayList();
         AdapterHistoryFuelFill adapter = new AdapterHistoryFuelFill(getApplicationContext(), FuelFill.listOfFuelFill);
         ListViewHistory.setAdapter(adapter);
+
+    }
+
+    public void deleteFix(Fix object) {
+        dbManager.deleteFixInDb(object);
+        initAdapter(2);
+    }
+
+    public void deleteMaintenance(Maintenance object) {
+        dbManager.deleteMaintenance(object);
+        initAdapter(3);
+    }
+
+    public void deleteMileage(Mileage object) {
+        dbManager.deleteMileageInDb(object);
+        initAdapter(4);
+    }
+
+    public void deleteCheckUp(Checkup object) {
+        dbManager.deleteCheckupInDb(object);
+        initAdapter(5);
     }
 
     public void updateFuelFill(FuelFill object) {
