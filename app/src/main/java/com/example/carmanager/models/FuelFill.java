@@ -25,6 +25,16 @@ public class FuelFill {
         this.fuelType = fuelType;
     }
 
+    public FuelFill(Integer carId, String fillDate, Double pricePerLiter, Double price, String stationName, Double literAmount, String fuelType) {
+        this.carId = carId;
+        this.fillDate = fillDate;
+        this.pricePerLiter = pricePerLiter;
+        this.price = price;
+        this.stationName = stationName;
+        this.literAmount = literAmount;
+        this.fuelType = fuelType;
+    }
+
     public Integer getFillId() {
         return fillId;
     }

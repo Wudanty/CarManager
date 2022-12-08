@@ -45,9 +45,9 @@
     <LinearLayout
         android:id="@+id/ll_car_data"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/car_v"
@@ -454,5 +454,7 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+
 
 </LinearLayout>

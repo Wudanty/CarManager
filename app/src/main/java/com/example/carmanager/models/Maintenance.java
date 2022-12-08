@@ -29,6 +29,17 @@ public class Maintenance {
         this.place = place;
     }
 
+    public Maintenance(Integer carId, String maintenanceDate, String maintenanceTarget, String nextMaintenanceDate, Double nextMileage, Double price, String description, String place) {
+        this.carId = carId;
+        this.maintenanceDate = maintenanceDate;
+        this.maintenanceTarget = maintenanceTarget;
+        this.nextMaintenanceDate = nextMaintenanceDate;
+        this.nextMileage = nextMileage;
+        this.price = price;
+        this.description = description;
+        this.place = place;
+    }
+
     public String getDescription() {
         return description;
     }
