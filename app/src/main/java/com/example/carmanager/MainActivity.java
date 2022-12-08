@@ -1,6 +1,5 @@
 package com.example.carmanager;
 
-import androidx.annotation.NonUiContext;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,9 +49,6 @@ public class MainActivity extends AppCompatActivity {
         detailsLayout = findViewById(R.id.ll_details);
         statisticsLayout = findViewById(R.id.ll_statistics);
         floatingButton = findViewById(R.id.fab);
-        btnDataCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_700));
-        btnDetailsCar.setBackgroundColor(btnDetailsCar.getContext().getResources().getColor(R.color.purple_500));
-        btnStatisticsCar.setBackgroundColor(btnStatisticsCar.getContext().getResources().getColor(R.color.purple_500));
         dataLayout.setVisibility(View.VISIBLE);
         detailsLayout.setVisibility(View.GONE);
         statisticsLayout.setVisibility(View.GONE);
@@ -66,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         btnCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(MainActivity.this, CarActivity.class);
+                Intent intentSP = new Intent(MainActivity.this, Raports.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
             }
@@ -109,9 +105,6 @@ public class MainActivity extends AppCompatActivity {
         btnDataCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnDataCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_700));
-                btnDetailsCar.setBackgroundColor(btnDetailsCar.getContext().getResources().getColor(R.color.purple_500));
-                btnStatisticsCar.setBackgroundColor(btnStatisticsCar.getContext().getResources().getColor(R.color.purple_500));
                 dataLayout.setVisibility(View.VISIBLE);
                 detailsLayout.setVisibility(View.GONE);
                 statisticsLayout.setVisibility(View.GONE);
@@ -120,9 +113,6 @@ public class MainActivity extends AppCompatActivity {
         btnDetailsCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnDataCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_500));
-                btnDetailsCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_700));
-                btnStatisticsCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_500));
                 detailsLayout.setVisibility(View.VISIBLE);
                 dataLayout.setVisibility(View.GONE);
                 statisticsLayout.setVisibility(View.GONE);
@@ -131,9 +121,6 @@ public class MainActivity extends AppCompatActivity {
         btnStatisticsCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnDataCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_500));
-                btnDetailsCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_500));
-                btnStatisticsCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_700));
                 statisticsLayout.setVisibility(View.VISIBLE);
                 detailsLayout.setVisibility(View.GONE);
                 dataLayout.setVisibility(View.GONE);
