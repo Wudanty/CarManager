@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         detailsLayout = findViewById(R.id.ll_details);
         statisticsLayout = findViewById(R.id.ll_statistics);
         floatingButton = findViewById(R.id.fab);
-        Car object = Car.listOfCars.get(1);
+        Car object = Car.listOfCars.get(5);
 
         imageCar1 = findViewById(R.id.image_car1);
         text_nazwa = findViewById(R.id.nazwa_v);
@@ -92,14 +92,17 @@ public class MainActivity extends AppCompatActivity {
         text_polisa.setText(object.getTankVolume().toString());
         text_vin.setText(object.getVin());
 
-        text_poj.setText(object.getCarNickname());
-        text_moc.setText(object.getCarNickname());
-        text_przebieg.setText(object.getCarNickname());
-        text_waga.setText(object.getCarNickname());
-        text_paliwo.setText(object.getCarNickname());
-        text_nadwozie.setText(object.getCarNickname());
-        text_kolor.setText(object.getCarNickname());
-        text_skrzynia.setText(object.getCarNickname());
+
+        text_poj.setText(object.getEngineCapacity().toString());
+        text_moc.setText(String.valueOf(object.getEnginePower()));
+        text_przebieg.setText(String.valueOf(object.getEnginePower()));
+        text_waga.setText(object.getWeight().toString());
+        text_paliwo.setText(object.getFuelType());
+        text_nadwozie.setText(object.getBodyType());
+        text_kolor.setText(object.getColour());
+        text_skrzynia.setText(object.getShifterType());
+
+
 
         btnDataCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_700));
         btnDetailsCar.setBackgroundColor(btnDetailsCar.getContext().getResources().getColor(R.color.purple_500));
