@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">CarManager</string>
     <string name="submit">+</string>
-    <string name="title_activity_additions_plus_button">AdditionsPlusButton</string>
+    <string name="title_activity_main2">MainActivity2</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

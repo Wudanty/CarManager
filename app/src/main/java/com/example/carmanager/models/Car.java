@@ -1,6 +1,5 @@
 package com.example.carmanager.models;
 
-import java.sql.Blob;
 import java.util.ArrayList;
 
 public class Car {
@@ -11,7 +10,13 @@ public class Car {
     private String model;
     private Integer productionDate;
     private Double tankVolume;
+    private Double engineCapacity;
+    private int enginePower;
+    private Double weight;
     private String vin;
+    private String bodyType;
+    private String colour;
+    private String shifterType;
     private String description;
     private String fuelType;
     private byte[] picture;
@@ -19,9 +24,27 @@ public class Car {
     private String carNickname;
 
 
-    public Car(Integer carId, String brand, String model, Integer productionDate, Double tankVolume, String vin, String description, String fuelType, byte[] picture, String registry, String carNickname) {
-
+    public Car(Integer carId, String brand, String model, Integer productionDate, Double tankVolume, Double engineCapacity, int enginePower, Double weight, String vin, String bodyType, String colour, String shifterType, String description, String fuelType, byte[] picture, String registry, String carNickname) {
         this.carId = carId;
+        this.brand = brand;
+        this.model = model;
+        this.productionDate = productionDate;
+        this.tankVolume = tankVolume;
+        this.engineCapacity = engineCapacity;
+        this.enginePower = enginePower;
+        this.weight = weight;
+        this.vin = vin;
+        this.bodyType = bodyType;
+        this.colour = colour;
+        this.shifterType = shifterType;
+        this.description = description;
+        this.fuelType = fuelType;
+        this.picture = picture;
+        this.registry = registry;
+        this.carNickname = carNickname;
+    }
+
+    public Car(String brand, String model, Integer productionDate, Double tankVolume, String vin, String description, String fuelType, byte[] picture, String registry, String carNickname) {
         this.brand = brand;
         this.model = model;
         this.productionDate = productionDate;
@@ -40,6 +63,54 @@ public class Car {
 
     public void setCarId(Integer carId) {
         this.carId = carId;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
+    public Double getEngineCapacity() {
+        return engineCapacity;
+    }
+
+    public void setEngineCapacity(Double engineCapacity) {
+        this.engineCapacity = engineCapacity;
+    }
+
+    public int getEnginePower() {
+        return enginePower;
+    }
+
+    public void setEnginePower(int enginePower) {
+        this.enginePower = enginePower;
+    }
+
+    public String getBodyType() {
+        return bodyType;
+    }
+
+    public void setBodyType(String bodyType) {
+        this.bodyType = bodyType;
+    }
+
+    public String getColour() {
+        return colour;
+    }
+
+    public void setColour(String colour) {
+        this.colour = colour;
+    }
+
+    public String getShifterType() {
+        return shifterType;
+    }
+
+    public void setShifterType(String shifterType) {
+        this.shifterType = shifterType;
     }
 
     public String getBrand() {
