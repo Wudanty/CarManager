@@ -2,7 +2,9 @@ package com.example.carmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +28,7 @@ public class CarActivity extends AppCompatActivity {
     Button btnCar, btnMoreActivities, btnHistory, btnSettings, btnMainActivity;
     //Toolbar-----------------------------------------------
 
+
     DbManager dbManager = DbManager.instanceOfDatabase(this);
     Spinner selectCarSpinner;
     String selectedCarName;
@@ -44,6 +47,9 @@ public class CarActivity extends AppCompatActivity {
         selectActiveCar = findViewById(R.id.selectActiveCarButton);
 
         dbManager.fillCarArrayList();
+
+        SharedPreferences sharedPref =  getSharedPreferences("activeCar", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
 
         List<String> carNames = new ArrayList<>();
 
@@ -65,7 +71,7 @@ public class CarActivity extends AppCompatActivity {
                 selectedCar = getCarByNickname(selectedCarName);
                 modelTextView.setText(selectedCar.getModel());
                 brandTextView.setText(selectedCar.getBrand());
-                Log.d("xd",selectedCarName);
+                Log.d("Selected car",selectedCarName);
 
             }
 
@@ -79,7 +85,12 @@ public class CarActivity extends AppCompatActivity {
         selectActiveCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Active Car Select here
+                editor.putInt("currentCar", selectedCar.getCarId());
+                editor.apply();
+                SharedPreferences sh = getSharedPreferences("activeCar", MODE_PRIVATE);
+
+                Log.d("Test", String.valueOf(sh.getInt("currentCar",0)));
+
             }
         });
 
