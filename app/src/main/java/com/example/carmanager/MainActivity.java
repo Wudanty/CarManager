@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout dataLayout, detailsLayout, statisticsLayout;
     FloatingActionButton floatingButton;
     TextView text_nazwa,text_marka,text_model,text_tablica,text_rok,text_polisa,text_vin;
+    TextView text_poj,text_moc,text_przebieg,text_waga,text_paliwo,text_nadwozie,text_kolor,text_skrzynia;
+    ImageView imageCar1,imageCar2,imageCar3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         statisticsLayout = findViewById(R.id.ll_statistics);
         floatingButton = findViewById(R.id.fab);
         Car object = Car.listOfCars.get(1);
+
+        imageCar1 = findViewById(R.id.image_car1);
         text_nazwa = findViewById(R.id.nazwa_v);
         text_marka = findViewById(R.id.marka_v);
         text_model = findViewById(R.id.model_v);
@@ -61,6 +67,23 @@ public class MainActivity extends AppCompatActivity {
         text_rok = findViewById(R.id.rok_v);
         text_polisa = findViewById(R.id.polisa_v);
         text_vin = findViewById(R.id.vin_v);
+
+        imageCar2 = findViewById(R.id.image_car2);
+        text_poj = findViewById(R.id.poj_v);
+        text_moc = findViewById(R.id.moc_v);
+        text_przebieg = findViewById(R.id.przebieg_v);
+        text_waga  = findViewById(R.id.waga_v);
+        text_paliwo = findViewById(R.id.paliwo_v);
+        text_nadwozie = findViewById(R.id.nadwozie_v);
+        text_kolor = findViewById(R.id.kolor_v);
+        text_skrzynia = findViewById(R.id.skrzynia_v);
+
+        imageCar3 = findViewById(R.id.image_car3);
+
+        try {
+            imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
+        } catch (Exception e) {
+        }
         text_nazwa.setText(object.getCarNickname());
         text_marka.setText(object.getBrand());
         text_model.setText(object.getModel());
@@ -68,6 +91,16 @@ public class MainActivity extends AppCompatActivity {
         text_rok.setText(object.getProductionDate().toString());
         text_polisa.setText(object.getTankVolume().toString());
         text_vin.setText(object.getVin());
+
+        text_poj.setText(object.getCarNickname());
+        text_moc.setText(object.getCarNickname());
+        text_przebieg.setText(object.getCarNickname());
+        text_waga.setText(object.getCarNickname());
+        text_paliwo.setText(object.getCarNickname());
+        text_nadwozie.setText(object.getCarNickname());
+        text_kolor.setText(object.getCarNickname());
+        text_skrzynia.setText(object.getCarNickname());
+
         btnDataCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_700));
         btnDetailsCar.setBackgroundColor(btnDetailsCar.getContext().getResources().getColor(R.color.purple_500));
         btnStatisticsCar.setBackgroundColor(btnStatisticsCar.getContext().getResources().getColor(R.color.purple_500));
