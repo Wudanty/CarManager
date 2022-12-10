@@ -74,8 +74,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
 
-        } catch (Exception e) {
-        }/*
+         /*
         text_nazwa.setText(object.getCarNickname());
         text_marka.setText(object.getBrand());
         text_model.setText(object.getModel());
