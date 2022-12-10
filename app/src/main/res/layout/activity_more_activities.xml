@@ -12,6 +12,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textSize="20dp"
-        android:textStyle="bold"
-        android:text="WIĘCEJ"/>
+        android:textStyle="bold|italic"
+        android:text="Kontakty"/>
+
+    <ListView
+        android:id="@+id/contactListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="7dp" />
 </LinearLayout>
