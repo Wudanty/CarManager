@@ -14,7 +14,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Data"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:layout_marginLeft="3dp"/>
 
         <TextView
             android:id="@+id/textViewEksCo"
@@ -52,7 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Do kiedy"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:layout_marginLeft="3dp"/>
 
         <TextView
             android:id="@+id/textViewEksPrzebieg"
