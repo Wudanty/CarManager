@@ -68,10 +68,7 @@ public class History extends AppCompatActivity {
         dbManager.addMileageToDb(mileage1);
         dbManager.addMileageToDb(mileage2);
         dbManager.addMileageToDb(mileage3);
-        SharedPreferences sharedPref =  getSharedPreferences("activeCar", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("activeCarId", 1);
-        editor.apply();
+
         SharedPreferences sh = getSharedPreferences("activeCar", MODE_PRIVATE);
         carID=sh.getInt("activeCarId",0);
 
