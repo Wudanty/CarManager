@@ -35,7 +35,7 @@ public class Settings extends AppCompatActivity {
         btnCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(Settings.this, Car.class);
+                Intent intentSP = new Intent(Settings.this, CarActivity.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
             }

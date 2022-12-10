@@ -9,6 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CarManager">
+
+        <activity
+            android:name=".AdditionOperatingElements"
+            android:exported="false" />
+        <activity
+            android:name=".AdditionRepairs"
+            android:exported="false" />
+        <activity
+            android:name=".AdditionMileage"
+            android:exported="false" />
+        <activity
+            android:name=".AddictionFuel"
+            android:exported="false" />
         <activity
             android:name=".Notifications"
             android:exported="false" />
@@ -16,7 +29,7 @@
             android:name=".MoreActivities"
             android:exported="false" />
         <activity
-            android:name=".Car"
+            android:name=".CarActivity"
             android:exported="false" />
         <activity
             android:name=".History"

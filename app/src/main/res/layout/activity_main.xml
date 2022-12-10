@@ -4,17 +4,382 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
-    <include layout="@layout/toolbar"/>
-    <TextView
-        android:layout_width="wrap_content"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:text="STRONA DOMOWA"/>
+        android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/button_data"
+            android:layout_width="0dp"
+            android:layout_height="37dp"
+            android:layout_weight="1"
+            android:insetTop="0dp"
+            android:text="Dane"
+            android:textSize="11sp"
+            app:cornerRadius="0sp" />
 
+        <Button
+            android:id="@+id/button_details"
+            android:layout_width="0dp"
+            android:layout_height="37dp"
+            android:layout_weight="1"
+            android:insetTop="0dp"
+            android:text="Detale"
+            android:textSize="11sp"
+            app:cornerRadius="0sp" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_car_data"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/car_v"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15px"
+            android:layout_marginBottom="15px"
+            android:text="Nazwa samochodu"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/image_car1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15px"
+            app:srcCompat="@drawable/images" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="15px">
+
+                <TextView
+                    android:id="@+id/tv_nazwa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="Nazwa:" />
+
+                <TextView
+                    android:id="@+id/tv_marka"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="Marka:" />
+
+                <TextView
+                    android:id="@+id/tv_model"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="Model:" />
+
+                <TextView
+                    android:id="@+id/tv_tablica"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="Tablica rejestracyjna:" />
+
+                <TextView
+                    android:id="@+id/tv_rok"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="Rok:" />
+
+                <TextView
+                    android:id="@+id/tv_polisa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="Nr polisy:" />
+
+                <TextView
+                    android:id="@+id/tv_vin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/my_border"
+                    android:text="Nr. VIN:" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingRight="15px">
+
+                <TextView
+                    android:id="@+id/nazwa_v"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/marka_v"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/model_v"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/tablica_v"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/rok_v"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/polisa_v"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/vin_v"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/my_border"
+                    android:text="TextView" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_details"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/statistics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15px"
+            android:layout_marginBottom="15px"
+            android:text="Nazwa samochodu"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/image_car2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15px"
+            app:srcCompat="@drawable/images" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="15px">
+
+                <TextView
+                    android:id="@+id/tv_poj"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="Poj. silnika:" />
+
+                <TextView
+                    android:id="@+id/tv_moc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="Moc silnika:" />
+
+                <TextView
+                    android:id="@+id/tv_przebieg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="Przebieg:" />
+
+                <TextView
+                    android:id="@+id/tv_waga"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="Waga:" />
+
+                <TextView
+                    android:id="@+id/tv_paliwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="Paliwo:" />
+
+                <TextView
+                    android:id="@+id/tv_nadwozie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="Typ nadwozia:" />
+
+                <TextView
+                    android:id="@+id/tv_kolor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="Kolor:" />
+
+                <TextView
+                    android:id="@+id/tv_skrzynia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/my_border"
+                    android:text="Skrzynia biegów: " />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingRight="15px">
+
+                <TextView
+                    android:id="@+id/poj_v"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/moc_v"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/przebieg_v"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/waga_v"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/paliwo_v"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/nadwozie_v"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/kolor_v"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15px"
+                    android:background="@drawable/my_border"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/skrzynia_v"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/my_border"
+                    android:text="TextView" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:srcCompat="@drawable/ic_baseline_add_24" />
+    </LinearLayout>
 </LinearLayout>
