@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
+
         } catch (Exception e) {
         }/*
         text_nazwa.setText(object.getCarNickname());
@@ -91,7 +92,12 @@ public class MainActivity extends AppCompatActivity {
         text_nadwozie.setText(object.getBodyType());
         text_kolor.setText(object.getColour());
         text_skrzynia.setText(object.getShifterType());
+
 */
+
+    } catch (Exception e) {
+    }
+
 
 
         btnDataCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_700));
