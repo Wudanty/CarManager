@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -143,6 +144,12 @@ public class History extends AppCompatActivity {
 
                         if (number == 1) {
                             FuelFill object = (FuelFill) ListViewHistory.getItemAtPosition(i);
+                            Intent intent = new Intent(view.getContext(), AddictionFuel.class);
+                            intent.putExtra("id",i);
+                            startActivity(intent);
+                            Log.d("test",i+"");
+
+
                         } else if (number == 2) {
                             Fix object = (Fix) ListViewHistory.getItemAtPosition(i);
 

@@ -44,7 +44,7 @@ public class AdditionMileage extends AppCompatActivity {
         strMileageDate = ldt.toString();
         intMileage = Double.parseDouble(etMileage.getText().toString());
 
-        mileage = new Mileage(0, strMileageDate, Double.parseDouble(String.valueOf(intMileage)));
+        mileage = new Mileage(0, strMileageDate, intMileage);
         dbManager.addMileageToDb(mileage);
         finish();
     }
