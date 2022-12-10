@@ -83,7 +83,7 @@ public class DbManager extends SQLiteOpenHelper {
     private static String NAPRAWA_GDZIE = "gdzie";
 
     //POWIADOMIENIA
-    private static String POWIADOMIENIA_ID_AUTA = "id_Auto";
+    private static String POWIADOMIENIA_ID_AUTA = "id_Auta";
     private static String POWIADOMIENIA_KIEDY = "kiedy";
     private static String POWIADOMIENIA_OPIS = "opis";
     private static String POWIADOMIENIA_STOPIEN_WAZNOSCI = "stopien_waznosci";
@@ -256,7 +256,7 @@ public class DbManager extends SQLiteOpenHelper {
                 .append("(")
                 .append(ID)
                 .append(" INTEGER PRIMARY KEY AUTOINCREMENT, ")
-                .append(NAPRAWA_ID_AUTA)
+                .append(POWIADOMIENIA_ID_AUTA)
                 .append(" INT, ")
                 .append(POWIADOMIENIA_KIEDY)
                 .append(" TEXT, ")
