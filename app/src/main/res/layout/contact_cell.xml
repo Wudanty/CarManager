@@ -59,8 +59,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:background="@color/white"
             android:minHeight="48dp"
-            app:srcCompat="@android:drawable/sym_action_call" />
+            android:background="@color/white"
+            android:src="@android:drawable/sym_action_call" />
     </LinearLayout>
 </LinearLayout>

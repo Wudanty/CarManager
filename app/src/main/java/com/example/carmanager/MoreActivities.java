@@ -26,7 +26,7 @@ public class MoreActivities extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_activities);
 
-        Contact contact = new Contact("test","123456789","test123@ukw.edu.pl","Kopernika 1");
+        Contact contact = new Contact("test","123488888","test123@ukw.edu.pl","Kopernika 1");
         dbManager.addContactToDb(contact);
 
         //Toolbar-----------------------------------------------
