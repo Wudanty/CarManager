@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+
+import com.example.carmanager.models.Contact;
 
 import java.util.Objects;
 
@@ -16,10 +19,15 @@ public class MoreActivities extends AppCompatActivity {
     Button btnCar, btnMoreActivities, btnHistory, btnSettings, btnMainActivity;
     //Toolbar-----------------------------------------------
 
+    ListView contactListView;
+    DbManager dbManager=DbManager.instanceOfDatabase(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_activities);
+
+        Contact contact = new Contact("test","123456789","test123@ukw.edu.pl","Kopernika 1");
+        dbManager.addContactToDb(contact);
 
         //Toolbar-----------------------------------------------
         btnCar = findViewById(R.id.car);
@@ -31,6 +39,8 @@ public class MoreActivities extends AppCompatActivity {
         toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle(null);
+
+        contactListView=findViewById(R.id.contactListView);
 
         btnCar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,5 +83,13 @@ public class MoreActivities extends AppCompatActivity {
             }
         });
         //Toolbar-----------------------------------------------
+
+        initAdapter();
+    }
+
+    public void initAdapter(){
+        dbManager.fillContactArrayList();
+        AdapterContact adapter = new AdapterContact(getApplicationContext(), Contact.listOfContact);
+        contactListView.setAdapter(adapter);
     }
 }
