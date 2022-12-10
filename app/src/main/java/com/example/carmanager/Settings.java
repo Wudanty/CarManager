@@ -24,7 +24,6 @@ public class Settings extends AppCompatActivity {
         //Toolbar-----------------------------------------------
         btnCar = findViewById(R.id.car);
         btnMoreActivities = findViewById(R.id.more);
-        btnSettings = findViewById(R.id.settings);
         btnMainActivity = findViewById(R.id.mainActivity);
         btnHistory = findViewById(R.id.history);
 

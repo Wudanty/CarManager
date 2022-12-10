@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-
         <entry key="..\:/Programowanie/Java/CarManager/app/src/main/res/layout/activity_car.xml" value="0.25" />
         <entry key="..\:/Programowanie/Java/CarManager/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
         <entry key="..\:/Programowanie/Java/CarManager/app/src/main/res/layout/dropdown_spinner.xml" value="0.18802083333333333" />
@@ -50,5 +49,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.33" />
+      </ProjectState>
+    </option>
   </component>
 </project>

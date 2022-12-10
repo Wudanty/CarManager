@@ -54,6 +54,7 @@ public class CarActivity extends AppCompatActivity {
 
         dbManager.fillCarArrayList();
 
+
         SharedPreferences sharedPref =  getSharedPreferences("activeCar", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -133,7 +134,6 @@ public class CarActivity extends AppCompatActivity {
         //Toolbar-----------------------------------------------
         btnCar = findViewById(R.id.car);
         btnMoreActivities = findViewById(R.id.more);
-        btnSettings = findViewById(R.id.settings);
         btnMainActivity = findViewById(R.id.mainActivity);
         btnHistory = findViewById(R.id.history);
         toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
@@ -177,14 +177,6 @@ public class CarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentSP = new Intent(CarActivity.this, MoreActivities.class);
-                intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity( intentSP );
-            }
-        });
-        btnSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentSP = new Intent(CarActivity.this, Settings.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
             }

@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.carmanager.models.Car;
-import com.example.carmanager.models.Maintenance;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Objects;
 
@@ -39,11 +38,10 @@ public class MainActivity extends AppCompatActivity {
         //Toolbar-----------------------------------------------
         btnCar = findViewById(R.id.car);
         btnMoreActivities = findViewById(R.id.more);
-        btnSettings = findViewById(R.id.settings);
         btnMainActivity = findViewById(R.id.mainActivity);
         btnHistory = findViewById(R.id.history);
-        btnDataCar = findViewById(R.id.button_data);
-        btnDetailsCar = findViewById(R.id.button_details);
+        btnDataCar = findViewById(R.id.button_add_a);
+        btnDetailsCar = findViewById(R.id.button_list);
         dataLayout = findViewById(R.id.ll_car_data);
         detailsLayout = findViewById(R.id.ll_details);
         floatingButton = findViewById(R.id.fab);
@@ -93,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
 
         btnDataCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_700));
         btnDetailsCar.setBackgroundColor(btnDetailsCar.getContext().getResources().getColor(R.color.purple_500));
-        detailsLayout.setVisibility(View.GONE);
 
 
 
@@ -130,20 +127,9 @@ public class MainActivity extends AppCompatActivity {
         btnMoreActivities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(MainActivity.this, MoreActivities.class);
-                intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity( intentSP );
-            }
-        });
-        btnSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
                 Intent intentSP = new Intent(MainActivity.this, Notifications.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
-              //  Maintenance maintenance = new Maintenance();
-
-
             }
         });
         btnDataCar.setOnClickListener(new View.OnClickListener() {

@@ -41,7 +41,6 @@ public class History extends AppCompatActivity {
         //Toolbar-----------------------------------------------
         btnCar = findViewById(R.id.car);
         btnMoreActivities = findViewById(R.id.more);
-        btnSettings = findViewById(R.id.settings);
         btnMainActivity = findViewById(R.id.mainActivity);
         btnHistory = findViewById(R.id.history);
 
@@ -86,14 +85,6 @@ public class History extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentSP = new Intent(History.this, MoreActivities.class);
-                intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intentSP);
-            }
-        });
-        btnSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentSP = new Intent(History.this, Settings.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intentSP);
             }
