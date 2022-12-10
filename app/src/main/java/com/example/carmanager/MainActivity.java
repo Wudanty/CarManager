@@ -4,7 +4,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
@@ -72,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         try {
             imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
 
+        } catch (Exception e) {
+        }/*
         text_nazwa.setText(object.getCarNickname());
         text_marka.setText(object.getBrand());
         text_model.setText(object.getModel());
@@ -79,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         text_rok.setText(object.getProductionDate().toString());
         text_polisa.setText(object.getTankVolume().toString());
         text_vin.setText(object.getVin());
+
         text_poj.setText(object.getEngineCapacity().toString());
         text_moc.setText(String.valueOf(object.getEnginePower()));
         text_przebieg.setText(String.valueOf(object.getEnginePower()));
@@ -87,8 +92,12 @@ public class MainActivity extends AppCompatActivity {
         text_nadwozie.setText(object.getBodyType());
         text_kolor.setText(object.getColour());
         text_skrzynia.setText(object.getShifterType());
+
+*/
+
     } catch (Exception e) {
     }
+
 
 
         btnDataCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_700));
@@ -236,7 +245,8 @@ public class MainActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MainActivity.this, AdditionCheckup.class);
+                startActivity(intent);
 
                 builder.cancel();
             }

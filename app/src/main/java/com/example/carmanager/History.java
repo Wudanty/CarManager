@@ -157,6 +157,12 @@ public class History extends AppCompatActivity {
 
                         if (number == 1) {
                             FuelFill object = (FuelFill) ListViewHistory.getItemAtPosition(i);
+                            Intent intent = new Intent(view.getContext(), AddictionFuel.class);
+                            intent.putExtra("id",i);
+                            startActivity(intent);
+                            Log.d("test",i+"");
+
+
                         } else if (number == 2) {
                             Fix object = (Fix) ListViewHistory.getItemAtPosition(i);
 
