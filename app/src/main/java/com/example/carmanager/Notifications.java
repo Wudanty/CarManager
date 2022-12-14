@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,8 +24,10 @@ import android.widget.Spinner;
 
 import com.example.carmanager.models.Car;
 import com.example.carmanager.models.Notification;
+import com.example.carmanager.models.NotificationReceiver;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Notifications extends AppCompatActivity {
@@ -41,7 +45,7 @@ public class Notifications extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
-        createNotificationChannel();
+        createAlarm();
         notification_list = findViewById(R.id.list_not);
         btnCar = findViewById(R.id.car);
         btnMoreActivities = findViewById(R.id.more);
@@ -101,8 +105,8 @@ public class Notifications extends AppCompatActivity {
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Notification notification = new Notification(car.getCarId(),"12.12.12",editTextDes.getText().toString(),1,1);
-                dbManager.addNotificationToDb(notification);
+               //Notification notification = new Notification(car.getCarId(),"12.12.12",editTextDes.getText().toString(),1,1);
+               //dbManager.addNotificationToDb(notification);
             }
         });
         btnCar.setOnClickListener(new View.OnClickListener() {
@@ -139,31 +143,18 @@ public class Notifications extends AppCompatActivity {
         });
     }
 
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "TestName";
-            String description = "TestDes";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("CHANNEL_ID", name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
+    private void createAlarm() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 6);
+        Intent intent = new Intent(this, NotificationReceiver.class);
+        AlarmManager alarmMgr = (AlarmManager) this.getSystemService(ALARM_SERVICE);
+        PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_NO_CREATE);
+        if (alarmMgr != null) {
+            alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
-    private void createNotification() {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "CHANNEL_ID")
-                .setSmallIcon(R.drawable.notification)
-                .setContentTitle("Przypomnienie")
-                .setContentText("Uwaga za 5 dni kończy sie polisa samochodu ")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(1, builder.build());
+    }
 
-    }
     public void itemClicked(View v) {
         CheckBox checkBoxDate = (CheckBox)v;
         if(checkBoxDate.isChecked()){
