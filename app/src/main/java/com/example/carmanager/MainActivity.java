@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.carmanager.models.Car;
+import com.example.carmanager.models.Maintenance;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Objects;
 
@@ -40,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         btnMoreActivities = findViewById(R.id.more);
         btnMainActivity = findViewById(R.id.mainActivity);
         btnHistory = findViewById(R.id.history);
-        btnDataCar = findViewById(R.id.button_add_a);
-        btnDetailsCar = findViewById(R.id.button_list);
+        btnDataCar = findViewById(R.id.button_data);
+        btnDetailsCar = findViewById(R.id.button_details);
         dataLayout = findViewById(R.id.ll_car_data);
         detailsLayout = findViewById(R.id.ll_details);
         floatingButton = findViewById(R.id.fab);
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
 
+         /*
         text_nazwa.setText(object.getCarNickname());
         text_marka.setText(object.getBrand());
         text_model.setText(object.getModel());
@@ -85,12 +87,16 @@ public class MainActivity extends AppCompatActivity {
         text_nadwozie.setText(object.getBodyType());
         text_kolor.setText(object.getColour());
         text_skrzynia.setText(object.getShifterType());
+
+*/
+
     } catch (Exception e) {
     }
 
 
         btnDataCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_700));
         btnDetailsCar.setBackgroundColor(btnDetailsCar.getContext().getResources().getColor(R.color.purple_500));
+        detailsLayout.setVisibility(View.GONE);
 
 
 
@@ -127,9 +133,18 @@ public class MainActivity extends AppCompatActivity {
         btnMoreActivities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(MainActivity.this, Notifications.class);
+                more(null);
+            }
+        });
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentSP = new Intent(MainActivity.this, Settings.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
+              //  Maintenance maintenance = new Maintenance();
+
+
             }
         });
         btnDataCar.setOnClickListener(new View.OnClickListener() {
@@ -164,6 +179,36 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+    public void more(View view){
+        final LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.more, null);
+        Button btnContacts=linearLayout.findViewById(R.id.btnContacts);
+        Button btnReminder=linearLayout.findViewById(R.id.btnReminder);
+        Button btnSettings=linearLayout.findViewById(R.id.btnContacts);
+        final AlertDialog builder = new AlertDialog.Builder(this)
+                .setView(linearLayout)
+                .setCancelable(true)
+                .create();
+        builder.show();
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(builder.getWindow().getAttributes());
+        lp.width = 600;
+        lp.x=25;
+        lp.y=75;
+
+        lp.gravity = Gravity.TOP | Gravity.END;
+        lp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        builder.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        builder.getWindow().setAttributes(lp);
+
+        btnContacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MoreActivities.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
     }
     public void additions(View view) {
         final LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.addition_menu, null);

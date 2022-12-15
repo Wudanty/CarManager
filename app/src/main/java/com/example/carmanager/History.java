@@ -3,9 +3,12 @@ package com.example.carmanager;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -31,7 +34,7 @@ public class History extends AppCompatActivity {
     ListView ListViewHistory;
     LinearLayout layoutColumnNames;
     DbManager dbManager = DbManager.instanceOfDatabase(this);
-    int number = 1;
+    int number = 1, carID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,17 @@ public class History extends AppCompatActivity {
 
         ListViewHistory = findViewById(R.id.ListViewHistory);
         layoutColumnNames = findViewById(R.id.layoutColumnNames);
+
+        Mileage mileage1 = new Mileage(1, "2022-12-12", 199999.11);
+        Mileage mileage2 = new Mileage(1, "2022-12-12", 199999.11);
+        Mileage mileage3 = new Mileage(2, "2022-12-12", 199999.22);
+
+        dbManager.addMileageToDb(mileage1);
+        dbManager.addMileageToDb(mileage2);
+        dbManager.addMileageToDb(mileage3);
+
+        SharedPreferences sh = getSharedPreferences("activeCar", MODE_PRIVATE);
+        carID=sh.getInt("activeCarId",0);
 
         btnCar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +148,12 @@ public class History extends AppCompatActivity {
 
                         if (number == 1) {
                             FuelFill object = (FuelFill) ListViewHistory.getItemAtPosition(i);
+                            Intent intent = new Intent(view.getContext(), AddictionFuel.class);
+                            intent.putExtra("id",i);
+                            startActivity(intent);
+                            Log.d("test",i+"");
+
+
                         } else if (number == 2) {
                             Fix object = (Fix) ListViewHistory.getItemAtPosition(i);
 
@@ -229,24 +249,22 @@ public class History extends AppCompatActivity {
     public void initAdapter(int type) {
 
         View columns = null;
-
+        dbManager.getCarHistory(carID);
         if (type == 1) {
             number = 1;
-            dbManager.fillFuelFillArrayList();
+            // dbManager.fillFuelFillArrayList();
             AdapterHistoryFuelFill adapter1 = new AdapterHistoryFuelFill(getApplicationContext(), FuelFill.listOfFuelFill);
             columns = getLayoutInflater().inflate(R.layout.fuell_fill_cell, null);
             ListViewHistory.setAdapter(adapter1);
 
         } else if (type == 2) {
             number = 2;
-            dbManager.fillFixArrayList();
             AdapterFix adapter2 = new AdapterFix(getApplicationContext(), Fix.listOfFix);
             columns = getLayoutInflater().inflate(R.layout.fix_cell, null);
             ListViewHistory.setAdapter(adapter2);
 
         } else if (type == 3) {
             number = 3;
-            dbManager.fillMaintenanceArrayList();
             AdapterMaintenance adapter3 = new AdapterMaintenance(getApplicationContext(), Maintenance.listOfMaintance);
             columns = getLayoutInflater().inflate(R.layout.maintenance_cell, null);
             ListViewHistory.setAdapter(adapter3);
@@ -254,16 +272,13 @@ public class History extends AppCompatActivity {
             number = 4;
             AdapterMileage adapter4 = new AdapterMileage(getApplicationContext(), Mileage.listOfMIleage);
             columns = getLayoutInflater().inflate(R.layout.mileage_cell, null);
-            dbManager.fillMileageArrayList();
             ListViewHistory.setAdapter(adapter4);
         } else if (type == 5) {
             number = 5;
             AdapterCheckUp adapter5 = new AdapterCheckUp(getApplicationContext(), Checkup.listOfCheckup);
             columns = getLayoutInflater().inflate(R.layout.check_up_cell, null);
-            dbManager.fillCheckupArrayList();
             ListViewHistory.setAdapter(adapter5);
         }
-
 
         layoutColumnNames.removeAllViews();
         layoutColumnNames.addView(columns);
@@ -271,9 +286,7 @@ public class History extends AppCompatActivity {
 
     public void deleteFuelFill(FuelFill object) {
         dbManager.deleteFuelFillInDb(object);
-        dbManager.fillFuelFillArrayList();
-        AdapterHistoryFuelFill adapter = new AdapterHistoryFuelFill(getApplicationContext(), FuelFill.listOfFuelFill);
-        ListViewHistory.setAdapter(adapter);
+        initAdapter(1);
 
     }
 
@@ -297,10 +310,5 @@ public class History extends AppCompatActivity {
         initAdapter(5);
     }
 
-    public void updateFuelFill(FuelFill object) {
-        dbManager.updateFuelFillInDb(object);
-        dbManager.fillFuelFillArrayList();
-        AdapterHistoryFuelFill adapter = new AdapterHistoryFuelFill(getApplicationContext(), FuelFill.listOfFuelFill);
-        ListViewHistory.setAdapter(adapter);
-    }
+
 }

@@ -1,9 +1,14 @@
 package com.example.carmanager;
 
+import static java.lang.Integer.parseInt;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,21 +29,28 @@ public class AddictionFuel extends AppCompatActivity {
     DbManager dbManager;
     FuelFill fuelFill;
     Button btnSave, btnExit;
-    TextView tvFuelDate;
+    TextView tvFuelDate, tvFuelText;
     EditText etFuelAmount, etFuelPrice,etFuelFullPrice,etFuelWhere;
     Spinner spinnerFuelType;
     LocalDate ldt;
     String data, strMonth, strDay;
+    Bundle extras;
+    int idToEdit;
+    SharedPreferences sh;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addiction_fuel);
         dbManager = new DbManager(this);
 
+        sh = getSharedPreferences("activeCar", MODE_PRIVATE);
+
         btnSave = findViewById(R.id.btnSave);
         btnExit = findViewById(R.id.btnExit);
         tvFuelDate = findViewById(R.id.tvFuelDate);
+        tvFuelText = findViewById(R.id.tvFuelText);
         etFuelAmount = findViewById(R.id.etFuelAmount);
         etFuelPrice = findViewById(R.id.etFuelPrice);
         etFuelFullPrice = findViewById(R.id.etFuelFullPrice);
@@ -53,6 +65,26 @@ public class AddictionFuel extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, listFuelTypes);
         spinnerFuelType.setAdapter(adapter);
 
+        extras = getIntent().getExtras();
+
+        if(extras != null)
+        {
+            idToEdit = extras.getInt("id");
+            tvFuelText.setText("EDYCJA TANKOWANIA");
+            dbManager.fillFuelFillArrayList();
+            FuelFill object = FuelFill.listOfFuelFill.get(idToEdit);
+
+            ldt = LocalDate.parse(object.getFillDate());
+            tvFuelDate.setText(object.getFillDate());
+            etFuelAmount.setText(String.valueOf(object.getLiterAmount()));
+            etFuelPrice.setText(String.valueOf(object.getPricePerLiter()));
+            etFuelFullPrice.setText(String.valueOf(object.getPrice()));
+            etFuelWhere.setText(object.getStationName());
+            spinnerFuelType.setSelection(listFuelTypes.indexOf(object.getFuelType()));
+            Log.d("test",FuelFill.listOfFuelFill.get(idToEdit).getPrice()+"");
+
+
+        }
 
     }
 
@@ -70,8 +102,21 @@ public class AddictionFuel extends AppCompatActivity {
         fuelDate = ldt.toString();
         fuelType = spinnerFuelType.getSelectedItem().toString();
 
-        fuelFill = new FuelFill(1, fuelDate,fuelPrice,fuelFullPrice,fuelWhere,fuelAmount,fuelType);
-        dbManager.addFuelFIllToDb(fuelFill);
+
+
+        if(extras != null){
+            FuelFill object = FuelFill.listOfFuelFill.get(idToEdit);
+            fuelFill = new FuelFill(object.getFillId(),sh.getInt("activeCarId",0), fuelDate,fuelPrice,fuelFullPrice,fuelWhere,fuelAmount,fuelType);
+            dbManager.updateFuelFillInDb(fuelFill);
+        }
+        else{
+            fuelFill = new FuelFill(sh.getInt("activeCarId",0), fuelDate,fuelPrice,fuelFullPrice,fuelWhere,fuelAmount,fuelType);
+            dbManager.addFuelFIllToDb(fuelFill);
+        }
+        finish();
+
+
+
 
     }
     public Double FuelFullPrice(Double amount, Double price){
@@ -93,13 +138,13 @@ public class AddictionFuel extends AppCompatActivity {
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
-        /*if(extras != null)
+        if(extras != null)
         {
-            ldt = LocalDate.parse();
+
             mYear = ldt.getYear();
             mMonth = ldt.getMonthValue()-1;
             mDay = ldt.getDayOfMonth();
-        }*/
+        }
         DatePickerDialog datePickerDialog = new DatePickerDialog(AddictionFuel.this,
                 (view, year, monthOfYear, dayOfMonth) -> {
                     monthOfYear = monthOfYear +1;

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp">
 
     <TextView
         android:id="@+id/textViewData"
@@ -9,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1.5"
         android:textStyle="bold"
-        android:text="Data:" />
+        android:text="Data:"
+        android:layout_marginLeft="3dp"/>
 
     <TextView
         android:id="@+id/textViewCena"

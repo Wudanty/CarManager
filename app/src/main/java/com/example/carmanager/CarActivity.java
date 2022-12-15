@@ -49,7 +49,7 @@ public class CarActivity extends AppCompatActivity {
         nicknameTextView = findViewById(R.id.nicknameTextView);
         selectActiveCar = findViewById(R.id.selectActiveCarButton);
         deleteCar = findViewById(R.id.deleteCarButton);
-        addCar = findViewById(R.id.addCarButton);
+        addCar = findViewById(R.id.buttonAdd);
 
 
         dbManager.fillCarArrayList();
@@ -108,7 +108,9 @@ public class CarActivity extends AppCompatActivity {
         addCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intentSP = new Intent(CarActivity.this, AddCarActivity.class);
+                intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intentSP);
             }
         });
 

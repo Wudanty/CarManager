@@ -19,6 +19,16 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/settings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="⚙"
+            app:cornerRadius="0dp" />
+
+        <Button
             android:id="@+id/history"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -55,6 +65,7 @@
             android:layout_weight="1"
             android:insetTop="0dp"
             android:insetBottom="0dp"
+            app:drawableLeftCompat="@drawable/ic_baseline_more_horiz_24"
             app:cornerRadius="0dp" />
     </LinearLayout>
 
