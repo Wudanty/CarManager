@@ -10,22 +10,44 @@ public class Notification {
     private String description;
     private Integer importance;
     private Integer notificationType;
+    private Integer kilometre;
+    private String name;
 
-    public Notification(Integer notificationId, Integer carId, String date, String description, Integer importance, Integer notificationType) {
+    public Notification(Integer notificationId, Integer carId, String date, String description, Integer importance, Integer notificationType, Integer kilometre, String name) {
         this.notificationId = notificationId;
         this.carId = carId;
         this.date = date;
         this.description = description;
         this.importance = importance;
         this.notificationType = notificationType;
+        this.kilometre = kilometre;
+        this.name = name;
     }
 
-    public Notification(Integer carId, String date, String description, Integer importance, Integer notificationType) {
+    public Notification(Integer carId, String date, String description, Integer importance, Integer notificationType, Integer kilometre, String name) {
         this.carId = carId;
         this.date = date;
         this.description = description;
         this.importance = importance;
         this.notificationType = notificationType;
+        this.kilometre = kilometre;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getKilometre() {
+        return kilometre;
+    }
+
+    public void setKilometre(Integer kilometre) {
+        this.kilometre = kilometre;
     }
 
     public Integer getNotificationId() {
