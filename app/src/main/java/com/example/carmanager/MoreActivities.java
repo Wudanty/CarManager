@@ -77,7 +77,7 @@ public class MoreActivities extends AppCompatActivity {
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(MoreActivities.this, Settings.class);
+                Intent intentSP = new Intent(MoreActivities.this, Raports.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
             }
