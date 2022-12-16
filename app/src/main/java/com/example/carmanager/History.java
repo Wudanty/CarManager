@@ -7,7 +7,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -94,9 +97,7 @@ public class History extends AppCompatActivity {
         btnMoreActivities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(History.this, MoreActivities.class);
-                intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intentSP);
+                more(null);
             }
         });
         btnSettings.setOnClickListener(new View.OnClickListener() {
@@ -333,5 +334,34 @@ public class History extends AppCompatActivity {
         initAdapter(5);
     }
 
+    public void more(View view){
+        final LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.more, null);
+        Button btnContacts=linearLayout.findViewById(R.id.btnContacts);
+        Button btnReminder=linearLayout.findViewById(R.id.btnReminder);
+        Button btnSettings=linearLayout.findViewById(R.id.btnContacts);
+        final AlertDialog builder = new AlertDialog.Builder(this)
+                .setView(linearLayout)
+                .setCancelable(true)
+                .create();
+        builder.show();
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(builder.getWindow().getAttributes());
+        lp.width = 600;
+        lp.x=25;
+        lp.y=75;
 
+        lp.gravity = Gravity.TOP | Gravity.END;
+        lp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        builder.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        builder.getWindow().setAttributes(lp);
+
+        btnContacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(History.this, MoreActivities.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
+    }
 }

@@ -3,6 +3,7 @@ package com.example.carmanager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -39,16 +40,20 @@ public class AdditionContact extends AppCompatActivity {
         etContactEmail = findViewById(R.id.etContactEmail);
 
         extras = getIntent().getExtras();
-        if(extras != null){
-            idToEdit = extras.getInt("id");
-            dbManager.fillContactArrayList();
-            object = Contact.listOfContact.get(idToEdit);
 
-            etContactName.setText(object.getContactName());
-            etContactNumber.setText(object.getPhoneNumber());
-            etContactAddres.setText(object.getAddress());
-            etContactEmail.setText(object.getEmail());
+        if (extras != null) {
+            Contact contact = null;
+            int id = extras.getInt("id");
+            for (int i = 0; i < Contact.listOfContact.size(); i++) {
+                if (Contact.listOfContact.get(i).getContactId() == id) {
+                    contact = Contact.listOfContact.get(i);
+                }
+            }
 
+            etContactName.setText(contact.getContactName());
+            etContactAddres.setText(contact.getAddress());
+            etContactEmail.setText(contact.getEmail());
+            etContactNumber.setText(contact.getPhoneNumber());
         }
     }
 
@@ -58,17 +63,18 @@ public class AdditionContact extends AppCompatActivity {
     }
 
     public void Save(View view) {
-        String contactName, contactAddres, contactEmail,contactNumber;
+        String contactName, contactAddres, contactEmail, contactNumber;
 
         contactName = etContactName.getText().toString();
         contactAddres = etContactAddres.getText().toString();
         contactEmail = etContactEmail.getText().toString();
         contactNumber = etContactNumber.getText().toString();
 
-        if(extras!=null){
-            contact = new Contact(object.getContactId(),contactName,contactNumber,contactEmail,contactAddres);
+        contact = new Contact(extras.getInt("id"), contactName, contactNumber, contactEmail, contactAddres);
+        if (extras != null) {
             dbManager.updateContactInDb(contact);
-        }
+            Intent intent = new Intent(AdditionContact.this,MoreActivities.class);
+            startActivity(intent);
         else
         {
             contact = new Contact(contactName,contactNumber,contactEmail,contactAddres);
