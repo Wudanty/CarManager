@@ -37,9 +37,6 @@ public class MoreActivities extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_activities);
 
-        Contact contact = new Contact("test22","123488888","test123@ukw.edu.pl","Kopernika 21");
-        dbManager.addContactToDb(contact);
-
         //Toolbar-----------------------------------------------
         btnCar = findViewById(R.id.car);
         btnMoreActivities = findViewById(R.id.more);
