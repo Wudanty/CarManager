@@ -10,7 +10,7 @@
         android:id="@+id/tvAdapterWeight"
         android:layout_width="0sp"
         android:layout_height="wrap_content"
-        android:text="195.3"
+        android:text="Przebieg"
         android:textSize="15sp"
         android:gravity="right"
 
@@ -19,7 +19,7 @@
 
 
         />
-    <TextView
+    <!--<TextView
         android:id="@+id/tvKmUnit"
         android:layout_width="0sp"
         android:layout_height="wrap_content"
@@ -28,11 +28,12 @@
         android:textColor="@color/black"
         android:layout_weight="1"
         />
+        -->
     <TextView
         android:id="@+id/tvAdapterDifference"
         android:layout_width="0sp"
         android:layout_height="wrap_content"
-        android:text="-10.2"
+        android:text="Różnica"
         android:textSize="15sp"
         android:gravity="right"
         android:textColor="@color/black"
@@ -42,7 +43,7 @@
         android:id="@+id/tvAdapterDate"
         android:layout_width="0sp"
         android:layout_height="wrap_content"
-        android:text="2022-09-11"
+        android:text="Data"
         android:textSize="15sp"
         android:gravity="right"
         android:paddingRight="5sp"
