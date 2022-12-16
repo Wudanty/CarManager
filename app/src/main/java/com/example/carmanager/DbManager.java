@@ -88,12 +88,15 @@ public class DbManager extends SQLiteOpenHelper {
     private static String POWIADOMIENIA_OPIS = "opis";
     private static String POWIADOMIENIA_STOPIEN_WAZNOSCI = "stopien_waznosci";
     private static String POWIADOMIENIA_TYP_POWIADOMIENIA = "typ";
+    private static String POWIADOMIENIA_KILOMETRY = "kilometry";
+    private static String POWIADOMIENIA_NAZWA = "nazwa";
 
     //PRZEBIEG
     private static String PRZEBIEG_ID_AUTA = "id_Auta";
     private static String PRZEBIEG_ID_AKCJI = "id_Akcji";
     private static String PRZEBIEG_DATA = "data";
     private static String PRZEBIEG_ILE = "ile";
+
 
     //PRZEGLAD
     private static String PRZEGLAD_ID_AUTA = "id_Auta";
@@ -262,7 +265,11 @@ public class DbManager extends SQLiteOpenHelper {
                 .append(POWIADOMIENIA_STOPIEN_WAZNOSCI)
                 .append(" INT, ")
                 .append(POWIADOMIENIA_TYP_POWIADOMIENIA)
-                .append(" INT)");
+                .append(" INT, ")
+                .append(POWIADOMIENIA_KILOMETRY)
+                .append(" INT, ")
+                .append(POWIADOMIENIA_NAZWA)
+                .append(" TEXT)");
 
         przebieg = new StringBuilder().append("CREATE TABLE ")
                 .append(TABLE_PRZEBIEG)
@@ -487,7 +494,7 @@ public class DbManager extends SQLiteOpenHelper {
 
     public Car getCarById(int carID) {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-        Car car=null;
+        Car car = null;
 
         try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_AUTO + " WHERE " + ID + " = " + carID, null)) {
             if (result.getCount() != 0) {
@@ -650,7 +657,7 @@ public class DbManager extends SQLiteOpenHelper {
 
         Maintenance.listOfMaintance.clear();
 
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_EKSPLOATACYJNE, null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_EKSPLOATACYJNE + " ORDER BY " + EKSPLOATACYJNE_DATA + " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -764,7 +771,7 @@ public class DbManager extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
 
         Fix.listOfFix.clear();
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAPRAWA, null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAPRAWA + " ORDER BY " + NAPRAWA_DATA + " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -813,6 +820,8 @@ public class DbManager extends SQLiteOpenHelper {
         contentValues.put(POWIADOMIENIA_OPIS, notification.getDescription());
         contentValues.put(POWIADOMIENIA_STOPIEN_WAZNOSCI, notification.getImportance());
         contentValues.put(POWIADOMIENIA_TYP_POWIADOMIENIA, notification.getNotificationType());
+        contentValues.put(POWIADOMIENIA_KILOMETRY, notification.getKilometre());
+        contentValues.put(POWIADOMIENIA_NAZWA, notification.getName());
 
         sqLiteDatabase.insert(TABLE_POWIADOMIENIA, null, contentValues);
     }
@@ -831,8 +840,10 @@ public class DbManager extends SQLiteOpenHelper {
                     String description = result.getString(3);
                     int importance = result.getInt(4);
                     int type = result.getInt(5);
+                    int kolometre = result.getInt(6);
+                    String name = result.getString(7);
 
-                    Notification notification = new Notification(id, carId, date, description, importance, type);
+                    Notification notification = new Notification(id, carId, date, description, importance, type, kolometre, name);
                     Notification.listOfNotification.add(notification);
                 }
             }
@@ -848,6 +859,8 @@ public class DbManager extends SQLiteOpenHelper {
         contentValues.put(POWIADOMIENIA_OPIS, notification.getDescription());
         contentValues.put(POWIADOMIENIA_STOPIEN_WAZNOSCI, notification.getImportance());
         contentValues.put(POWIADOMIENIA_TYP_POWIADOMIENIA, notification.getNotificationType());
+        contentValues.put(POWIADOMIENIA_KILOMETRY, notification.getKilometre());
+        contentValues.put(POWIADOMIENIA_NAZWA, notification.getName());
 
         sqLiteDatabase.update(TABLE_POWIADOMIENIA, contentValues, ID + " =? ", new String[]{String.valueOf(notification.getNotificationId())});
     }
@@ -875,7 +888,7 @@ public class DbManager extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
 
         Mileage.listOfMIleage.clear();
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEBIEG, null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEBIEG + " ORDER BY " + PRZEBIEG_DATA + " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -930,7 +943,7 @@ public class DbManager extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Checkup.listOfCheckup.clear();
 
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEGLAD, null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEGLAD+ " ORDER BY " + PRZEGLAD_KIEDY + " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -1033,7 +1046,7 @@ public class DbManager extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         FuelFill.listOfFuelFill.clear();
 
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_TANKOWANIE + " ORDER BY " + TANKOWANIE_DATA + " DESC", null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_TANKOWANIE + " ORDER BY " + TANKOWANIE_DATA + " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -1093,7 +1106,7 @@ public class DbManager extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Insurance.listOfInsurance.clear();
 
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_UBEZPIECZENIE, null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_UBEZPIECZENIE + " ORDER BY " + UBEZPIECZENIE_KIEDY + " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);

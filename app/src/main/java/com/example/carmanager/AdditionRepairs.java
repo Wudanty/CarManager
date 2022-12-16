@@ -3,6 +3,7 @@ package com.example.carmanager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,14 +26,17 @@ public class AdditionRepairs extends AppCompatActivity {
     EditText etRepairsNote, etRepairsPrice,etRepairsWhere, etRepairsPart;
     LocalDate ldt;
     String data, strMonth, strDay;
-
+    Bundle extras;
+    int idToEdit;
+    SharedPreferences sh;
+    Fix object;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addition_repairs);
 
         dbManager = new DbManager(this);
-
+        sh = getSharedPreferences("activeCar", MODE_PRIVATE);
         btnSave = findViewById(R.id.btnSave);
         btnExit = findViewById(R.id.btnExit);
         tvRepairsDate = findViewById(R.id.tvRepairsDate);
@@ -43,6 +47,22 @@ public class AdditionRepairs extends AppCompatActivity {
 
         ldt = java.time.LocalDate.now();
         tvRepairsDate.setText(ldt.toString());
+
+        extras = getIntent().getExtras();
+
+        if(extras != null) {
+            idToEdit = extras.getInt("id");
+            dbManager.fillFuelFillArrayList();
+            object = Fix.listOfFix.get(idToEdit);
+
+            ldt = LocalDate.parse(object.getDateOfFix());
+
+            tvRepairsDate.setText(object.getDateOfFix().toString());
+            etRepairsNote.setText(object.getWarnings().toString());
+            etRepairsPrice.setText(object.getPrice().toString());
+            etRepairsWhere.setText(object.getPlaceOfFix().toString());
+            etRepairsPart.setText(object.getFixDescription().toString());
+        }
 
     }
 
@@ -56,13 +76,12 @@ public class AdditionRepairs extends AppCompatActivity {
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
-        /*if(extras != null)
+        if(extras != null)
         {
-            ldt = LocalDate.parse();
             mYear = ldt.getYear();
             mMonth = ldt.getMonthValue()-1;
             mDay = ldt.getDayOfMonth();
-        }*/
+        }
         DatePickerDialog datePickerDialog = new DatePickerDialog(AdditionRepairs.this,
                 (view, year, monthOfYear, dayOfMonth) -> {
                     monthOfYear = monthOfYear +1;
@@ -98,9 +117,17 @@ public class AdditionRepairs extends AppCompatActivity {
         RepairsPart = etRepairsPart.getText().toString();
         RepairsDate = ldt.toString();
 
+        if (extras != null) {
+            fix = new Fix(object.getFixId(), sh.getInt("activeCarId",0),RepairsDate,RepairsPart,RepairsNote,RepairsPrice,RepairsWhere);
+            dbManager.updateFixInDb(fix);
+        }
+        else
+        {
+            fix = new Fix(sh.getInt("activeCarId",0),RepairsDate,RepairsPart,RepairsNote,RepairsPrice,RepairsWhere);
+            dbManager.addFixToDb(fix);
+        }
 
-        fix = new Fix(1,RepairsDate,RepairsPart,RepairsNote,RepairsPrice,RepairsWhere);
-        dbManager.addFixToDb(fix);
+
 
         finish();
     }
