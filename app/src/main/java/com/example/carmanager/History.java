@@ -61,14 +61,6 @@ public class History extends AppCompatActivity {
         ListViewHistory = findViewById(R.id.ListViewHistory);
         layoutColumnNames = findViewById(R.id.layoutColumnNames);
 
-        Mileage mileage1 = new Mileage(1, "2022-12-12", 199999.11);
-        Mileage mileage2 = new Mileage(1, "2022-12-12", 199999.11);
-        Mileage mileage3 = new Mileage(2, "2022-12-12", 199999.22);
-
-        dbManager.addMileageToDb(mileage1);
-        dbManager.addMileageToDb(mileage2);
-        dbManager.addMileageToDb(mileage3);
-
         SharedPreferences sh = getSharedPreferences("activeCar", MODE_PRIVATE);
         carID=sh.getInt("activeCarId",0);
 
