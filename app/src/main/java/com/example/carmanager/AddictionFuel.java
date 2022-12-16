@@ -70,10 +70,10 @@ public class AddictionFuel extends AppCompatActivity {
         if(extras != null)
         {
             idToEdit = extras.getInt("id");
-            tvFuelText.setText("EDYCJA TANKOWANIA");
             dbManager.fillFuelFillArrayList();
             FuelFill object = FuelFill.listOfFuelFill.get(idToEdit);
 
+            tvFuelText.setText("EDYCJA TANKOWANIA");
             ldt = LocalDate.parse(object.getFillDate());
             tvFuelDate.setText(object.getFillDate());
             etFuelAmount.setText(String.valueOf(object.getLiterAmount()));
@@ -140,7 +140,6 @@ public class AddictionFuel extends AppCompatActivity {
         mDay = c.get(Calendar.DAY_OF_MONTH);
         if(extras != null)
         {
-
             mYear = ldt.getYear();
             mMonth = ldt.getMonthValue()-1;
             mDay = ldt.getDayOfMonth();

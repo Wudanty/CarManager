@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingBottom="10sp"
+    android:paddingTop="10dp">
+    <TextView
+        android:id="@+id/tvAdapterWeight"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:text="195.3"
+        android:textSize="15sp"
+        android:gravity="right"
+
+        android:textColor="@color/black"
+        android:layout_weight="4"
+
+
+        />
+    <TextView
+        android:id="@+id/tvKmUnit"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:text=" km"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:layout_weight="1"
+        />
+    <TextView
+        android:id="@+id/tvAdapterDifference"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:text="-10.2"
+        android:textSize="15sp"
+        android:gravity="right"
+        android:textColor="@color/black"
+        android:layout_weight="4"
+        />
+    <TextView
+        android:id="@+id/tvAdapterDate"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:text="2022-09-11"
+        android:textSize="15sp"
+        android:gravity="right"
+        android:paddingRight="5sp"
+        android:textColor="@color/black"
+        android:layout_weight="5"
+        />
+
+</LinearLayout>

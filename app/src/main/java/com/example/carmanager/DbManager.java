@@ -650,7 +650,7 @@ public class DbManager extends SQLiteOpenHelper {
 
         Maintenance.listOfMaintance.clear();
 
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_EKSPLOATACYJNE, null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_EKSPLOATACYJNE + " ORDER BY " + EKSPLOATACYJNE_DATA + " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -764,7 +764,7 @@ public class DbManager extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
 
         Fix.listOfFix.clear();
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAPRAWA, null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAPRAWA + " ORDER BY " + NAPRAWA_DATA + " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -875,7 +875,7 @@ public class DbManager extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
 
         Mileage.listOfMIleage.clear();
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEBIEG, null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEBIEG + " ORDER BY " + PRZEBIEG_DATA + " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -930,7 +930,7 @@ public class DbManager extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Checkup.listOfCheckup.clear();
 
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEGLAD, null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEGLAD+ " ORDER BY " + PRZEGLAD_KIEDY + " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -1033,7 +1033,7 @@ public class DbManager extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         FuelFill.listOfFuelFill.clear();
 
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_TANKOWANIE + " ORDER BY " + TANKOWANIE_DATA + " DESC", null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_TANKOWANIE + " ORDER BY " + TANKOWANIE_DATA + " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -1093,7 +1093,7 @@ public class DbManager extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Insurance.listOfInsurance.clear();
 
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_UBEZPIECZENIE, null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_UBEZPIECZENIE + " ORDER BY " + UBEZPIECZENIE_KIEDY + " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);

@@ -3,12 +3,10 @@ package com.example.carmanager;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -21,6 +19,7 @@ import com.example.carmanager.models.FuelFill;
 import com.example.carmanager.models.Maintenance;
 import com.example.carmanager.models.Mileage;
 
+import java.util.Collections;
 import java.util.Objects;
 
 public class History extends AppCompatActivity {
@@ -61,13 +60,9 @@ public class History extends AppCompatActivity {
         ListViewHistory = findViewById(R.id.ListViewHistory);
         layoutColumnNames = findViewById(R.id.layoutColumnNames);
 
-        Mileage mileage1 = new Mileage(1, "2022-12-12", 199999.11);
-        Mileage mileage2 = new Mileage(1, "2022-12-12", 199999.11);
-        Mileage mileage3 = new Mileage(2, "2022-12-12", 199999.22);
 
-        dbManager.addMileageToDb(mileage1);
-        dbManager.addMileageToDb(mileage2);
-        dbManager.addMileageToDb(mileage3);
+
+
 
         SharedPreferences sh = getSharedPreferences("activeCar", MODE_PRIVATE);
         carID=sh.getInt("activeCarId",0);
@@ -107,7 +102,7 @@ public class History extends AppCompatActivity {
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(History.this, Settings.class);
+                Intent intentSP = new Intent(History.this, Raports.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intentSP);
             }
@@ -160,20 +155,30 @@ public class History extends AppCompatActivity {
                             Intent intent = new Intent(view.getContext(), AddictionFuel.class);
                             intent.putExtra("id",i);
                             startActivity(intent);
-                            Log.d("test",i+"");
-
 
                         } else if (number == 2) {
                             Fix object = (Fix) ListViewHistory.getItemAtPosition(i);
+                            Intent intent = new Intent(view.getContext(), AdditionRepairs.class);
+                            intent.putExtra("id",i);
+                            startActivity(intent);
 
                         } else if (number == 3) {
                             Maintenance object = (Maintenance) ListViewHistory.getItemAtPosition(i);
+                            Intent intent = new Intent(view.getContext(), AdditionOperatingElements.class);
+                            intent.putExtra("id",i);
+                            startActivity(intent);
 
                         } else if (number == 4) {
                             Mileage object = (Mileage) ListViewHistory.getItemAtPosition(i);
+                            Intent intent = new Intent(view.getContext(), AdditionMileage.class);
+                            intent.putExtra("id",i);
+                            startActivity(intent);
 
                         } else if (number == 5) {
                             Checkup object = (Checkup) ListViewHistory.getItemAtPosition(i);
+                            Intent intent = new Intent(view.getContext(), AdditionCheckup.class);
+                            intent.putExtra("id",i);
+                            startActivity(intent);
 
                         }
                     }
@@ -261,29 +266,38 @@ public class History extends AppCompatActivity {
         dbManager.getCarHistory(carID);
         if (type == 1) {
             number = 1;
-            // dbManager.fillFuelFillArrayList();
+            dbManager.fillFuelFillArrayList();
+            Collections.reverse(FuelFill.listOfFuelFill);
             AdapterHistoryFuelFill adapter1 = new AdapterHistoryFuelFill(getApplicationContext(), FuelFill.listOfFuelFill);
             columns = getLayoutInflater().inflate(R.layout.fuell_fill_cell, null);
             ListViewHistory.setAdapter(adapter1);
 
         } else if (type == 2) {
             number = 2;
+            dbManager.fillFixArrayList();
+            Collections.reverse(Fix.listOfFix);
             AdapterFix adapter2 = new AdapterFix(getApplicationContext(), Fix.listOfFix);
             columns = getLayoutInflater().inflate(R.layout.fix_cell, null);
             ListViewHistory.setAdapter(adapter2);
 
         } else if (type == 3) {
             number = 3;
+            dbManager.fillMaintenanceArrayList();
+            Collections.reverse(Maintenance.listOfMaintance);
             AdapterMaintenance adapter3 = new AdapterMaintenance(getApplicationContext(), Maintenance.listOfMaintance);
             columns = getLayoutInflater().inflate(R.layout.maintenance_cell, null);
             ListViewHistory.setAdapter(adapter3);
         } else if (type == 4) {
             number = 4;
+            dbManager.fillMileageArrayList();
+            Collections.reverse(Mileage.listOfMIleage);
             AdapterMileage adapter4 = new AdapterMileage(getApplicationContext(), Mileage.listOfMIleage);
             columns = getLayoutInflater().inflate(R.layout.mileage_cell, null);
             ListViewHistory.setAdapter(adapter4);
         } else if (type == 5) {
             number = 5;
+            dbManager.fillCheckupArrayList();
+            Collections.reverse(Checkup.listOfCheckup);
             AdapterCheckUp adapter5 = new AdapterCheckUp(getApplicationContext(), Checkup.listOfCheckup);
             columns = getLayoutInflater().inflate(R.layout.check_up_cell, null);
             ListViewHistory.setAdapter(adapter5);
