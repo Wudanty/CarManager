@@ -136,17 +136,6 @@ public class MainActivity extends AppCompatActivity {
                 more(null);
             }
         });
-        btnSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentSP = new Intent(MainActivity.this, Settings.class);
-                intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity( intentSP );
-              //  Maintenance maintenance = new Maintenance();
-
-
-            }
-        });
         btnDataCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -205,6 +194,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, MoreActivities.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
+        btnReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Notifications.class);
                 startActivity(intent);
                 builder.cancel();
             }
