@@ -74,7 +74,7 @@ public class AdditionContact extends AppCompatActivity {
         if (extras != null) {
             dbManager.updateContactInDb(contact);
             Intent intent = new Intent(AdditionContact.this,MoreActivities.class);
-            startActivity(intent);
+            startActivity(intent);}
         else
         {
             contact = new Contact(contactName,contactNumber,contactEmail,contactAddres);
