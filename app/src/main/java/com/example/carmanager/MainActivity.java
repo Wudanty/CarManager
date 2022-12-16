@@ -194,9 +194,9 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(builder.getWindow().getAttributes());
-        lp.width = 600;
+        lp.width = 480;
         lp.x=25;
-        lp.y=75;
+        lp.y=100;
 
         lp.gravity = Gravity.TOP | Gravity.END;
         lp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;

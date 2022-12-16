@@ -16,7 +16,8 @@
         android:textStyle="bold"
         app:cornerRadius="6dp"
         android:layout_marginTop="12dp"
-        android:alpha="0.90"/>
+        android:alpha="0.90"
+        android:gravity="right|center"/>
 
     <Button
         android:id="@+id/btnReminder"
@@ -30,7 +31,8 @@
         android:textStyle="bold"
         app:cornerRadius="6dp"
         android:layout_marginTop="12dp"
-        android:alpha="0.90"/>
+        android:alpha="0.90"
+        android:gravity="right|center"/>
     <Button
         android:id="@+id/btnSettings"
         android:layout_width="match_parent"
@@ -43,5 +45,6 @@
         android:textStyle="bold"
         app:cornerRadius="6dp"
         android:layout_marginTop="12dp"
-        android:alpha="0.90"/>
+        android:alpha="0.90"
+        android:gravity="right|center"/>
 </LinearLayout>

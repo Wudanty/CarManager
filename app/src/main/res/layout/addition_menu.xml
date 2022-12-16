@@ -19,7 +19,8 @@
         android:textStyle="bold"
         app:cornerRadius="6dp"
         android:layout_marginTop="12dp"
-        android:alpha="0.90"/>
+        android:alpha="0.90"
+        android:gravity="right|center"/>
 
     <Button
         android:id="@+id/btnMileage"
@@ -33,7 +34,8 @@
         android:textStyle="bold"
         app:cornerRadius="6dp"
         android:layout_marginTop="12dp"
-        android:alpha="0.90"/>
+        android:alpha="0.90"
+        android:gravity="right|center"/>
 
     <Button
         android:id="@+id/btnRepairs"
@@ -47,7 +49,8 @@
         android:textStyle="bold"
         app:cornerRadius="6dp"
         android:layout_marginTop="12dp"
-        android:alpha="0.90"/>
+        android:alpha="0.90"
+        android:gravity="right|center"/>
 
     <Button
         android:id="@+id/btnOperatingElements"
@@ -61,7 +64,8 @@
         android:textStyle="bold"
         app:cornerRadius="6dp"
         android:layout_marginTop="12dp"
-        android:alpha="0.90"/>
+        android:alpha="0.90"
+        android:gravity="right|center"/>
 
     <Button
         android:id="@+id/btnCarInspection"
@@ -75,6 +79,7 @@
         android:textStyle="bold"
         app:cornerRadius="6dp"
         android:layout_marginTop="12dp"
-        android:alpha="0.90" />
+        android:alpha="0.90"
+        android:gravity="right|center"/>
 
 </LinearLayout>
