@@ -15,7 +15,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button_add_a"
+            android:id="@+id/button_data"
             android:layout_width="0dp"
             android:layout_height="37dp"
             android:layout_weight="1"
@@ -25,7 +25,7 @@
             app:cornerRadius="0sp" />
 
         <Button
-            android:id="@+id/button_list"
+            android:id="@+id/button_details"
             android:layout_width="0dp"
             android:layout_height="37dp"
             android:layout_weight="1"
@@ -97,7 +97,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/editTextNumber"
+            android:id="@+id/editKm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -105,7 +105,7 @@
             android:inputType="number" />
 
         <EditText
-            android:id="@+id/editTextDate"
+            android:id="@+id/editDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
