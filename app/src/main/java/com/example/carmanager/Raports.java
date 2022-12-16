@@ -56,6 +56,8 @@ public class Raports extends AppCompatActivity {
     Bundle extras;
     int idToEdit;
     SharedPreferences sh;
+    LinearLayout columnNames;
+    View column = null;
 
 
     @Override
@@ -80,6 +82,8 @@ public class Raports extends AppCompatActivity {
         tvCarNameRaports.setText(sh.getString("activeCarNickname",""));
 
         listViewRaports = findViewById(R.id.listViewRaports);
+
+        columnNames=findViewById(R.id.layoutColumnNamesRaports);
 
         toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -129,30 +133,45 @@ public class Raports extends AppCompatActivity {
         FixBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                column = getLayoutInflater().inflate(R.layout.adapter_raports_fix, null);
+                columnNames.removeAllViews();
+                columnNames.addView(column);
                 RaportMonthlyRepairs();
             }
         });
         FuelFillBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                column = getLayoutInflater().inflate(R.layout.adapter_raports_fuel, null);
+                columnNames.removeAllViews();
+                columnNames.addView(column);
                 LoadMonthyFuel();
             }
         });
         MaintenanceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                column = getLayoutInflater().inflate(R.layout.adapter_raports_fix, null);
+                columnNames.removeAllViews();
+                columnNames.addView(column);
                 RaportMonthlyMaintenance();
             }
         });
         MileageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                column = getLayoutInflater().inflate(R.layout.adapter_raports_mileage, null);
+                columnNames.removeAllViews();
+                columnNames.addView(column);
                 RaportMonthlyMileage();
             }
         });
         MoneyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                column = getLayoutInflater().inflate(R.layout.adapter_raports_money, null);
+                columnNames.removeAllViews();
+                columnNames.addView(column);
                 RaportMonthlyMoneySpend();
             }
         });

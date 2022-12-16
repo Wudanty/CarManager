@@ -10,7 +10,7 @@
         android:id="@+id/tvAdapterData1"
         android:layout_width="0sp"
         android:layout_height="wrap_content"
-        android:text="195.3"
+        android:text="Ilość"
         android:textSize="13sp"
         android:gravity="right"
 
@@ -18,7 +18,7 @@
         android:layout_weight="4"
 
         />
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" L"
@@ -26,45 +26,46 @@
         android:textColor="@color/black"
 
         />
+        -->
     <TextView
         android:id="@+id/tvAdapterData2"
         android:layout_width="0sp"
         android:layout_height="wrap_content"
-        android:text="-10.2"
+        android:text="Cena"
         android:textSize="13sp"
         android:gravity="right"
         android:textColor="@color/black"
         android:layout_weight="4"
         />
-    <TextView
+   <!-- <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" zł"
         android:textSize="13sp"
         android:textColor="@color/black"
-        />
+        />-->
     <TextView
         android:id="@+id/tvAdapterData3"
         android:layout_width="0sp"
         android:layout_height="wrap_content"
-        android:text="-10.2"
+        android:text="L/zł"
         android:textSize="13sp"
         android:gravity="right"
         android:textColor="@color/black"
         android:layout_weight="3"
         />
-    <TextView
+   <!-- <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" zł/L"
         android:textSize="13sp"
         android:textColor="@color/black"
-        />
+        />-->
     <TextView
         android:id="@+id/tvAdapterDate"
         android:layout_width="0sp"
         android:layout_height="wrap_content"
-        android:text="2022-09-11"
+        android:text="Data"
         android:textSize="13sp"
         android:gravity="right"
         android:paddingRight="5sp"
