@@ -46,7 +46,7 @@ public class AddCarActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_car2);
 
-        carImage = findViewById(R.id.imageViewCar);
+        carImage = findViewById(R.id.carImageView);
 
         ActivityResultLauncher<Intent> launchPictureSelect
                 = registerForActivityResult(
@@ -71,7 +71,6 @@ public class AddCarActivity2 extends AppCompatActivity {
                                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                                 selectedImageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                                 byte[] pictureByteArray = stream.toByteArray();
-                                selectedImageBitmap.recycle();
                                 NewCar.newCar.setPicture(pictureByteArray);
                             }
                             catch (IOException e) {

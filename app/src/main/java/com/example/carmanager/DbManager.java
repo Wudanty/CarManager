@@ -476,6 +476,7 @@ public class DbManager extends SQLiteOpenHelper {
         contentValues.put(AUTO_NUMER_DOWODU_REJESTRACYJNEGO, car.getRegistry());
         contentValues.put(AUTO_NAZWA_WLASNA, car.getCarNickname());
         contentValues.put(AUTO_POJEMNOSC_BAKU, car.getTankVolume());
+        contentValues.put(AUTO_ZDJECIE, car.getPicture());
         contentValues.put(AUTO_KOLOR, car.getColour());
         contentValues.put(AUTO_WAGA, car.getWeight());
         contentValues.put(AUTO_RODZAJ_NADWOZIA, car.getBodyType());

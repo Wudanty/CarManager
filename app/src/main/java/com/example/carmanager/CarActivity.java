@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +38,7 @@ public class CarActivity extends AppCompatActivity {
     Car selectedCar;
     TextView modelTextView, brandTextView, plateNumber, nicknameTextView;
     Button selectActiveCar, deleteCar, addCar;
+    ImageView selectedCarPicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,7 @@ public class CarActivity extends AppCompatActivity {
         selectActiveCar = findViewById(R.id.selectActiveCarButton);
         deleteCar = findViewById(R.id.deleteCarButton);
         addCar = findViewById(R.id.buttonAdd);
-
+        selectedCarPicture = findViewById(R.id.imageViewCarSelect);
 
         dbManager.fillCarArrayList();
 
@@ -79,6 +82,7 @@ public class CarActivity extends AppCompatActivity {
                 brandTextView.setText(selectedCar.getBrand());
                 nicknameTextView.setText("\""+selectedCar.getCarNickname()+"\"");
                 plateNumber.setText(selectedCar.getRegistry());
+                selectedCarPicture.setImageBitmap(BitmapFactory.decodeByteArray(selectedCar.getPicture(), 0, selectedCar.getPicture().length));
                 Log.d("Selected car",selectedCarName);
 
             }
