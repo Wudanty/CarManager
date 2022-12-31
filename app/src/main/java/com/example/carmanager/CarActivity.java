@@ -1,5 +1,6 @@
 package com.example.carmanager;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -8,11 +9,14 @@ import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -182,15 +186,13 @@ public class CarActivity extends AppCompatActivity {
         btnMoreActivities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(CarActivity.this, MoreActivities.class);
-                intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity( intentSP );
+                more(null);
             }
         });
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(CarActivity.this, Settings.class);
+                Intent intentSP = new Intent(CarActivity.this, Raports.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
             }
@@ -210,5 +212,36 @@ public class CarActivity extends AppCompatActivity {
 
         }
         return null;
+    }
+
+    public void more(View view){
+        final LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.more, null);
+        Button btnContacts=linearLayout.findViewById(R.id.btnContacts);
+        Button btnReminder=linearLayout.findViewById(R.id.btnReminder);
+        Button btnSettings=linearLayout.findViewById(R.id.btnContacts);
+        final AlertDialog builder = new AlertDialog.Builder(this)
+                .setView(linearLayout)
+                .setCancelable(true)
+                .create();
+        builder.show();
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(builder.getWindow().getAttributes());
+        lp.width = 480;
+        lp.x=25;
+        lp.y=100;
+
+        lp.gravity = Gravity.TOP | Gravity.END;
+        lp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        builder.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        builder.getWindow().setAttributes(lp);
+
+        btnContacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CarActivity.this, MoreActivities.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
     }
 }

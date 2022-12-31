@@ -25,7 +25,7 @@
             android:layout_weight="1"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:text="⚙"
+            android:text="R"
             app:cornerRadius="0dp" />
 
         <Button
@@ -65,7 +65,7 @@
             android:layout_weight="1"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:text="W"
+            app:drawableLeftCompat="@drawable/ic_baseline_more_horiz_24"
             app:cornerRadius="0dp" />
     </LinearLayout>
 

@@ -1,52 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    >
 
-    <TextView
-        android:id="@+id/textViewData"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1.5"
-        android:textStyle="bold"
-        android:text="Data:" />
-
-    <TextView
-        android:id="@+id/textViewCena"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Cena:"
-        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textViewIle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="0.8"
+        android:text="Ile"
+
+
+        />
+    <TextView
+        android:id="@+id/textViewCena"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Ile:"
-        android:textStyle="bold"/>
+        android:text="Cena"
+
+        />
+
+
     <TextView
         android:id="@+id/textViewIleZaLitr"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Ile za litr:"
-        android:textStyle="bold"/>
-    <TextView
-        android:id="@+id/textViewGdzie"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Gdzie:"
-        android:textStyle="bold"/>
+        android:layout_weight="0.8"
+        android:text="L/zł"
+
+        />
+
 
     <TextView
         android:id="@+id/textViewJakie"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Jakie:"
-        android:textStyle="bold"/>
+        android:text="Typ"
 
+
+        />
+    <TextView
+        android:id="@+id/textViewGdzie"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Gdzie"
+
+        />
+    <TextView
+        android:id="@+id/textViewData"
+        android:layout_width="80sp"
+        android:layout_height="wrap_content"
+        android:text="Data"
+        android:layout_marginLeft="3dp"
+        />
 </LinearLayout>

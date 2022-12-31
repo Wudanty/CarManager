@@ -5,43 +5,119 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddictionFuel"
+    tools:context=".AdditionCheckup"
     android:layout_margin="10dp">
     <TextView
-        android:id="@+id/tvFuelText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="DODAJ TANKOWANIE"
+        android:text="DODAJ PRZEGLĄD"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:textAlignment="center"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:text="RODZAJ: "/>
-        <Spinner
-            android:id="@+id/spinnerFuelType"
+            android:text="OD KIEDY: "
+
+            />
+        <TextView
+            android:id="@+id/tvCheckupFromDate"
+            android:onClick="CheckupFromDate"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:inputType="numberDecimal|numberSigned" />
+
+            android:textColor="@color/black" />
+
+
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="DO KIEDY: "
+
+            />
+        <TextView
+            android:id="@+id/tvCheckupNextDate"
+            android:onClick="CheckupNextDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+
+            android:textColor="@color/black" />
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        android:gravity="center">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="WYNIK: "/>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/rbCheckupPositive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="POZYTYWNY"
+            android:onClick="onRadioButtonClicked"
+            android:layout_weight="2"
+            android:checked="true"/>
+        <RadioButton
+            android:id="@+id/rbCheckupNegative"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="NEGATYWNY"
+            android:onClick="onRadioButtonClicked"
+
+            android:layout_weight="2"/>
+        </RadioGroup>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
@@ -50,20 +126,47 @@
             android:textColor="@color/black"
             android:text="ILE: "/>
         <EditText
-            android:id="@+id/etFuelAmount"
+            android:id="@+id/etMileageAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:inputType="numberDecimal|numberSigned" />
+            android:inputType="numberDecimal|numberSigned"
+            android:background="@null"/>
 
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="GDZIE: "/>
+        <EditText
+            android:id="@+id/etCheckupWhere"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:background="@null"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
         <TextView
 
 
@@ -74,85 +177,47 @@
             android:textColor="@color/black"
             android:text="CENA: "/>
         <EditText
-            android:id="@+id/etFuelPrice"
+            android:id="@+id/etCheckupPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:inputType="numberDecimal|numberSigned" />
+            android:inputType="numberDecimal|numberSigned"
+            android:background="@null"
+            />
 
 
 
     </LinearLayout>
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        >
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:text="KWOTA: "/>
+            android:text="OPIS: "
+            android:layout_gravity="start"
+            android:paddingTop="10dp"
+            />
         <EditText
-            android:id="@+id/etFuelFullPrice"
+            android:id="@+id/etCheckupNote"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:textSize="20sp"
-            android:textStyle="bold"
             android:textColor="@color/black"
-            android:inputType="numberDecimal|numberSigned" />
+            android:background="@null"
+            android:gravity="start"
 
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:text="GDZIE: "/>
-        <EditText
-            android:id="@+id/etFuelWhere"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:inputType="text" />
-
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:text="KIEDY: "/>
-        <TextView
-            android:id="@+id/tvFuelDate"
-            android:onClick="FuelDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/black" />
+            />
 
 
 

@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.carmanager.models.Car;
-import com.example.carmanager.models.Maintenance;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Objects;
 
@@ -72,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
 
+         /*
         text_nazwa.setText(object.getCarNickname());
         text_marka.setText(object.getBrand());
         text_model.setText(object.getModel());
@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         text_rok.setText(object.getProductionDate().toString());
         text_polisa.setText(object.getTankVolume().toString());
         text_vin.setText(object.getVin());
+
         text_poj.setText(object.getEngineCapacity().toString());
         text_moc.setText(String.valueOf(object.getEnginePower()));
         text_przebieg.setText(String.valueOf(object.getEnginePower()));
@@ -87,8 +88,12 @@ public class MainActivity extends AppCompatActivity {
         text_nadwozie.setText(object.getBodyType());
         text_kolor.setText(object.getColour());
         text_skrzynia.setText(object.getShifterType());
+
+*/
+
     } catch (Exception e) {
     }
+
 
 
         btnDataCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_700));
@@ -130,15 +135,13 @@ public class MainActivity extends AppCompatActivity {
         btnMoreActivities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(MainActivity.this, MoreActivities.class);
-                intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity( intentSP );
+                more(null);
             }
         });
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(MainActivity.this, Settings.class);
+                Intent intentSP = new Intent(MainActivity.this, Raports.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intentSP );
               //  Maintenance maintenance = new Maintenance();
@@ -178,6 +181,36 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+    public void more(View view){
+        final LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.more, null);
+        Button btnContacts=linearLayout.findViewById(R.id.btnContacts);
+        Button btnReminder=linearLayout.findViewById(R.id.btnReminder);
+        Button btnSettings=linearLayout.findViewById(R.id.btnContacts);
+        final AlertDialog builder = new AlertDialog.Builder(this)
+                .setView(linearLayout)
+                .setCancelable(true)
+                .create();
+        builder.show();
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(builder.getWindow().getAttributes());
+        lp.width = 480;
+        lp.x=25;
+        lp.y=100;
+
+        lp.gravity = Gravity.TOP | Gravity.END;
+        lp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        builder.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        builder.getWindow().setAttributes(lp);
+
+        btnContacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MoreActivities.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
     }
     public void additions(View view) {
         final LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.addition_menu, null);
@@ -236,7 +269,8 @@ public class MainActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MainActivity.this, AdditionCheckup.class);
+                startActivity(intent);
 
                 builder.cancel();
             }

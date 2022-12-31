@@ -3,17 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-
-  >
-
+    android:orientation="vertical">
     <Button
-        android:id="@+id/btnFuel"
+        android:id="@+id/btnContacts"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        android:text="Paliwo"
+        android:text="Kontakty"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -23,12 +20,12 @@
         android:gravity="right|center"/>
 
     <Button
-        android:id="@+id/btnMileage"
+        android:id="@+id/btnReminder"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        android:text="Przebieg"
+        android:text="Przypomnienia"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -36,14 +33,13 @@
         android:layout_marginTop="12dp"
         android:alpha="0.90"
         android:gravity="right|center"/>
-
     <Button
-        android:id="@+id/btnRepairs"
+        android:id="@+id/btnSettings"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        android:text="Naprawy"
+        android:text="Ustawienia"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -51,35 +47,4 @@
         android:layout_marginTop="12dp"
         android:alpha="0.90"
         android:gravity="right|center"/>
-
-    <Button
-        android:id="@+id/btnOperatingElements"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:text="El. Eksploatacyjne"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:cornerRadius="6dp"
-        android:layout_marginTop="12dp"
-        android:alpha="0.90"
-        android:gravity="right|center"/>
-
-    <Button
-        android:id="@+id/btnCarInspection"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:text="Przegląd"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:cornerRadius="6dp"
-        android:layout_marginTop="12dp"
-        android:alpha="0.90"
-        android:gravity="right|center"/>
-
 </LinearLayout>
