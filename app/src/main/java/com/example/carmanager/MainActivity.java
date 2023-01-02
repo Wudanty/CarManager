@@ -211,6 +211,14 @@ public class MainActivity extends AppCompatActivity {
                 builder.cancel();
             }
         });
+        btnReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Notifications.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
     }
     public void additions(View view) {
         final LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.addition_menu, null);
