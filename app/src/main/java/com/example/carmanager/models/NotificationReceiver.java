@@ -17,7 +17,6 @@ import com.example.carmanager.DbManager;
 import com.example.carmanager.MainActivity;
 import com.example.carmanager.Notifications;
 import com.example.carmanager.R;
-import com.example.carmanager.Settings;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
