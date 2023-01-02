@@ -13,7 +13,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -53,6 +55,7 @@ public class Notifications extends AppCompatActivity {
         btnMoreActivities = findViewById(R.id.more);
         btnMainActivity = findViewById(R.id.mainActivity);
         btnHistory = findViewById(R.id.history);
+        btnSettings = findViewById(R.id.settings);
         checkBoxKm = findViewById(R.id.checkBox);
         checkBoxDate = findViewById(R.id.checkBox2);
         editTextKm = findViewById(R.id.editKm);
@@ -183,9 +186,15 @@ public class Notifications extends AppCompatActivity {
         btnMoreActivities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSP = new Intent(Notifications.this, Notifications.class);
+                more(null);
+            }
+        });
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentSP = new Intent(Notifications.this, Raports.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity( intentSP );
+                startActivity(intentSP);
             }
         });
     }
@@ -284,6 +293,43 @@ public class Notifications extends AppCompatActivity {
     }
 
 
+    public void more(View view){
+        final LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.more, null);
+        Button btnContacts=linearLayout.findViewById(R.id.btnContacts);
+        Button btnReminder=linearLayout.findViewById(R.id.btnReminder);
+        Button btnSettings=linearLayout.findViewById(R.id.btnContacts);
+        final AlertDialog builder = new AlertDialog.Builder(this)
+                .setView(linearLayout)
+                .setCancelable(true)
+                .create();
+        builder.show();
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(builder.getWindow().getAttributes());
+        lp.width = 480;
+        lp.x=25;
+        lp.y=100;
 
+        lp.gravity = Gravity.TOP | Gravity.END;
+        lp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        builder.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        builder.getWindow().setAttributes(lp);
+
+        btnContacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Notifications.this, MoreActivities.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
+        btnReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Notifications.this, Notifications.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
+    }
 
 }
