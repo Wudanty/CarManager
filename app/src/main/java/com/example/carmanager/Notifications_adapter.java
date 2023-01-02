@@ -24,10 +24,24 @@ public class Notifications_adapter extends ArrayAdapter<Notification> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null)
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.notifiactions_adapter, parent, false);
+        DbManager dbManager = DbManager.instanceOfDatabase(getContext());
+        TextView NotiName = convertView.findViewById(R.id.listtext1);
+        TextView NotiDes = convertView.findViewById(R.id.listtext2);
+        TextView NotiCar = convertView.findViewById(R.id.listtext3);
+        TextView NotiType = convertView.findViewById(R.id.listtext4);
+        TextView NotiKmOrData = convertView.findViewById(R.id.listtext5);
 
-        TextView NotiName = convertView.findViewById(R.id.textView5);
-
-        NotiName.setText(getItem(position).getDescription()+"");
+        NotiName.setText(getItem(position).getName()+"");
+        NotiDes.setText(getItem(position).getDescription()+"");
+        NotiCar.setText(dbManager.getCarById(getItem(position).getCarId()).getCarNickname());
+        if(getItem(position).getNotificationType()==1){
+        NotiType.setText("Typ: Data");
+        NotiKmOrData.setText(getItem(position).getDate().toString());
+        }
+        else if(getItem(position).getNotificationType()==0){
+            NotiType.setText("Typ: Km");
+            NotiKmOrData.setText(getItem(position).getKilometre().toString()+" Km");
+        }
 
         return convertView;
     }

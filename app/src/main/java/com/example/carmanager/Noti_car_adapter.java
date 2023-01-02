@@ -26,8 +26,8 @@ public class Noti_car_adapter extends ArrayAdapter<Car> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_noti_car, parent, false);
 
         TextView carName = convertView.findViewById(R.id.textView6);
+        carName.setText(getItem(position).getCarNickname() + "");
 
-        carName.setText(getItem(position).getCarNickname()+"");
 
         return convertView;
     }
