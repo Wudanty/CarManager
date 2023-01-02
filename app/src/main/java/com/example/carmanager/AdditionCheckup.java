@@ -17,6 +17,7 @@ import com.example.carmanager.models.Mileage;
 
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class AdditionCheckup extends AppCompatActivity {
 
@@ -31,7 +32,11 @@ public class AdditionCheckup extends AppCompatActivity {
     String data, strMonth, strDay;
     int intResult, intCarId;
     RadioButton rbCheckupPositive,rbCheckupNegative;
+    Bundle extras;
+    int idToEdit, mileageId;
     SharedPreferences sh;
+    Checkup object;
+    Mileage objectMileage;
 
 
     @SuppressLint("MissingInflatedId")
@@ -54,13 +59,45 @@ public class AdditionCheckup extends AppCompatActivity {
 
         ldt = java.time.LocalDate.now();
         ldt2 = java.time.LocalDate.now().plusYears(1);
-        tvCheckupFromDate.setText(ldt.toString());
-        tvCheckupNextDate.setText(ldt2.toString());
+
 
         rbCheckupPositive = findViewById(R.id.rbCheckupPositive);
         rbCheckupNegative = findViewById(R.id.rbCheckupNegative);
 
         intResult = 1;
+        extras = getIntent().getExtras();
+        if(extras != null) {
+            idToEdit = extras.getInt("id");
+            dbManager.fillFuelFillArrayList();
+            object = Checkup.listOfCheckup.get(idToEdit);
+
+            ldt = LocalDate.parse(object.getDate());
+            ldt2 = LocalDate.parse(object.getExpirationDate());
+
+            etCheckupPrice.setText(object.getPrice().toString());
+            etCheckupWhere.setText(object.getCheckupLocation().toString());
+            etCheckupNote.setText(object.getDescription().toString());
+
+            for (int i = 0;i<Mileage.listOfMIleage.size();i++){
+                if(Objects.equals(Mileage.listOfMIleage.get(i).getMileageId(), object.getMileageId())){
+                    etMileageAmount.setText(Mileage.listOfMIleage.get(i).getMileageValue().toString());
+                    mileageId= i;
+                    break;
+                }
+            }
+
+
+            if(object.getPassed().equals(0)){
+                rbCheckupNegative.setChecked(true);
+                intResult = 0;
+            }
+
+            ldt = LocalDate.parse(object.getDate());
+            ldt2 = LocalDate.parse(object.getExpirationDate());
+        }
+
+        tvCheckupFromDate.setText(ldt.toString());
+        tvCheckupNextDate.setText(ldt2.toString());
     }
 
     public void CheckupFromDate(View view) {
@@ -95,10 +132,19 @@ public class AdditionCheckup extends AppCompatActivity {
         strMileageDate = ldt.toString();
         intMileage = Double.parseDouble(etMileageAmount.getText().toString());
 
-        mileage = new Mileage(0, strMileageDate, intMileage);
-        dbManager.addMileageToDb(mileage);
 
-        dbManager.fillMileageArrayList();
+
+
+        if (extras != null) {
+            mileage = new Mileage(Mileage.listOfMIleage.get(mileageId).getMileageValue().intValue(),sh.getInt("activeCarId",0),0, strMileageDate, intMileage,0);
+            dbManager.addMileageToDb(mileage);
+        }
+        else
+        {
+            mileage = new Mileage(0, strMileageDate, intMileage);
+            dbManager.updateMileageInDb(mileage);
+        }
+
 
 
 
@@ -112,9 +158,17 @@ public class AdditionCheckup extends AppCompatActivity {
         CheckupFromDate = ldt.toString();
         CheckupNextDate = ldt2.toString();
 
-        checkup = new Checkup(sh.getInt("activeCarId",0),mileageId,CheckupFromDate,CheckupNextDate,CheckupWhere,CheckupPrice, intResult,CheckupNote);
+        if (extras != null) {
+            checkup = new Checkup(object.getCheckupId(), sh.getInt("activeCarId",0),mileageId,CheckupFromDate,CheckupNextDate,CheckupWhere,CheckupPrice, intResult,CheckupNote);
+            dbManager.updateCheckupInDb(checkup);
+        }
+        else
+        {
+            checkup = new Checkup(sh.getInt("activeCarId",0),mileageId,CheckupFromDate,CheckupNextDate,CheckupWhere,CheckupPrice, intResult,CheckupNote);
+            dbManager.addCheckupToDb(checkup);
+        }
 
-        dbManager.addCheckupToDb(checkup);
+
 
         finish();
     }
@@ -130,13 +184,18 @@ public class AdditionCheckup extends AppCompatActivity {
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
-        /*if(extras != null)
+        if(extras != null)
         {
-            ldt = LocalDate.parse();
+
             mYear = ldt.getYear();
             mMonth = ldt.getMonthValue()-1;
             mDay = ldt.getDayOfMonth();
-        }*/
+            if(whatDatePicker == false) {
+                mYear = ldt2.getYear();
+                mMonth = ldt2.getMonthValue() - 1;
+                mDay = ldt2.getDayOfMonth();
+            }
+        }
         DatePickerDialog datePickerDialog = new DatePickerDialog(AdditionCheckup.this,
                 (view, year, monthOfYear, dayOfMonth) -> {
                     monthOfYear = monthOfYear +1;

@@ -3,6 +3,7 @@ package com.example.carmanager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,10 @@ public class AdditionOperatingElements extends AppCompatActivity {
     RadioButton rbOperationalElementChangeByDate,rbOperationalElementChangeByBoth,rbOperationalElementChangeByMileage;
     LocalDate ldt, ldt2;
     String data, strMonth, strDay;
+    Bundle extras;
+    int idToEdit;
+    SharedPreferences sh;
+    Maintenance object;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +39,7 @@ public class AdditionOperatingElements extends AppCompatActivity {
         setContentView(R.layout.activity_addition_operating_elements);
 
         dbManager = new DbManager(this);
-
+        sh = getSharedPreferences("activeCar", MODE_PRIVATE);
         btnSave = findViewById(R.id.btnSave);
         btnExit = findViewById(R.id.btnExit);
         tvOperatingElementsDate = findViewById(R.id.tvOperatingElementsDate);
@@ -54,7 +59,51 @@ public class AdditionOperatingElements extends AppCompatActivity {
         tvOperatingElementsDate.setText(ldt.toString());
         tvOperatingElementsNextDate.setText(ldt2.toString());
 
+        extras = getIntent().getExtras();
 
+        if(extras != null) {
+            idToEdit = extras.getInt("id");
+            dbManager.fillFuelFillArrayList();
+            object = Maintenance.listOfMaintance.get(idToEdit);
+
+            ldt = LocalDate.parse(object.getMaintenanceDate());
+            try {
+                ldt2 = LocalDate.parse(object.getNextMaintenanceDate());
+            }
+            catch(Exception e) {
+                tvOperatingElementsNextDate.setText(ldt2.toString());
+            }
+
+
+
+
+
+            tvOperatingElementsDate.setText(object.getMaintenanceDate());
+            tvOperatingElementsNextDate.setText(object.getNextMaintenanceDate());
+            etOperatingElementsNextMileage.setText(object.getNextMileage().toString());
+            etOperatingElementsNote.setText(object.getDescription());
+            etOperatingElementsPrice.setText(object.getPrice().toString());
+            etOperatingElementsWhere.setText(object.getPlace());
+            etOperatingElementsPart.setText(object.getMaintenanceTarget());
+
+            if(!object.getNextMileage().equals(0.0) && !object.getNextMaintenanceDate().equals("")){
+                rbOperationalElementChangeByBoth.setChecked(true);
+                etOperatingElementsNextMileage.setVisibility(View.VISIBLE);
+                tvOperatingElementsNextSlash.setVisibility(View.VISIBLE);
+                tvOperatingElementsNextDate.setVisibility(View.VISIBLE);
+            }
+            else if(object.getNextMileage().equals(0.0)){
+                rbOperationalElementChangeByDate.setChecked(true);
+                tvOperatingElementsNextDate.setVisibility(View.VISIBLE);
+                etOperatingElementsNextMileage.setVisibility(View.GONE);
+                tvOperatingElementsNextSlash.setVisibility(View.GONE);            }
+            else{
+                rbOperationalElementChangeByMileage.setChecked(true);
+                etOperatingElementsNextMileage.setVisibility(View.VISIBLE);
+                tvOperatingElementsNextDate.setVisibility(View.GONE);
+                tvOperatingElementsNextSlash.setVisibility(View.GONE);            }
+
+        }
 
 
 
@@ -112,22 +161,47 @@ public class AdditionOperatingElements extends AppCompatActivity {
 
         OperatingElementsDate = ldt.toString();
 
+        if (extras != null) {
+            if (rbOperationalElementChangeByDate.isChecked() == true) {
+                OperatingElementsNextDate = ldt2.toString();
+                maintenance = new Maintenance(object.getMaintenanceId(),sh.getInt("activeCarId",0),OperatingElementsDate,OperatingElementsPart,OperatingElementsNextDate,0.0,OperatingElementsPrice,OperatingElementsNote,OperatingElementsWhere);
+            }
+            else if (rbOperationalElementChangeByMileage.isChecked() == true) {
+                OperatingElementsNextMileage = Double.parseDouble(etOperatingElementsNextMileage.getText().toString());
+                maintenance = new Maintenance(object.getMaintenanceId(),sh.getInt("activeCarId",0),OperatingElementsDate,OperatingElementsPart,"",OperatingElementsNextMileage,OperatingElementsPrice,OperatingElementsNote,OperatingElementsWhere);
+            }
+            else if (rbOperationalElementChangeByBoth.isChecked() == true) {
+                OperatingElementsNextDate = ldt2.toString();
+                OperatingElementsNextMileage = Double.parseDouble(etOperatingElementsNextMileage.getText().toString());
+                maintenance = new Maintenance(object.getMaintenanceId(),sh.getInt("activeCarId",0),OperatingElementsDate,OperatingElementsPart,OperatingElementsNextDate,OperatingElementsNextMileage,OperatingElementsPrice,OperatingElementsNote,OperatingElementsWhere);
+            }
+            dbManager.updateMaintenanceInDb(maintenance);
 
-        if (rbOperationalElementChangeByDate.isChecked() == true) {
-            OperatingElementsNextDate = ldt2.toString();
-            maintenance = new Maintenance(1,OperatingElementsDate,OperatingElementsPart,OperatingElementsNextDate,0.0,OperatingElementsPrice,OperatingElementsNote,OperatingElementsWhere);
         }
-        else if (rbOperationalElementChangeByMileage.isChecked() == true) {
-            OperatingElementsNextMileage = Double.parseDouble(etOperatingElementsNextMileage.getText().toString());
-            maintenance = new Maintenance(1,OperatingElementsDate,OperatingElementsPart,"",OperatingElementsNextMileage,OperatingElementsPrice,OperatingElementsNote,OperatingElementsWhere);
-        }
-        else if (rbOperationalElementChangeByBoth.isChecked() == true) {
-            OperatingElementsNextDate = ldt2.toString();
-            OperatingElementsNextMileage = Double.parseDouble(etOperatingElementsNextMileage.getText().toString());
-            maintenance = new Maintenance(1,OperatingElementsDate,OperatingElementsPart,OperatingElementsNextDate,OperatingElementsNextMileage,OperatingElementsPrice,OperatingElementsNote,OperatingElementsWhere);
+        else
+        {
+            if (rbOperationalElementChangeByDate.isChecked() == true) {
+                OperatingElementsNextDate = ldt2.toString();
+                maintenance = new Maintenance(sh.getInt("activeCarId",0),OperatingElementsDate,OperatingElementsPart,OperatingElementsNextDate,0.0,OperatingElementsPrice,OperatingElementsNote,OperatingElementsWhere);
+
+            }
+            else if (rbOperationalElementChangeByMileage.isChecked() == true) {
+                OperatingElementsNextMileage = Double.parseDouble(etOperatingElementsNextMileage.getText().toString());
+                maintenance = new Maintenance(sh.getInt("activeCarId",0),OperatingElementsDate,OperatingElementsPart,"",OperatingElementsNextMileage,OperatingElementsPrice,OperatingElementsNote,OperatingElementsWhere);
+
+            }
+            else if (rbOperationalElementChangeByBoth.isChecked() == true) {
+                OperatingElementsNextDate = ldt2.toString();
+                OperatingElementsNextMileage = Double.parseDouble(etOperatingElementsNextMileage.getText().toString());
+                maintenance = new Maintenance(sh.getInt("activeCarId",0),OperatingElementsDate,OperatingElementsPart,OperatingElementsNextDate,OperatingElementsNextMileage,OperatingElementsPrice,OperatingElementsNote,OperatingElementsWhere);
+
+            }
+            dbManager.addMaintenanceToDb(maintenance);
         }
 
-        dbManager.addMaintenanceToDb(maintenance);
+
+
+
         finish();
     }
 
@@ -138,13 +212,12 @@ public class AdditionOperatingElements extends AppCompatActivity {
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
-        /*if(extras != null)
+        if(extras != null)
         {
-            ldt = LocalDate.parse();
             mYear = ldt.getYear();
             mMonth = ldt.getMonthValue()-1;
             mDay = ldt.getDayOfMonth();
-        }*/
+        }
         DatePickerDialog datePickerDialog = new DatePickerDialog(AdditionOperatingElements.this,
                 (view, year, monthOfYear, dayOfMonth) -> {
                     monthOfYear = monthOfYear +1;

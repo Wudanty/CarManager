@@ -3,6 +3,7 @@ package com.example.carmanager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -20,6 +21,10 @@ public class AdditionMileage extends AppCompatActivity {
     TextView tvMileageDate;
     String data, strMonth, strDay;
     LocalDate ldt;
+    Bundle extras;
+    int idToEdit;
+    SharedPreferences sh;
+    Mileage object;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +33,25 @@ public class AdditionMileage extends AppCompatActivity {
 
         tvMileageDate = findViewById(R.id.tvMileageDate);
         etMileage = findViewById(R.id.etMileage);
-
+        sh = getSharedPreferences("activeCar", MODE_PRIVATE);
 
         ldt = java.time.LocalDate.now();
         tvMileageDate.setText(ldt.toString());
+
+        extras = getIntent().getExtras();
+
+        if(extras != null)
+        {
+
+            idToEdit = extras.getInt("id");
+            dbManager.fillMileageArrayList();
+            object = Mileage.listOfMIleage.get(idToEdit);
+
+            ldt = LocalDate.parse(object.getMileageCheckDate());
+
+            tvMileageDate.setText(object.getMileageCheckDate());
+            etMileage.setText(object.getMileageValue().toString());
+        }
     }
 
     public void Exit(View view) {
@@ -44,8 +64,17 @@ public class AdditionMileage extends AppCompatActivity {
         strMileageDate = ldt.toString();
         intMileage = Double.parseDouble(etMileage.getText().toString());
 
-        mileage = new Mileage(0, strMileageDate, Double.parseDouble(String.valueOf(intMileage)));
-        dbManager.addMileageToDb(mileage);
+
+        if(extras!=null){
+            mileage = new Mileage(object.getMileageId(),sh.getInt("activeCarId",0),0, strMileageDate, Double.parseDouble(String.valueOf(intMileage)),0);
+            dbManager.updateMileageInDb(mileage);
+        }
+        else
+        {
+            mileage = new Mileage(sh.getInt("activeCarId",0), strMileageDate, Double.parseDouble(String.valueOf(intMileage)));
+            dbManager.addMileageToDb(mileage);
+        }
+
         finish();
     }
 
@@ -60,13 +89,12 @@ public class AdditionMileage extends AppCompatActivity {
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
-        /*if(extras != null)
+        if(extras != null)
         {
-            ldt = LocalDate.parse();
             mYear = ldt.getYear();
             mMonth = ldt.getMonthValue()-1;
             mDay = ldt.getDayOfMonth();
-        }*/
+        }
         DatePickerDialog datePickerDialog = new DatePickerDialog(AdditionMileage.this,
                 (view, year, monthOfYear, dayOfMonth) -> {
                     monthOfYear = monthOfYear +1;

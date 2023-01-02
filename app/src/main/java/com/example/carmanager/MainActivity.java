@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.carmanager.models.Car;
-import com.example.carmanager.models.Maintenance;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Objects;
 
@@ -39,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         //Toolbar-----------------------------------------------
         btnCar = findViewById(R.id.car);
         btnMoreActivities = findViewById(R.id.more);
+        btnSettings = findViewById(R.id.settings);
         btnMainActivity = findViewById(R.id.mainActivity);
         btnHistory = findViewById(R.id.history);
         btnDataCar = findViewById(R.id.button_data);
@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         text_rok.setText(object.getProductionDate().toString());
         text_polisa.setText(object.getTankVolume().toString());
         text_vin.setText(object.getVin());
+
         text_poj.setText(object.getEngineCapacity().toString());
         text_moc.setText(String.valueOf(object.getEnginePower()));
         text_przebieg.setText(String.valueOf(object.getEnginePower()));
@@ -92,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     } catch (Exception e) {
     }
+
 
 
         btnDataCar.setBackgroundColor(btnDataCar.getContext().getResources().getColor(R.color.purple_700));
@@ -134,6 +136,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 more(null);
+            }
+        });
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentSP = new Intent(MainActivity.this, Raports.class);
+                intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity( intentSP );
+              //  Maintenance maintenance = new Maintenance();
+
+
             }
         });
         btnDataCar.setOnClickListener(new View.OnClickListener() {
@@ -181,9 +194,9 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(builder.getWindow().getAttributes());
-        lp.width = 600;
+        lp.width = 480;
         lp.x=25;
-        lp.y=75;
+        lp.y=100;
 
         lp.gravity = Gravity.TOP | Gravity.END;
         lp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
@@ -194,14 +207,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, MoreActivities.class);
-                startActivity(intent);
-                builder.cancel();
-            }
-        });
-        btnReminder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Notifications.class);
                 startActivity(intent);
                 builder.cancel();
             }
@@ -264,7 +269,8 @@ public class MainActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MainActivity.this, AdditionCheckup.class);
+                startActivity(intent);
 
                 builder.cancel();
             }

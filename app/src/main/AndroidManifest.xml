@@ -58,7 +58,7 @@
             android:name=".History"
             android:exported="false" />
         <activity
-            android:name=".Settings"
+            android:name=".Raports"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
