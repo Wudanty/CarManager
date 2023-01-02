@@ -23,12 +23,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 public class NotificationReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         DbManager dbManager = DbManager.instanceOfDatabase(context);
         dbManager.fillNotificationArrayList();
         for (Notification notification: Notification.listOfNotification){
@@ -36,12 +37,11 @@ public class NotificationReceiver extends BroadcastReceiver {
                 try {
                     Date currentTime = Calendar.getInstance().getTime();
                     Date date = format.parse(notification.getDate());
-                    if (currentTime.after(date) && currentTime.equals(date)){
+                    if (currentTime.after(date) || currentTime.equals(date)){
                         createNotification(notification.getName(), notification.getDescription(), context);
                         dbManager.deleteNotificationInDb(notification);
                     }
                 } catch (ParseException e) {
-                    e.printStackTrace();
                 }
             }
             else if(notification.getNotificationType()==0){
@@ -57,12 +57,12 @@ public class NotificationReceiver extends BroadcastReceiver {
     private void createNotification(String title,String content,Context context) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "CHANNEL_ID")
                 .setSmallIcon(R.drawable.notification)
-                .setContentTitle(title)
+                .setContentTitle("Przypomienie o "+title)
                 .setContentText(content)
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        notificationManager.notify(0, builder.build());
+        notificationManager.notify(new Random().nextInt() , builder.build());
 
     }
 }

@@ -1,12 +1,15 @@
 package com.example.carmanager;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlarmManager;
+import android.app.DatePickerDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,19 +22,21 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.carmanager.models.Car;
 import com.example.carmanager.models.Mileage;
 import com.example.carmanager.models.Notification;
 import com.example.carmanager.models.NotificationReceiver;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 public class Notifications extends AppCompatActivity {
     DbManager dbManager = DbManager.instanceOfDatabase(this);
     Button button_add,button_add_a,button_list;
     Button btnCar, btnMoreActivities, btnHistory, btnSettings, btnMainActivity;
-    LinearLayout layout_add,layout_list;
+    LinearLayout layout_add,layout_list,layout_empty,layout_Data,layout_KM;
     CheckBox checkBoxKm, checkBoxDate;
     EditText editTextKm,editTextDate,editTextDes;
     Spinner spino,selectCarSpinner;
@@ -57,6 +62,9 @@ public class Notifications extends AppCompatActivity {
         selectCarSpinner = findViewById(R.id.spinner2);
         layout_add = findViewById(R.id.layout_add);
         layout_list = findViewById(R.id.layout_list);
+        layout_empty = findViewById(R.id.empty_lay);
+        layout_Data = findViewById(R.id.layout_Data);
+        layout_KM = findViewById(R.id.layout_KM);
         button_add_a = findViewById(R.id.button_data);
         button_add = findViewById(R.id.button_add);
         button_list = findViewById(R.id.button_details);
@@ -67,6 +75,8 @@ public class Notifications extends AppCompatActivity {
         dbManager.fillCarArrayList();
         Noti_car_adapter noti_car_adapter = new Noti_car_adapter(getApplicationContext(),Car.listOfCars);
         selectCarSpinner.setAdapter(noti_car_adapter);
+        dbManager.fillNotificationArrayList();
+        Notifications_adapter notifications_adapter = new Notifications_adapter(getApplicationContext(), Notification.listOfNotification);
         button_add_a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,13 +89,34 @@ public class Notifications extends AppCompatActivity {
         button_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dbManager.fillNotificationArrayList();
-                Notifications_adapter notifications_adapter = new Notifications_adapter(getApplicationContext(),Notification.listOfNotification);
-                notification_list.setAdapter(notifications_adapter);
                 button_add_a.setBackgroundColor(button_add_a.getContext().getResources().getColor(R.color.purple_500));
                 button_list.setBackgroundColor(button_list.getContext().getResources().getColor(R.color.purple_700));
                 layout_list.setVisibility(View.VISIBLE);
                 layout_add.setVisibility(View.GONE);
+                dbManager.fillNotificationArrayList();
+                notification_list.deferNotifyDataSetChanged();
+                notification_list.setAdapter(notifications_adapter);
+                if(Notification.listOfNotification==null) {
+                    layout_list.setVisibility(View.GONE);
+                    layout_empty.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        notification_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Notifications.this);
+                builder.setTitle("Co chcesz zrobić?");
+                builder.setPositiveButton("Usuń", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Notification object = (Notification) notification_list.getItemAtPosition(i);
+                        dbManager.deleteNotificationInDb(object);
+                        notifications_adapter.remove(object);
+                        notification_list.deferNotifyDataSetChanged();
+                    }
+                });
+                builder.show();
             }
         });
         selectCarSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -102,7 +133,8 @@ public class Notifications extends AppCompatActivity {
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* int typ = 0;
+                try{
+                int typ = 0;
                 Double kilometry= 0.0;
                 String data=null;
                 if (checkBoxDate.isChecked()){
@@ -116,8 +148,12 @@ public class Notifications extends AppCompatActivity {
                 }
 
               Notification notification = new Notification(car.getCarId(),data,editTextDes.getText().toString(),null,typ,kilometry.intValue(),spino.getSelectedItem().toString());
-              dbManager.addNotificationToDb(notification);*/
-              createAlarm();
+              dbManager.addNotificationToDb(notification);
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Dodaj samochód aby dodac przypomienie", Toast.LENGTH_LONG).show();
+                }
+                createAlarm();
+
             }
         });
         btnCar.setOnClickListener(new View.OnClickListener() {
@@ -157,20 +193,21 @@ public class Notifications extends AppCompatActivity {
     private void createAlarm() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 15);
-        calendar.set(Calendar.MINUTE, 45);
+        calendar.set(Calendar.HOUR_OF_DAY,17 );
+        calendar.set(Calendar.MINUTE, 18);
+        long triger = System.currentTimeMillis()+5000;
         Intent intent = new Intent(this, NotificationReceiver.class);
         AlarmManager alarmMgr = (AlarmManager) this.getSystemService(ALARM_SERVICE);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmMgr.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_MUTABLE);
+        alarmMgr.set(AlarmManager.RTC_WAKEUP, triger,pendingIntent);
 
     }
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "TestName";
-            String description = "TestDes";
+            CharSequence name = "NotificationChannel";
+            String description = "Channel for notifications";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel("CHANNEL_ID", name, importance);
             channel.setDescription(description);
@@ -184,30 +221,66 @@ public class Notifications extends AppCompatActivity {
     public void itemClicked(View v) {
         CheckBox checkBoxDate = (CheckBox)v;
         if(checkBoxDate.isChecked()){
-            editTextDate.setVisibility(View.VISIBLE);
+            layout_Data.setVisibility(View.VISIBLE);
             checkBoxKm.setChecked(false);
-            editTextKm.setVisibility(View.GONE);
+            layout_KM.setVisibility(View.GONE);
         }
         else {
-            editTextDate.setVisibility(View.GONE);
+            layout_Data.setVisibility(View.GONE);
             checkBoxKm.setChecked(true);
-            editTextKm.setVisibility(View.VISIBLE);
+            layout_KM.setVisibility(View.VISIBLE);
         }
 
     }
     public void itemClicked2(View v) {
         CheckBox checkBoxKm = (CheckBox)v;
         if(checkBoxKm.isChecked()){
-            editTextKm.setVisibility(View.VISIBLE);
+            layout_KM.setVisibility(View.VISIBLE);
             checkBoxDate.setChecked(false);
-            editTextDate.setVisibility(View.GONE);
+            layout_Data.setVisibility(View.GONE);
         }
         else {
-            editTextKm.setVisibility(View.GONE);
+            layout_KM.setVisibility(View.GONE);
             checkBoxDate.setChecked(true);
-            editTextDate.setVisibility(View.VISIBLE);
+            layout_Data.setVisibility(View.VISIBLE);
         }
 
+    }
+    public void datePicker(View v){
+        int mYear, mMonth, mDay;
+        final Calendar c = Calendar.getInstance();
+
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+        /*if(extras != null)
+        {
+            ldt = LocalDate.parse();
+            mYear = ldt.getYear();
+            mMonth = ldt.getMonthValue()-1;
+            mDay = ldt.getDayOfMonth();
+        }*/
+        DatePickerDialog datePickerDialog = new DatePickerDialog(Notifications.this,
+                (view, year, monthOfYear, dayOfMonth) -> {
+            String strDay,strMonth;
+            LocalDate ldt;
+                    monthOfYear = monthOfYear +1;
+                    strDay = dayOfMonth+"";
+                    if(strDay.length() == 1) strDay = "0"+strDay;
+
+                    strMonth = monthOfYear+"";
+                    if(strMonth.length() == 1) strMonth = "0"+strMonth;
+
+                    String data = year + "-"+strMonth+"-"+strDay;
+
+                    ldt = LocalDate.parse(data);
+                    editTextDate.setText(data);
+
+
+                }, mYear, mMonth, mDay);
+
+        datePickerDialog.getDatePicker().setFirstDayOfWeek(Calendar.MONDAY);
+        datePickerDialog.show();
     }
 
 
