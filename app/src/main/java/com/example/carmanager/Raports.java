@@ -536,6 +536,14 @@ public class Raports extends AppCompatActivity {
                 builder.cancel();
             }
         });
+        btnReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Raports.this, Notifications.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
     }
 
 

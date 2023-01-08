@@ -1,11 +1,13 @@
 package com.example.carmanager;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -21,6 +23,7 @@ import com.example.carmanager.models.Fix;
 import com.example.carmanager.models.FuelFill;
 import com.example.carmanager.models.Maintenance;
 import com.example.carmanager.models.Mileage;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Collections;
 import java.util.Objects;
@@ -35,6 +38,7 @@ public class History extends AppCompatActivity {
     Button FuelFillBtn, MaintenanceBtn, CheckUpBtn, FixBtn, MileageBtn;
     ListView ListViewHistory;
     LinearLayout layoutColumnNames;
+    FloatingActionButton floatingButton;
     DbManager dbManager = DbManager.instanceOfDatabase(this);
     int number = 1, carID;
 
@@ -53,6 +57,7 @@ public class History extends AppCompatActivity {
         toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle(null);
+        floatingButton = findViewById(R.id.fab);
 
         FuelFillBtn = findViewById(R.id.buttonFuel);
         MaintenanceBtn = findViewById(R.id.buttonMaintenance);
@@ -69,6 +74,7 @@ public class History extends AppCompatActivity {
 
         SharedPreferences sh = getSharedPreferences("activeCar", MODE_PRIVATE);
         carID=sh.getInt("activeCarId",0);
+        Log.d("dd", String.valueOf(carID));
 
         btnCar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,8 +114,13 @@ public class History extends AppCompatActivity {
                 startActivity(intentSP);
             }
         });
+        floatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                additions(null);
+            }
+        });
         //Toolbar-----------------------------------------------
-
         listeners();
         initAdapter(1);
     }
@@ -267,7 +278,6 @@ public class History extends AppCompatActivity {
         dbManager.getCarHistory(carID);
         if (type == 1) {
             number = 1;
-            dbManager.fillFuelFillArrayList();
             Collections.reverse(FuelFill.listOfFuelFill);
             AdapterHistoryFuelFill adapter1 = new AdapterHistoryFuelFill(getApplicationContext(), FuelFill.listOfFuelFill);
             columns = getLayoutInflater().inflate(R.layout.fuell_fill_cell, null);
@@ -275,7 +285,6 @@ public class History extends AppCompatActivity {
 
         } else if (type == 2) {
             number = 2;
-            dbManager.fillFixArrayList();
             Collections.reverse(Fix.listOfFix);
             AdapterFix adapter2 = new AdapterFix(getApplicationContext(), Fix.listOfFix);
             columns = getLayoutInflater().inflate(R.layout.fix_cell, null);
@@ -283,21 +292,18 @@ public class History extends AppCompatActivity {
 
         } else if (type == 3) {
             number = 3;
-            dbManager.fillMaintenanceArrayList();
             Collections.reverse(Maintenance.listOfMaintance);
             AdapterMaintenance adapter3 = new AdapterMaintenance(getApplicationContext(), Maintenance.listOfMaintance);
             columns = getLayoutInflater().inflate(R.layout.maintenance_cell, null);
             ListViewHistory.setAdapter(adapter3);
         } else if (type == 4) {
             number = 4;
-            dbManager.fillMileageArrayList();
             Collections.reverse(Mileage.listOfMIleage);
             AdapterMileage adapter4 = new AdapterMileage(getApplicationContext(), Mileage.listOfMIleage);
             columns = getLayoutInflater().inflate(R.layout.mileage_cell, null);
             ListViewHistory.setAdapter(adapter4);
         } else if (type == 5) {
             number = 5;
-            dbManager.fillCheckupArrayList();
             Collections.reverse(Checkup.listOfCheckup);
             AdapterCheckUp adapter5 = new AdapterCheckUp(getApplicationContext(), Checkup.listOfCheckup);
             columns = getLayoutInflater().inflate(R.layout.check_up_cell, null);
@@ -360,6 +366,88 @@ public class History extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(History.this, MoreActivities.class);
                 startActivity(intent);
+                builder.cancel();
+            }
+        });
+        btnReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(History.this, Notifications.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
+    }
+    public void additions(View view) {
+        final LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.addition_menu, null);
+        Button btnFuel = (Button) linearLayout.findViewById(R.id.btnFuel);
+        Button btnMileage = (Button) linearLayout.findViewById(R.id.btnMileage);
+        Button btnRepairs = (Button) linearLayout.findViewById(R.id.btnRepairs);
+        Button btnCarInspection = (Button) linearLayout.findViewById(R.id.btnCarInspection);
+        Button btnOperatingElements = (Button) linearLayout.findViewById(R.id.btnOperatingElements);
+
+        final AlertDialog builder = new AlertDialog.Builder(this)
+                .setView(linearLayout)
+                .setCancelable(true)
+                .create();
+        builder.show();
+        //builder.getWindow().setLayout(600, 530);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(builder.getWindow().getAttributes());
+        lp.width = 600;
+        lp.x=25;
+        lp.y=25;
+
+        lp.gravity = Gravity.BOTTOM | Gravity.END;
+        lp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        builder.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        builder.getWindow().setAttributes(lp);
+
+        btnFuel.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(History.this, AddictionFuel.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
+        btnMileage.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(History.this, AdditionMileage.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
+        btnRepairs.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(History.this, AdditionRepairs.class);
+                startActivity(intent);
+
+                builder.cancel();
+            }
+        });
+        btnCarInspection.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(History.this, AdditionCheckup.class);
+                startActivity(intent);
+
+                builder.cancel();
+            }
+        });
+        btnOperatingElements.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(History.this, AdditionOperatingElements.class);
+                startActivity(intent);
+
                 builder.cancel();
             }
         });

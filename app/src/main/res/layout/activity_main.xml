@@ -141,55 +141,48 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15px"
-                    android:background="@drawable/my_border"
-                    android:text="TextView" />
+                    android:background="@drawable/my_border" />
 
                 <TextView
                     android:id="@+id/marka_v"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15px"
-                    android:background="@drawable/my_border"
-                    android:text="TextView" />
+                    android:background="@drawable/my_border" />
 
                 <TextView
                     android:id="@+id/model_v"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15px"
-                    android:background="@drawable/my_border"
-                    android:text="TextView" />
+                    android:background="@drawable/my_border" />
 
                 <TextView
                     android:id="@+id/tablica_v"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15px"
-                    android:background="@drawable/my_border"
-                    android:text="TextView" />
+                    android:background="@drawable/my_border" />
 
                 <TextView
                     android:id="@+id/rok_v"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15px"
-                    android:background="@drawable/my_border"
-                    android:text="TextView" />
+                    android:background="@drawable/my_border" />
 
                 <TextView
                     android:id="@+id/polisa_v"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15px"
-                    android:background="@drawable/my_border"
-                    android:text="TextView" />
+                    android:background="@drawable/my_border" />
 
                 <TextView
                     android:id="@+id/vin_v"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/my_border"
-                    android:text="TextView" />
+                    android:background="@drawable/my_border" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -307,63 +300,55 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15px"
-                    android:background="@drawable/my_border"
-                    android:text="TextView" />
+                    android:background="@drawable/my_border" />
 
                 <TextView
                     android:id="@+id/moc_v"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15px"
-                    android:background="@drawable/my_border"
-                    android:text="TextView" />
+                    android:background="@drawable/my_border" />
 
                 <TextView
                     android:id="@+id/przebieg_v"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15px"
-                    android:background="@drawable/my_border"
-                    android:text="TextView" />
+                    android:background="@drawable/my_border" />
 
                 <TextView
                     android:id="@+id/waga_v"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15px"
-                    android:background="@drawable/my_border"
-                    android:text="TextView" />
+                    android:background="@drawable/my_border" />
 
                 <TextView
                     android:id="@+id/paliwo_v"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15px"
-                    android:background="@drawable/my_border"
-                    android:text="TextView" />
+                    android:background="@drawable/my_border" />
 
                 <TextView
                     android:id="@+id/nadwozie_v"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15px"
-                    android:background="@drawable/my_border"
-                    android:text="TextView" />
+                    android:background="@drawable/my_border" />
 
                 <TextView
                     android:id="@+id/kolor_v"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15px"
-                    android:background="@drawable/my_border"
-                    android:text="TextView" />
+                    android:background="@drawable/my_border" />
 
                 <TextView
                     android:id="@+id/skrzynia_v"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/my_border"
-                    android:text="TextView" />
+                    android:background="@drawable/my_border" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
