@@ -59,6 +59,9 @@ public class CarActivity extends AppCompatActivity {
         addCar = findViewById(R.id.buttonAdd);
         selectedCarPicture = findViewById(R.id.imageViewCarSelect);
 
+        selectedCarPicture.getLayoutParams().height = 200;
+        selectedCarPicture.getLayoutParams().width = WindowManager.LayoutParams.MATCH_PARENT;
+
         dbManager.fillCarArrayList();
 
         SharedPreferences sharedPref =  getSharedPreferences("activeCar", Context.MODE_PRIVATE);
