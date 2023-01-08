@@ -53,6 +53,52 @@ public class AddCarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Boolean parsingError, weightParseErr, tankVolumeParseErr, engineVolumeParseErr, enginePowerParseErr, prodYearParseErr;
+                //parsing
+                try{
+                    NewCar.newCar.setTankVolume(Double.parseDouble(getETString(tankVolumeEditText)));
+                    tankVolumeParseErr = false;
+                }catch (NumberFormatException e){
+                    Toast.makeText(getApplicationContext(),"Podana pojemność baku nie jest liczbą, Wpisz ponownie.",Toast.LENGTH_SHORT).show();
+                    tankVolumeEditText.setText("");
+                    tankVolumeParseErr = true;
+                }
+                try{
+                    NewCar.newCar.setEngineCapacity(Double.parseDouble(getETString(engineVolumeEditText)));
+                    engineVolumeParseErr = false;
+                }catch (NumberFormatException e){
+                    Toast.makeText(getApplicationContext(),"Podana pojemność silnika nie jest liczbą, Wpisz ponownie.",Toast.LENGTH_SHORT).show();
+                    engineVolumeEditText.setText("");
+                    engineVolumeParseErr = true;
+                }
+                try{
+                    NewCar.newCar.setWeight(Double.parseDouble(getETString(weightEditText)));
+                    weightParseErr = false;
+                }catch (NumberFormatException e){
+                    Toast.makeText(getApplicationContext(),"Podana waga samochodu nie jest liczbą, Wpisz ponownie.",Toast.LENGTH_SHORT).show();
+                    tankVolumeEditText.setText("");
+                    weightParseErr = true;
+                }
+
+                try{
+                    NewCar.newCar.setEnginePower(Integer.parseInt(getETString(weightEditText)));
+                    enginePowerParseErr = false;
+                }catch (NumberFormatException e){
+                    Toast.makeText(getApplicationContext(),"Podana moc silnika nie jest liczbą, Wpisz ponownie.",Toast.LENGTH_SHORT).show();
+                    powerEditText.setText("");
+                    enginePowerParseErr = true;
+                }
+
+                try{
+                    NewCar.newCar.setProductionDate(Integer.parseInt(getETString(weightEditText)));
+                    prodYearParseErr = false;
+                }catch (NumberFormatException e){
+                    Toast.makeText(getApplicationContext(),"Podana data produkcji samochodu nie jest liczbą, Wpisz ponownie.",Toast.LENGTH_SHORT).show();
+                    tankVolumeEditText.setText("");
+                    prodYearParseErr = true;
+                }
+
+                parsingError = (tankVolumeParseErr || engineVolumeParseErr || weightParseErr || enginePowerParseErr || prodYearParseErr);
                 try{
 
                     NewCar.newCar.setBrand(getETString(brandEditText));
@@ -69,10 +115,11 @@ public class AddCarActivity extends AppCompatActivity {
                     NewCar.newCar.setRegistry(getETString(plateNumberEditText));
                     NewCar.newCar.setProductionDate(Integer.parseInt(getETString(productionYearEditText)));
                     //Log.d("BRAND OF NEW CAR",NewCar.newCar.getBrand());
-                    Intent intentSP = new Intent(AddCarActivity.this, AddCarActivity2.class);
-                    intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intentSP);
-
+                    if(!parsingError) {
+                        Intent intentSP = new Intent(AddCarActivity.this, AddCarActivity2.class);
+                        intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intentSP);
+                    }
 
                 }catch (Exception e){
                     Toast.makeText(getApplicationContext(),"Jedno z pól nie zostało wypełnione",Toast.LENGTH_SHORT).show();
