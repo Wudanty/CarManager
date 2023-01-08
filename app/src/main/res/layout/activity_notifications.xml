@@ -123,13 +123,13 @@
                 android:text="Powtarzanie" />
 
             <CheckBox
-                android:id="@+id/checkBox3"
+                android:id="@+id/checkBoxPow1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Powtarzanie" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/powKm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -161,13 +161,13 @@
                 android:text="Powtarzanie" />
 
             <CheckBox
-                android:id="@+id/checkBox4"
+                android:id="@+id/checkBoxPow2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Powtarzanie" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/powData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"

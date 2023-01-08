@@ -86,7 +86,7 @@ public class CarActivity extends AppCompatActivity {
                 brandTextView.setText(selectedCar.getBrand());
                 nicknameTextView.setText("\""+selectedCar.getCarNickname()+"\"");
                 plateNumber.setText(selectedCar.getRegistry());
-                selectedCarPicture.setImageBitmap(BitmapFactory.decodeByteArray(selectedCar.getPicture(), 0, selectedCar.getPicture().length));
+                //selectedCarPicture.setImageBitmap(BitmapFactory.decodeByteArray(selectedCar.getPicture(), 0, selectedCar.getPicture().length));
                 Log.d("Selected car",selectedCarName);
 
             }

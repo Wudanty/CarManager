@@ -37,8 +37,8 @@ public class Notifications extends AppCompatActivity {
     Button button_add,button_add_a,button_list;
     Button btnCar, btnMoreActivities, btnHistory, btnSettings, btnMainActivity;
     LinearLayout layout_add,layout_list,layout_empty,layout_Data,layout_KM;
-    CheckBox checkBoxKm, checkBoxDate;
-    EditText editTextKm,editTextDate,editTextDes;
+    CheckBox checkBoxKm, checkBoxDate,checkBoxPowt1,checkBoxPowt2;
+    EditText editTextKm,editTextDate,editTextDes,editTextPowKm,editTextPowDate;
     Spinner spino,selectCarSpinner;
     ListView notification_list;
     Car car=null;
@@ -55,9 +55,13 @@ public class Notifications extends AppCompatActivity {
         btnHistory = findViewById(R.id.history);
         checkBoxKm = findViewById(R.id.checkBox);
         checkBoxDate = findViewById(R.id.checkBox2);
+        checkBoxPowt1= findViewById(R.id.checkBoxPow1);
+        checkBoxPowt2 = findViewById(R.id.checkBoxPow2);
         editTextKm = findViewById(R.id.editKm);
         editTextDate = findViewById(R.id.editDate);
         editTextDes = findViewById(R.id.editTextTextMultiLine);
+        editTextPowDate= findViewById(R.id.powData);
+        editTextPowKm = findViewById(R.id.powKm);
         spino = findViewById(R.id.spinner);
         selectCarSpinner = findViewById(R.id.spinner2);
         layout_add = findViewById(R.id.layout_add);
@@ -133,25 +137,35 @@ public class Notifications extends AppCompatActivity {
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try{
+                //try{
                 int typ = 0;
+                int pow = 0;
+                String powo="";
                 Double kilometry= 0.0;
                 String data=null;
                 if (checkBoxDate.isChecked()){
                     typ=1;
                     data =editTextDate.getText().toString();
+                    if (checkBoxPowt2.isChecked()){
+                        pow=1;
+                        powo = editTextPowDate.getText().toString();
+                    }
                 }
                 else if (checkBoxKm.isChecked()){
                     dbManager.getCarHistory(car.getCarId());
                     typ=0;
                     kilometry = Mileage.listOfMIleage.get(Mileage.listOfMIleage.size() - 1).getMileageValue()+Double.parseDouble(editTextKm.getText().toString());
+                    if (checkBoxPowt1.isChecked()){
+                        pow=1;
+                        powo = editTextPowKm.getText().toString();
+                    }
                 }
 
-              Notification notification = new Notification(car.getCarId(),data,editTextDes.getText().toString(),null,typ,kilometry.intValue(),spino.getSelectedItem().toString());
+              Notification notification = new Notification(car.getCarId(),data,editTextDes.getText().toString(),pow,typ,kilometry.intValue(),spino.getSelectedItem().toString(),powo);
               dbManager.addNotificationToDb(notification);
-                } catch (Exception e) {
+               // } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "Dodaj samochód aby dodac przypomienie", Toast.LENGTH_LONG).show();
-                }
+               // }
                 createAlarm();
 
             }
@@ -244,6 +258,10 @@ public class Notifications extends AppCompatActivity {
             checkBoxDate.setChecked(true);
             layout_Data.setVisibility(View.VISIBLE);
         }
+
+    }
+    public void itemClicked3(View v) {
+        CheckBox checkBoxPowta = (CheckBox)v;
 
     }
     public void datePicker(View v){

@@ -90,6 +90,7 @@ public class DbManager extends SQLiteOpenHelper {
     private static String POWIADOMIENIA_TYP_POWIADOMIENIA = "typ";
     private static String POWIADOMIENIA_KILOMETRY = "kilometry";
     private static String POWIADOMIENIA_NAZWA = "nazwa";
+    private static String POWIADOMIENIA_POWTARZANIE = "powtarzanie";
 
     //PRZEBIEG
     private static String PRZEBIEG_ID_AUTA = "id_Auta";
@@ -269,6 +270,8 @@ public class DbManager extends SQLiteOpenHelper {
                 .append(POWIADOMIENIA_KILOMETRY)
                 .append(" INT, ")
                 .append(POWIADOMIENIA_NAZWA)
+                .append(" TEXT, ")
+                .append(POWIADOMIENIA_POWTARZANIE)
                 .append(" TEXT)");
 
         przebieg = new StringBuilder().append("CREATE TABLE ")
@@ -823,6 +826,7 @@ public class DbManager extends SQLiteOpenHelper {
         contentValues.put(POWIADOMIENIA_TYP_POWIADOMIENIA, notification.getNotificationType());
         contentValues.put(POWIADOMIENIA_KILOMETRY, notification.getKilometre());
         contentValues.put(POWIADOMIENIA_NAZWA, notification.getName());
+        contentValues.put(POWIADOMIENIA_POWTARZANIE, notification.getPowtarzanie());
 
         sqLiteDatabase.insert(TABLE_POWIADOMIENIA, null, contentValues);
     }
@@ -843,8 +847,9 @@ public class DbManager extends SQLiteOpenHelper {
                     int type = result.getInt(5);
                     int kolometre = result.getInt(6);
                     String name = result.getString(7);
+                    String pow = result.getString(8);
 
-                    Notification notification = new Notification(id, carId, date, description, importance, type, kolometre, name);
+                    Notification notification = new Notification(id, carId, date, description, importance, type, kolometre, name,pow);
                     Notification.listOfNotification.add(notification);
                 }
             }
@@ -862,6 +867,7 @@ public class DbManager extends SQLiteOpenHelper {
         contentValues.put(POWIADOMIENIA_TYP_POWIADOMIENIA, notification.getNotificationType());
         contentValues.put(POWIADOMIENIA_KILOMETRY, notification.getKilometre());
         contentValues.put(POWIADOMIENIA_NAZWA, notification.getName());
+        contentValues.put(POWIADOMIENIA_POWTARZANIE, notification.getPowtarzanie());
 
         sqLiteDatabase.update(TABLE_POWIADOMIENIA, contentValues, ID + " =? ", new String[]{String.valueOf(notification.getNotificationId())});
     }

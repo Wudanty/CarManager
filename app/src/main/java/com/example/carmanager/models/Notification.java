@@ -12,8 +12,9 @@ public class Notification {
     private Integer notificationType;
     private Integer kilometre;
     private String name;
+    private String powtarzanie;
 
-    public Notification(Integer notificationId, Integer carId, String date, String description, Integer importance, Integer notificationType, Integer kilometre, String name) {
+    public Notification(Integer notificationId, Integer carId, String date, String description, Integer importance, Integer notificationType, Integer kilometre, String name, String powtarzanie) {
         this.notificationId = notificationId;
         this.carId = carId;
         this.date = date;
@@ -22,9 +23,10 @@ public class Notification {
         this.notificationType = notificationType;
         this.kilometre = kilometre;
         this.name = name;
+        this.powtarzanie = powtarzanie;
     }
 
-    public Notification(Integer carId, String date, String description, Integer importance, Integer notificationType, Integer kilometre, String name) {
+    public Notification(Integer carId, String date, String description, Integer importance, Integer notificationType, Integer kilometre, String name, String powtarzanie) {
         this.carId = carId;
         this.date = date;
         this.description = description;
@@ -32,7 +34,12 @@ public class Notification {
         this.notificationType = notificationType;
         this.kilometre = kilometre;
         this.name = name;
+        this.powtarzanie = powtarzanie;
     }
+
+    public String getPowtarzanie() {return powtarzanie;}
+
+    public void setPowtarzanie(String powtarzanie) {this.powtarzanie = powtarzanie;}
 
     public String getName() {
         return name;

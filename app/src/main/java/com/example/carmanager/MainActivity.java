@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     TextView text_nazwa,text_marka,text_model,text_tablica,text_rok,text_polisa,text_vin;
     TextView text_poj,text_moc,text_przebieg,text_waga,text_paliwo,text_nadwozie,text_kolor,text_skrzynia;
     ImageView imageCar1,imageCar2,imageCar3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,10 +71,12 @@ public class MainActivity extends AppCompatActivity {
         imageCar3 = findViewById(R.id.image_car2);
         SharedPreferences myPrefs;
         try {
-            //imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
             myPrefs = getSharedPreferences("activeCar", MODE_PRIVATE);
             int carId = myPrefs.getInt("activeCarId",0);
             Car object = dbManager.getCarById(carId);
+            //imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
+            //imageCar2.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
+            //imageCar3.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
             text_nazwa.setText(object.getCarNickname());
             text_marka.setText(object.getBrand());
             text_model.setText(object.getModel());
