@@ -5,9 +5,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -34,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DbManager dbManager = DbManager.instanceOfDatabase(this);
-        Car object = dbManager.getCarById(1);
         //Toolbar-----------------------------------------------
         btnCar = findViewById(R.id.car);
         btnMoreActivities = findViewById(R.id.more);
@@ -67,29 +68,28 @@ public class MainActivity extends AppCompatActivity {
         text_skrzynia = findViewById(R.id.skrzynia_v);
 
         imageCar3 = findViewById(R.id.image_car2);
-
+        SharedPreferences myPrefs;
         try {
-            imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
+            //imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
+            myPrefs = getSharedPreferences("activeCar", MODE_PRIVATE);
+            int carId = myPrefs.getInt("activeCarId",0);
+            Car object = dbManager.getCarById(carId);
+            text_nazwa.setText(object.getCarNickname());
+            text_marka.setText(object.getBrand());
+            text_model.setText(object.getModel());
+            text_tablica.setText(object.getRegistry());
+            text_rok.setText(object.getProductionDate().toString());
+            text_polisa.setText(object.getTankVolume().toString());
+            text_vin.setText(object.getVin());
 
-         /*
-        text_nazwa.setText(object.getCarNickname());
-        text_marka.setText(object.getBrand());
-        text_model.setText(object.getModel());
-        text_tablica.setText(object.getRegistry());
-        text_rok.setText(object.getProductionDate().toString());
-        text_polisa.setText(object.getTankVolume().toString());
-        text_vin.setText(object.getVin());
-
-        text_poj.setText(object.getEngineCapacity().toString());
-        text_moc.setText(String.valueOf(object.getEnginePower()));
-        text_przebieg.setText(String.valueOf(object.getEnginePower()));
-        text_waga.setText(object.getWeight().toString());
-        text_paliwo.setText(object.getFuelType());
-        text_nadwozie.setText(object.getBodyType());
-        text_kolor.setText(object.getColour());
-        text_skrzynia.setText(object.getShifterType());
-
-*/
+            text_poj.setText(object.getEngineCapacity().toString());
+            text_moc.setText(String.valueOf(object.getEnginePower()));
+            text_przebieg.setText(String.valueOf(object.getEnginePower()));
+            text_waga.setText(object.getWeight().toString());
+            text_paliwo.setText(object.getFuelType());
+            text_nadwozie.setText(object.getBodyType());
+            text_kolor.setText(object.getColour());
+            text_skrzynia.setText(object.getShifterType());
 
     } catch (Exception e) {
     }
@@ -207,6 +207,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, MoreActivities.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
+        btnReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Notifications.class);
                 startActivity(intent);
                 builder.cancel();
             }

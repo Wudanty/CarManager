@@ -246,5 +246,13 @@ public class CarActivity extends AppCompatActivity {
                 builder.cancel();
             }
         });
+        btnReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CarActivity.this, Notifications.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
     }
 }
