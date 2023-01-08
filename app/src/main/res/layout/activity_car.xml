@@ -18,7 +18,7 @@
         android:spinnerMode="dropdown" />
 
     <ImageView
-        android:id="@+id/imageViewCar"
+        android:id="@+id/imageViewCarSelect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/images" />
