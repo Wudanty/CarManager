@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.carmanager.car.NewCar;
@@ -22,9 +24,11 @@ public class AddCarActivity extends AppCompatActivity {
     //Toolbar-----------------------------------------------
 
     EditText brandEditText,modelEditText,tankVolumeEditText,engineVolumeEditText,powerEditText,
-            weightEditText,vinNumberEditText,bodyTypeEditText,colorEditText,transmissionTypeEditText,
+            weightEditText,vinNumberEditText,bodyTypeEditText,colorEditText,
             fuelTypeEditText,plateNumberEditText,productionYearEditText;
     Button goNextButton;
+    Spinner bodyTypeSpinner, fuelTypeSpinner;
+    RadioButton manual, automatic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +43,11 @@ public class AddCarActivity extends AppCompatActivity {
         powerEditText = findViewById(R.id.editTextEnginePower);
         weightEditText = findViewById(R.id.editTextWeight);
         vinNumberEditText = findViewById(R.id.editTextVin);
-        bodyTypeEditText = findViewById(R.id.editTextBodyType);
+        bodyTypeSpinner = findViewById(R.id.spinnerBodyType);
         colorEditText = findViewById(R.id.editTextColour);
-        transmissionTypeEditText = findViewById(R.id.editTextShifterType);
-        fuelTypeEditText = findViewById(R.id.editTextFuelType);
+        manual = findViewById(R.id.radioButtonManual);
+        automatic = findViewById(R.id.radioButtonAutomatic);
+        fuelTypeSpinner = findViewById(R.id.spinnerFuelType);
         plateNumberEditText = findViewById(R.id.editTextRegistry);
         productionYearEditText = findViewById(R.id.editTextProdDate);
 
@@ -108,10 +113,14 @@ public class AddCarActivity extends AppCompatActivity {
                     NewCar.newCar.setEnginePower(Integer.parseInt(getETString(powerEditText)));
                     NewCar.newCar.setWeight(Double.parseDouble(getETString(weightEditText)));
                     NewCar.newCar.setVin(getETString(vinNumberEditText));
-                    NewCar.newCar.setBodyType(getETString(bodyTypeEditText));
+                    NewCar.newCar.setBodyType(bodyTypeSpinner.getSelectedItem().toString());
                     NewCar.newCar.setColour(getETString(colorEditText));
-                    NewCar.newCar.setShifterType(getETString(transmissionTypeEditText));
-                    NewCar.newCar.setFuelType(getETString(fuelTypeEditText));
+                    if(manual.isChecked()) {
+                        NewCar.newCar.setShifterType("Manualna");
+                    }else if(automatic.isChecked()){
+                        NewCar.newCar.setShifterType("Automatyczna");
+                    }
+                    NewCar.newCar.setFuelType(fuelTypeSpinner.getSelectedItem().toString());
                     NewCar.newCar.setRegistry(getETString(plateNumberEditText));
                     NewCar.newCar.setProductionDate(Integer.parseInt(getETString(productionYearEditText)));
                     //Log.d("BRAND OF NEW CAR",NewCar.newCar.getBrand());
