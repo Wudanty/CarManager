@@ -54,6 +54,20 @@ public class AddCarActivity extends AppCompatActivity {
         goNextButton = findViewById(R.id.buttonAdd);
 
 
+        manual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                automatic.setChecked(false);
+            }
+        });
+
+        automatic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                manual.setChecked(false);
+            }
+        });
+
         goNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,6 +117,8 @@ public class AddCarActivity extends AppCompatActivity {
                     prodYearParseErr = true;
                 }
 
+
+
                 parsingError = (tankVolumeParseErr || engineVolumeParseErr || weightParseErr || enginePowerParseErr || prodYearParseErr);
                 try{
 
@@ -117,8 +133,10 @@ public class AddCarActivity extends AppCompatActivity {
                     NewCar.newCar.setColour(getETString(colorEditText));
                     if(manual.isChecked()) {
                         NewCar.newCar.setShifterType("Manualna");
+
                     }else if(automatic.isChecked()){
                         NewCar.newCar.setShifterType("Automatyczna");
+
                     }
                     NewCar.newCar.setFuelType(fuelTypeSpinner.getSelectedItem().toString());
                     NewCar.newCar.setRegistry(getETString(plateNumberEditText));
