@@ -23,6 +23,10 @@ import com.example.carmanager.models.FuelFill;
 import com.example.carmanager.models.Insurance;
 import com.example.carmanager.models.Maintenance;
 import com.example.carmanager.models.Mileage;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -49,6 +53,7 @@ public class Raports extends AppCompatActivity {
     ListView listViewRaports;
     ArrayList<AdapterRekordRaports> adapterRekordRaports = new ArrayList<>();
     DbManager dbManager = DbManager.instanceOfDatabase(this);
+    BarChart barChart;
     Mileage mileage;
     FuelFill fuelFill;
     Fix fix;
@@ -74,6 +79,20 @@ public class Raports extends AppCompatActivity {
         btnSettings = findViewById(R.id.settings);
         btnMainActivity = findViewById(R.id.mainActivity);
         btnHistory = findViewById(R.id.history);
+
+        ArrayList barArrayList;
+        barArrayList = new ArrayList<>();
+        barArrayList.add(new BarEntry(2f,10));
+        barArrayList.add(new BarEntry(3f,10));
+        barArrayList.add(new BarEntry(4f,10));
+        barArrayList.add(new BarEntry(5f,10));
+        barChart = findViewById(R.id.barChart);
+        BarDataSet barDataSet= new BarDataSet(barArrayList,"Wykres");
+        BarData barData = new BarData(barDataSet);
+        barChart.setData(barData);
+
+
+
 
         FuelFillBtn = findViewById(R.id.buttonFuel);
         MaintenanceBtn = findViewById(R.id.buttonMaintenance);
