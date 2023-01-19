@@ -126,6 +126,7 @@
                 android:id="@+id/checkBoxPow1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="itemClicked3"
                 android:text="Powtarzanie" />
 
             <EditText
@@ -134,7 +135,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Wpisz KM"
-                android:inputType="textPersonName" />
+                android:inputType="number"
+                android:visibility="gone" />
         </LinearLayout>
 
         <LinearLayout
@@ -152,6 +154,7 @@
                 android:hint="Data"
                 android:inputType="date"
                 android:onClick="datePicker"
+                android:phoneNumber="false"
                 android:visibility="visible" />
 
             <TextView
@@ -164,6 +167,7 @@
                 android:id="@+id/checkBoxPow2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="itemClicked4"
                 android:text="Powtarzanie" />
 
             <EditText
@@ -172,7 +176,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Wpisz ilość dni"
-                android:inputType="textPersonName" />
+                android:inputType="number"
+                android:visibility="gone" />
         </LinearLayout>
 
         <LinearLayout
@@ -214,7 +219,9 @@
         <ListView
             android:id="@+id/list_not"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:divider="@drawable/ic_separator"
+            android:dividerHeight="2dp" />
     </LinearLayout>
 
     <LinearLayout

@@ -137,7 +137,7 @@ public class Notifications extends AppCompatActivity {
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //try{
+                try{
                 int typ = 0;
                 int pow = 0;
                 String powo="";
@@ -163,9 +163,10 @@ public class Notifications extends AppCompatActivity {
 
               Notification notification = new Notification(car.getCarId(),data,editTextDes.getText().toString(),pow,typ,kilometry.intValue(),spino.getSelectedItem().toString(),powo);
               dbManager.addNotificationToDb(notification);
-               // } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "Dodaj samochód aby dodac przypomienie", Toast.LENGTH_LONG).show();
-               // }
+              Toast.makeText(getApplicationContext(), "Dodano przypomnienie", Toast.LENGTH_LONG).show();
+               } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Wystąpił błąd podczas dodawania", Toast.LENGTH_LONG).show();
+               }
                 createAlarm();
 
             }
@@ -219,6 +220,7 @@ public class Notifications extends AppCompatActivity {
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
+        // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "NotificationChannel";
             String description = "Channel for notifications";
@@ -262,6 +264,22 @@ public class Notifications extends AppCompatActivity {
     }
     public void itemClicked3(View v) {
         CheckBox checkBoxPowta = (CheckBox)v;
+        if(checkBoxPowt1.isChecked()) {
+            editTextPowKm.setVisibility(View.VISIBLE);
+        }
+        else{
+            editTextPowKm.setVisibility(View.GONE);
+        }
+
+    }
+    public void itemClicked4(View v) {
+        CheckBox checkBoxPowta = (CheckBox)v;
+        if(checkBoxPowt2.isChecked()) {
+            editTextPowDate.setVisibility(View.VISIBLE);
+        }
+        else{
+            editTextPowDate.setVisibility(View.GONE);
+        }
 
     }
     public void datePicker(View v){

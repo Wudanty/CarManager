@@ -43,7 +43,8 @@ public class CarActivity extends AppCompatActivity {
     TextView modelTextView, brandTextView, plateNumber, nicknameTextView;
     Button selectActiveCar, deleteCar, addCar;
     ImageView selectedCarPicture;
-
+    int selectedPosition;
+    SharedPreferences myPrefs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +59,7 @@ public class CarActivity extends AppCompatActivity {
         deleteCar = findViewById(R.id.deleteCarButton);
         addCar = findViewById(R.id.buttonAdd);
         selectedCarPicture = findViewById(R.id.imageViewCarSelect);
+
 
         dbManager.fillCarArrayList();
 
@@ -75,11 +77,14 @@ public class CarActivity extends AppCompatActivity {
 
 
         selectCarSpinner.setAdapter(selectedCarAdapter);
+        myPrefs = getSharedPreferences("activeCar", MODE_PRIVATE);
+        int carPosition = myPrefs.getInt("activePosition",0);
+        selectCarSpinner.setSelection(carPosition);
         selectCarSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-
+                selectedPosition = position;
                 selectedCarName = parent.getSelectedItem().toString();
                 selectedCar = getCarByNickname(selectedCarName);
                 modelTextView.setText(selectedCar.getModel());
@@ -101,6 +106,7 @@ public class CarActivity extends AppCompatActivity {
         selectActiveCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                editor.putInt("activePosition",selectedPosition);
                 editor.putInt("activeCarId", selectedCar.getCarId());
                 editor.putString("activeCarNickname",selectedCar.getCarNickname());
                 editor.apply();
