@@ -19,7 +19,10 @@ import com.example.carmanager.models.Fix;
 import com.example.carmanager.models.FuelFill;
 import com.example.carmanager.models.Maintenance;
 import com.example.carmanager.models.Mileage;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 
 public class MoreActivities extends AppCompatActivity {
@@ -31,6 +34,7 @@ public class MoreActivities extends AppCompatActivity {
 
     AdapterContact adapter;
     ListView contactListView;
+    private FloatingActionButton addContact;
     DbManager dbManager=DbManager.instanceOfDatabase(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,7 @@ public class MoreActivities extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle(null);
 
+        addContact = findViewById(R.id.addContactButton);
         contactListView=findViewById(R.id.contactListView);
 
         btnCar.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +98,15 @@ public class MoreActivities extends AppCompatActivity {
         //Toolbar-----------------------------------------------
 
         initAdapter();
-
+        addContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentSP = new Intent(MoreActivities.this, AdditionContact.class);
+                intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intentSP);
+                finish();
+            }
+        });
         contactListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -106,6 +119,7 @@ public class MoreActivities extends AppCompatActivity {
                         Contact object = (Contact) contactListView.getItemAtPosition(i);
                         dbManager.deleteContactInDb(object);
                         dbManager.fillContactArrayList();
+                        Collections.reverse(Contact.listOfContact);
                         adapter.notifyDataSetChanged();
 
                     }
@@ -129,6 +143,7 @@ public class MoreActivities extends AppCompatActivity {
 
     public void initAdapter(){
         dbManager.fillContactArrayList();
+        Collections.reverse(Contact.listOfContact);
         adapter = new AdapterContact(getApplicationContext(), Contact.listOfContact);
         contactListView.setAdapter(adapter);
     }

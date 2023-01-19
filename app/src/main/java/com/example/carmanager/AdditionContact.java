@@ -55,10 +55,10 @@ public class AdditionContact extends AppCompatActivity {
             etContactEmail.setText(contact.getEmail());
             etContactNumber.setText(contact.getPhoneNumber());
         }
+
     }
 
     public void Exit(View view) {
-
         finish();
     }
 
@@ -70,8 +70,9 @@ public class AdditionContact extends AppCompatActivity {
         contactEmail = etContactEmail.getText().toString();
         contactNumber = etContactNumber.getText().toString();
 
-        contact = new Contact(extras.getInt("id"), contactName, contactNumber, contactEmail, contactAddres);
+
         if (extras != null) {
+            contact = new Contact(extras.getInt("id"), contactName, contactNumber, contactEmail, contactAddres);
             dbManager.updateContactInDb(contact);
             Intent intent = new Intent(AdditionContact.this,MoreActivities.class);
             startActivity(intent);}
@@ -79,6 +80,8 @@ public class AdditionContact extends AppCompatActivity {
         {
             contact = new Contact(contactName,contactNumber,contactEmail,contactAddres);
             dbManager.addContactToDb(contact);
+            Intent intent = new Intent(AdditionContact.this,MoreActivities.class);
+            startActivity(intent);
         }
         finish();
     }
