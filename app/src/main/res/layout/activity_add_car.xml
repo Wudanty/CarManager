@@ -198,13 +198,13 @@
                 android:layout_weight="0"
                 android:text="Typ Nadwozia:" />
 
-            <EditText
-                android:id="@+id/editTextBodyType"
-                android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/spinnerBodyType"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                android:entries="@array/spinnerItemsBodyType"
+                android:layout_weight="0" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -246,13 +246,34 @@
                 android:layout_weight="0"
                 android:text="Rodzaj Skrzyni Biegów:" />
 
-            <EditText
-                android:id="@+id/editTextShifterType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName" />
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioButtonManual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Manualna" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonAutomatic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Automatyczna" />
+                </LinearLayout>
+
+            </RadioGroup>
+
         </LinearLayout>
 
         <LinearLayout
@@ -270,13 +291,13 @@
                 android:layout_weight="0"
                 android:text="Typ Paliwa:" />
 
-            <EditText
-                android:id="@+id/editTextFuelType"
-                android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/spinnerFuelType"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                android:entries="@array/spinnerItemsFuelType"
+                android:layout_weight="0" />
+
         </LinearLayout>
 
         <LinearLayout
