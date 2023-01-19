@@ -154,7 +154,7 @@ public class Notifications extends AppCompatActivity {
                 else if (checkBoxKm.isChecked()){
                     dbManager.getCarHistory(car.getCarId());
                     typ=0;
-                    kilometry = Mileage.listOfMIleage.get(Mileage.listOfMIleage.size() - 1).getMileageValue()+Double.parseDouble(editTextKm.getText().toString());
+                    kilometry = Double.parseDouble(editTextKm.getText().toString());
                     if (checkBoxPowt1.isChecked()){
                         pow=1;
                         powo = editTextPowKm.getText().toString();
