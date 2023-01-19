@@ -13,9 +13,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -39,8 +37,8 @@ public class Notifications extends AppCompatActivity {
     Button button_add,button_add_a,button_list;
     Button btnCar, btnMoreActivities, btnHistory, btnSettings, btnMainActivity;
     LinearLayout layout_add,layout_list,layout_empty,layout_Data,layout_KM;
-    CheckBox checkBoxKm, checkBoxDate;
-    EditText editTextKm,editTextDate,editTextDes;
+    CheckBox checkBoxKm, checkBoxDate,checkBoxPowt1,checkBoxPowt2;
+    EditText editTextKm,editTextDate,editTextDes,editTextPowKm,editTextPowDate;
     Spinner spino,selectCarSpinner;
     ListView notification_list;
     Car car=null;
@@ -55,12 +53,15 @@ public class Notifications extends AppCompatActivity {
         btnMoreActivities = findViewById(R.id.more);
         btnMainActivity = findViewById(R.id.mainActivity);
         btnHistory = findViewById(R.id.history);
-        btnSettings = findViewById(R.id.settings);
         checkBoxKm = findViewById(R.id.checkBox);
         checkBoxDate = findViewById(R.id.checkBox2);
+        checkBoxPowt1= findViewById(R.id.checkBoxPow1);
+        checkBoxPowt2 = findViewById(R.id.checkBoxPow2);
         editTextKm = findViewById(R.id.editKm);
         editTextDate = findViewById(R.id.editDate);
         editTextDes = findViewById(R.id.editTextTextMultiLine);
+        editTextPowDate= findViewById(R.id.powData);
+        editTextPowKm = findViewById(R.id.powKm);
         spino = findViewById(R.id.spinner);
         selectCarSpinner = findViewById(R.id.spinner2);
         layout_add = findViewById(R.id.layout_add);
@@ -138,23 +139,34 @@ public class Notifications extends AppCompatActivity {
             public void onClick(View view) {
                 try{
                 int typ = 0;
+                int pow = 0;
+                String powo="";
                 Double kilometry= 0.0;
                 String data=null;
                 if (checkBoxDate.isChecked()){
                     typ=1;
                     data =editTextDate.getText().toString();
+                    if (checkBoxPowt2.isChecked()){
+                        pow=1;
+                        powo = editTextPowDate.getText().toString();
+                    }
                 }
                 else if (checkBoxKm.isChecked()){
                     dbManager.getCarHistory(car.getCarId());
                     typ=0;
-                    kilometry = Mileage.listOfMIleage.get(Mileage.listOfMIleage.size() - 1).getMileageValue()+Double.parseDouble(editTextKm.getText().toString());
+                    kilometry = Double.parseDouble(editTextKm.getText().toString());
+                    if (checkBoxPowt1.isChecked()){
+                        pow=1;
+                        powo = editTextPowKm.getText().toString();
+                    }
                 }
 
-              Notification notification = new Notification(car.getCarId(),data,editTextDes.getText().toString(),null,typ,kilometry.intValue(),spino.getSelectedItem().toString());
+              Notification notification = new Notification(car.getCarId(),data,editTextDes.getText().toString(),pow,typ,kilometry.intValue(),spino.getSelectedItem().toString(),powo);
               dbManager.addNotificationToDb(notification);
-                } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "Dodaj samochód aby dodac przypomienie", Toast.LENGTH_LONG).show();
-                }
+              Toast.makeText(getApplicationContext(), "Dodano przypomnienie", Toast.LENGTH_LONG).show();
+               } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Wystąpił błąd podczas dodawania", Toast.LENGTH_LONG).show();
+               }
                 createAlarm();
 
             }
@@ -186,15 +198,9 @@ public class Notifications extends AppCompatActivity {
         btnMoreActivities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                more(null);
-            }
-        });
-        btnSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentSP = new Intent(Notifications.this, Raports.class);
+                Intent intentSP = new Intent(Notifications.this, Notifications.class);
                 intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intentSP);
+                startActivity( intentSP );
             }
         });
     }
@@ -213,6 +219,7 @@ public class Notifications extends AppCompatActivity {
     }
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "NotificationChannel";
@@ -255,6 +262,26 @@ public class Notifications extends AppCompatActivity {
         }
 
     }
+    public void itemClicked3(View v) {
+        CheckBox checkBoxPowta = (CheckBox)v;
+        if(checkBoxPowt1.isChecked()) {
+            editTextPowKm.setVisibility(View.VISIBLE);
+        }
+        else{
+            editTextPowKm.setVisibility(View.GONE);
+        }
+
+    }
+    public void itemClicked4(View v) {
+        CheckBox checkBoxPowta = (CheckBox)v;
+        if(checkBoxPowt2.isChecked()) {
+            editTextPowDate.setVisibility(View.VISIBLE);
+        }
+        else{
+            editTextPowDate.setVisibility(View.GONE);
+        }
+
+    }
     public void datePicker(View v){
         int mYear, mMonth, mDay;
         final Calendar c = Calendar.getInstance();
@@ -293,43 +320,6 @@ public class Notifications extends AppCompatActivity {
     }
 
 
-    public void more(View view){
-        final LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.more, null);
-        Button btnContacts=linearLayout.findViewById(R.id.btnContacts);
-        Button btnReminder=linearLayout.findViewById(R.id.btnReminder);
-        Button btnSettings=linearLayout.findViewById(R.id.btnContacts);
-        final AlertDialog builder = new AlertDialog.Builder(this)
-                .setView(linearLayout)
-                .setCancelable(true)
-                .create();
-        builder.show();
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(builder.getWindow().getAttributes());
-        lp.width = 480;
-        lp.x=25;
-        lp.y=100;
 
-        lp.gravity = Gravity.TOP | Gravity.END;
-        lp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
-        builder.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        builder.getWindow().setAttributes(lp);
-
-        btnContacts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Notifications.this, MoreActivities.class);
-                startActivity(intent);
-                builder.cancel();
-            }
-        });
-        btnReminder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Notifications.this, Notifications.class);
-                startActivity(intent);
-                builder.cancel();
-            }
-        });
-    }
 
 }

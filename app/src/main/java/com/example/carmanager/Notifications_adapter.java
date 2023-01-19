@@ -26,21 +26,28 @@ public class Notifications_adapter extends ArrayAdapter<Notification> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.notifiactions_adapter, parent, false);
         DbManager dbManager = DbManager.instanceOfDatabase(getContext());
         TextView NotiName = convertView.findViewById(R.id.listtext1);
-        TextView NotiDes = convertView.findViewById(R.id.listtext2);
-        TextView NotiCar = convertView.findViewById(R.id.listtext3);
+        TextView NotiDes = convertView.findViewById(R.id.textView25);
+        TextView NotiCar = convertView.findViewById(R.id.listtext2);
         TextView NotiType = convertView.findViewById(R.id.listtext4);
-        TextView NotiKmOrData = convertView.findViewById(R.id.listtext5);
+        TextView Pow = convertView.findViewById(R.id.listtext3);
+        TextView NotiKmOrData = convertView.findViewById(R.id.listtext4);
 
         NotiName.setText(getItem(position).getName()+"");
         NotiDes.setText(getItem(position).getDescription()+"");
         NotiCar.setText(dbManager.getCarById(getItem(position).getCarId()).getCarNickname());
         if(getItem(position).getNotificationType()==1){
-        NotiType.setText("Typ: Data");
+        NotiType.setText("Data");
         NotiKmOrData.setText(getItem(position).getDate().toString());
         }
         else if(getItem(position).getNotificationType()==0){
-            NotiType.setText("Typ: Km");
+            NotiType.setText("Km");
             NotiKmOrData.setText(getItem(position).getKilometre().toString()+" Km");
+        }
+        if (getItem(position).getImportance()==0){
+            Pow.setText("Nie");
+        }
+        else {
+            Pow.setText("Tak");
         }
 
         return convertView;

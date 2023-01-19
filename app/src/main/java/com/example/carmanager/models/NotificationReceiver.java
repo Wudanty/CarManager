@@ -38,7 +38,17 @@ public class NotificationReceiver extends BroadcastReceiver {
                     Date date = format.parse(notification.getDate());
                     if (currentTime.after(date) || currentTime.equals(date)){
                         createNotification(notification.getName(), notification.getDescription(), context);
-                        dbManager.deleteNotificationInDb(notification);
+                        if(notification.getImportance()==1){
+                            Calendar cal = Calendar.getInstance();
+                            cal.setTime(date);
+                            cal.add(Calendar.DAY_OF_YEAR,Integer.valueOf(notification.getPowtarzanie()));
+                            Notification not = new Notification(notification.getNotificationId(), notification.getCarId(), format.format(cal.getTime()),notification.getDescription(),notification.getImportance(),notification.getNotificationType(),notification.getKilometre(),notification.getName(), notification.getPowtarzanie());
+                            dbManager.updateNotificationInDb(not);
+                        }
+                        else {
+                            dbManager.deleteNotificationInDb(notification);
+                        }
+
                     }
                 } catch (ParseException e) {
                 }
@@ -47,7 +57,13 @@ public class NotificationReceiver extends BroadcastReceiver {
                 dbManager.fillMileageArrayList();
                 if (notification.getKilometre()<=Mileage.listOfMIleage.get(Mileage.listOfMIleage.size() - 1).getMileageValue()) {
                     createNotification(notification.getName(), notification.getDescription(), context);
-                    dbManager.deleteNotificationInDb(notification);
+                    if(notification.getImportance()==1){
+                        Notification not = new Notification(notification.getNotificationId(), notification.getCarId(), notification.getDate(),notification.getDescription(),notification.getImportance(),notification.getNotificationType(),notification.getKilometre()+Integer.valueOf(notification.getPowtarzanie()),notification.getName(), notification.getPowtarzanie());
+                        dbManager.updateNotificationInDb(not);
+                    }
+                    else {
+                        dbManager.deleteNotificationInDb(notification);
+                    }
                 }
             }
         }
