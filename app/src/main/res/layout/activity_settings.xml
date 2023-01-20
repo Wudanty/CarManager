@@ -13,13 +13,13 @@
 
         <include layout="@layout/toolbar" />
 
-        <Switch
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/switchNotifications"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Powiadomienia" />
 
-        <Switch
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/switchNightMode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
