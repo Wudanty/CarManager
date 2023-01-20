@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.carmanager.models.Car;
 
+import java.io.EOFException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -92,7 +93,10 @@ public class CarActivity extends AppCompatActivity {
                 brandTextView.setText(selectedCar.getBrand());
                 nicknameTextView.setText("\""+selectedCar.getCarNickname()+"\"");
                 plateNumber.setText(selectedCar.getRegistry());
-                //selectedCarPicture.setImageBitmap(BitmapFactory.decodeByteArray(selectedCar.getPicture(), 0, selectedCar.getPicture().length));
+                try {
+                    selectedCarPicture.setImageBitmap(BitmapFactory.decodeByteArray(selectedCar.getPicture(), 0, selectedCar.getPicture().length));
+
+                }catch(Exception e){};
                 Log.d("Selected car",selectedCarName);
 
             }

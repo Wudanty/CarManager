@@ -54,7 +54,7 @@ public class AdapterRekordInflater extends ArrayAdapter<AdapterRekordRaports> {
             else if(adaperRekord.getDataType()==0){
                 TextView tvAdapterData1 = (TextView) view.findViewById(R.id.tvAdapterData1);
                 TextView tvAdapterData2 = (TextView) view.findViewById(R.id.tvAdapterData2);
-                TextView tvAdapterData3 = (TextView) view.findViewById(R.id.tvAdapterData3);
+                //TextView tvAdapterData3 = (TextView) view.findViewById(R.id.tvAdapterData3);
                 TextView tvAdapterDate = (TextView) view.findViewById(R.id.tvAdapterDate);
                 if (tvAdapterData1 != null) {
                     tvAdapterData1.setText(adaperRekord.getData1());
@@ -62,9 +62,9 @@ public class AdapterRekordInflater extends ArrayAdapter<AdapterRekordRaports> {
                 if (tvAdapterData2 != null) {
                     tvAdapterData2.setText(adaperRekord.getData2());
                 }
-                if (tvAdapterData3 != null) {
+                /*if (tvAdapterData3 != null) {
                     tvAdapterData3.setText(adaperRekord.getData3());
-                }
+                }*/
                 if (tvAdapterDate != null) {
                     tvAdapterDate.setText(adaperRekord.getDate());
                 }

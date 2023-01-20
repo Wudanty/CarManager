@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="230dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
 
@@ -18,9 +18,10 @@
         android:insetBottom="0dp"
         android:text="Paliwo"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="13sp"
         android:textStyle="bold"
-        app:cornerRadius="6dp" />
+        app:cornerRadius="0sp"
+        android:backgroundTint="@color/purple_700"/>
 
     <Button
         android:id="@+id/btnMileage"
@@ -33,9 +34,10 @@
         android:insetBottom="0dp"
         android:text="Przebieg"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="13sp"
         android:textStyle="bold"
-        app:cornerRadius="6dp" />
+        app:cornerRadius="0dp"
+        android:backgroundTint="@color/purple_700"/>
 
     <Button
         android:id="@+id/btnRepairs"
@@ -48,9 +50,10 @@
         android:insetBottom="0dp"
         android:text="Naprawy"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="13sp"
         android:textStyle="bold"
-        app:cornerRadius="6dp" />
+        app:cornerRadius="0dp"
+        android:backgroundTint="@color/purple_700"/>
 
     <Button
         android:id="@+id/btnOperatingElements"
@@ -61,11 +64,12 @@
         android:gravity="center"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        android:text="El. Eksploatacyjne"
+        android:text="Części wymienne"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="13sp"
         android:textStyle="bold"
-        app:cornerRadius="6dp" />
+        app:cornerRadius="0dp"
+        android:backgroundTint="@color/purple_700"/>
 
     <Button
         android:id="@+id/btnCarInspection"
@@ -78,8 +82,9 @@
         android:insetBottom="0dp"
         android:text="Przegląd"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="13sp"
         android:textStyle="bold"
-        app:cornerRadius="6dp" />
+        app:cornerRadius="0dp"
+        android:backgroundTint="@color/purple_700"/>
 
 </LinearLayout>

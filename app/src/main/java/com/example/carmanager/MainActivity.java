@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.carmanager.models.Car;
+import com.example.carmanager.models.Checkup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Objects;
 
@@ -35,8 +36,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
         DbManager dbManager = DbManager.instanceOfDatabase(this);
+
         //Toolbar-----------------------------------------------
         btnCar = findViewById(R.id.car);
         btnMoreActivities = findViewById(R.id.more);
@@ -70,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
 
         imageCar3 = findViewById(R.id.image_car2);
         SharedPreferences myPrefs;
+
+
         try {
             myPrefs = getSharedPreferences("activeCar", MODE_PRIVATE);
             int carId = myPrefs.getInt("activeCarId",0);
@@ -247,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
         //builder.getWindow().setLayout(600, 530);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(builder.getWindow().getAttributes());
-        lp.width = 600;
+        lp.width = 650;
         lp.x=25;
         lp.y=25;
 

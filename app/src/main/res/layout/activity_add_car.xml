@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddCarActivity">
+    tools:context=".AddCarActivity"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
 
         <include
             layout="@layout/toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/tvCarNameRaports"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="DODAJ DANE AUTA"
+            android:textColor="@color/black"/>
+
 
         <LinearLayout
             android:id="@+id/Brand"
@@ -188,7 +208,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/textViewBodyType"
@@ -202,8 +224,8 @@
                 android:id="@+id/spinnerBodyType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/spinnerItemsBodyType"
-                android:layout_weight="0" />
+                android:layout_weight="0"
+                android:entries="@array/spinnerItemsBodyType" />
 
         </LinearLayout>
 
@@ -244,12 +266,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10px"
                 android:layout_weight="0"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
                 android:text="Rodzaj Skrzyni Biegów:" />
 
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0" >
+                android:layout_weight="0">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -289,14 +313,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10px"
                 android:layout_weight="0"
-                android:text="Typ Paliwa:" />
+                android:text="Typ Paliwa:"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"/>
 
             <Spinner
                 android:id="@+id/spinnerFuelType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/spinnerItemsFuelType"
-                android:layout_weight="0" />
+                android:layout_weight="0"
+                android:entries="@array/spinnerItemsFuelType" />
 
         </LinearLayout>
 
@@ -364,11 +390,12 @@
                     android:id="@+id/buttonAdd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Dalej" />
+                    android:text="Dalej"
+                    app:cornerRadius="0dp"/>
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

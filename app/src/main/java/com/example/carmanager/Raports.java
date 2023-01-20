@@ -101,7 +101,6 @@ public class Raports extends AppCompatActivity {
         MoneyBtn = findViewById(R.id.buttonMoney);
 
         tvCarNameRaports = findViewById(R.id.tvCarNameRaports);
-        tvCarNameRaports.setText(sh.getString("activeCarNickname",""));
 
         listViewRaports = findViewById(R.id.listViewRaports);
 
@@ -196,7 +195,12 @@ public class Raports extends AppCompatActivity {
                 column = getLayoutInflater().inflate(R.layout.adapter_raports_money, null);
                 columnNames.removeAllViews();
                 columnNames.addView(column);
-                RaportMonthlyMoneySpend();
+                try{
+                    RaportMonthlyMoneySpend();
+                }
+                catch(Exception e){};
+
+
             }
         });
 
