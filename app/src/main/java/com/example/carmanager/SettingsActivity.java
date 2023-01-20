@@ -1,11 +1,13 @@
 package com.example.carmanager;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +31,7 @@ public class SettingsActivity extends AppCompatActivity {
                 editor.apply();
      */
     SwitchMaterial nightMode, notifications;
+    Button clearDB;
 
 
     //Toolbar-----------------------------------------------
@@ -47,6 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         nightMode = findViewById(R.id.switchNightMode);
         notifications = findViewById(R.id.switchNotifications);
+        clearDB = findViewById(R.id.buttonClearDB);
 
         nightMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -74,6 +78,14 @@ public class SettingsActivity extends AppCompatActivity {
                     editor.apply();
                     Log.d("NotificationsON", String.valueOf(sharedPref.getBoolean("notificationsOn",false)));
                 }
+            }
+        });
+
+        clearDB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //DbManager dbManager = new DbManager(getApplicationContext());
+                getApplicationContext().deleteDatabase("CarData");
             }
         });
 
