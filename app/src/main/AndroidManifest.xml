@@ -11,8 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarManager">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AdditionContact"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".AddCarActivity2"
             android:exported="false">
