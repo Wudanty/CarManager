@@ -13,14 +13,19 @@
         android:id="@+id/textViewMilValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:text="Przebieg"
+        android:textColor="@color/black"
+
 
         />
     <TextView
         android:id="@+id/textViewMilDate"
-        android:layout_width="80sp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="Data"
+        android:textColor="@color/black"
+
         />
 </LinearLayout>

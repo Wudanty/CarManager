@@ -6,6 +6,7 @@
     android:paddingTop="10dp"
     android:paddingLeft="5dp"
     android:paddingRight="5dp"
+
     >
 
 
@@ -13,8 +14,10 @@
         android:id="@+id/textViewIle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.8"
+        android:layout_weight="0.6"
         android:text="Ile"
+        android:textColor="@color/black"
+
 
 
         />
@@ -22,8 +25,10 @@
         android:id="@+id/textViewCena"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.7"
         android:text="Cena"
+        android:textColor="@color/black"
+
 
         />
 
@@ -32,8 +37,9 @@
         android:id="@+id/textViewIleZaLitr"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.8"
+        android:layout_weight="0.6"
         android:text="L/zł"
+        android:textColor="@color/black"
 
         />
 
@@ -42,8 +48,9 @@
         android:id="@+id/textViewJakie"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
         android:text="Typ"
+        android:textColor="@color/black"
 
 
         />
@@ -53,6 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Gdzie"
+        android:textColor="@color/black"
 
         />
     <TextView
@@ -61,5 +69,7 @@
         android:layout_height="wrap_content"
         android:text="Data"
         android:layout_marginLeft="3dp"
+        android:textColor="@color/black"
+
         />
 </LinearLayout>
