@@ -67,6 +67,8 @@ public class AddCarActivity2 extends AppCompatActivity {
                                         selectedImageUri);
 
                                 carImage.setImageBitmap(selectedImageBitmap);
+                                carImage.getLayoutParams().height = 200;
+                                carImage.getLayoutParams().width = 300;
 
                                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                                 selectedImageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);

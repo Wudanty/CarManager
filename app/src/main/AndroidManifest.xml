@@ -54,6 +54,9 @@
             android:name=".AddictionFuel"
             android:exported="false" />
         <activity
+            android:name=".Notifications"
+            android:exported="false" />
+        <activity
             android:name=".MoreActivities"
             android:exported="false" />
         <activity
@@ -67,9 +70,6 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"/>
-        <activity
-            android:name=".Notifications"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

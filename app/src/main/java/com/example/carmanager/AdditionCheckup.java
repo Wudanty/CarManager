@@ -150,7 +150,11 @@ public class AdditionCheckup extends AppCompatActivity {
 
         String CheckupFromDate, CheckupNextDate, CheckupNote, CheckupWhere;
         Double CheckupPrice;
-        int mileageId= Mileage.listOfMIleage.get(Mileage.listOfMIleage.size()-1).getMileageId();
+        try{
+            int mileageId= Mileage.listOfMIleage.get(Mileage.listOfMIleage.size()-1).getMileageId();
+        }catch(Exception e){}
+
+
         CheckupPrice = Double.parseDouble(etCheckupPrice.getText().toString());
         CheckupWhere = etCheckupWhere.getText().toString();
         CheckupNote = etCheckupNote.getText().toString();

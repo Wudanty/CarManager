@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.carmanager.models.Car;
+import com.example.carmanager.models.Checkup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Objects;
 
@@ -31,11 +32,15 @@ public class MainActivity extends AppCompatActivity {
     TextView text_nazwa,text_marka,text_model,text_tablica,text_rok,text_polisa,text_vin;
     TextView text_poj,text_moc,text_przebieg,text_waga,text_paliwo,text_nadwozie,text_kolor,text_skrzynia;
     ImageView imageCar1,imageCar2,imageCar3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
         DbManager dbManager = DbManager.instanceOfDatabase(this);
+
         //Toolbar-----------------------------------------------
         btnCar = findViewById(R.id.car);
         btnMoreActivities = findViewById(R.id.more);
@@ -69,11 +74,15 @@ public class MainActivity extends AppCompatActivity {
 
         imageCar3 = findViewById(R.id.image_car2);
         SharedPreferences myPrefs;
+
+
         try {
-            //imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
             myPrefs = getSharedPreferences("activeCar", MODE_PRIVATE);
             int carId = myPrefs.getInt("activeCarId",0);
             Car object = dbManager.getCarById(carId);
+            //imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
+            //imageCar2.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
+            //imageCar3.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
             text_nazwa.setText(object.getCarNickname());
             text_marka.setText(object.getBrand());
             text_model.setText(object.getModel());
@@ -194,9 +203,9 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(builder.getWindow().getAttributes());
-        lp.width = 480;
+        lp.width = 580;
         lp.x=25;
-        lp.y=100;
+        lp.y=140;
 
         lp.gravity = Gravity.TOP | Gravity.END;
         lp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
@@ -244,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
         //builder.getWindow().setLayout(600, 530);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(builder.getWindow().getAttributes());
-        lp.width = 600;
+        lp.width = 650;
         lp.x=25;
         lp.y=25;
 

@@ -6,9 +6,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Notifications">
-
     <include layout="@layout/toolbar" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="PRZYPOMNIENIA"
+        android:textColor="@color/black"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,12 +57,13 @@
         android:visibility="visible">
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dodaj przypomnienie"
-            android:textAlignment="center"
-            android:textSize="24sp" />
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="DODAJ PRZYPOMNIENIE"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/textView2"
@@ -123,18 +137,20 @@
                 android:text="Powtarzanie" />
 
             <CheckBox
-                android:id="@+id/checkBox3"
+                android:id="@+id/checkBoxPow1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="itemClicked3"
                 android:text="Powtarzanie" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/powKm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Wpisz KM"
-                android:inputType="textPersonName" />
+                android:inputType="number"
+                android:visibility="gone" />
         </LinearLayout>
 
         <LinearLayout
@@ -152,6 +168,7 @@
                 android:hint="Data"
                 android:inputType="date"
                 android:onClick="datePicker"
+                android:phoneNumber="false"
                 android:visibility="visible" />
 
             <TextView
@@ -161,18 +178,20 @@
                 android:text="Powtarzanie" />
 
             <CheckBox
-                android:id="@+id/checkBox4"
+                android:id="@+id/checkBoxPow2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="itemClicked4"
                 android:text="Powtarzanie" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/powData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Wpisz ilość dni"
-                android:inputType="textPersonName" />
+                android:inputType="number"
+                android:visibility="gone" />
         </LinearLayout>
 
         <LinearLayout
@@ -199,7 +218,8 @@
                 android:id="@+id/button_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dodaj" />
+                android:text="Dodaj"
+                app:cornerRadius="0dp"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -214,7 +234,9 @@
         <ListView
             android:id="@+id/list_not"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:divider="@drawable/ic_separator"
+            android:dividerHeight="2dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -245,5 +267,5 @@
             android:layout_weight="1"
             android:text="Dodaj najpierw samochód" />
     </LinearLayout>
-
+    </LinearLayout>
 </LinearLayout>

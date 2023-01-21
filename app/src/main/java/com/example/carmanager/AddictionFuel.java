@@ -86,6 +86,7 @@ public class AddictionFuel extends AppCompatActivity {
 
         }
 
+
     }
 
     public void Exit(View view) {
