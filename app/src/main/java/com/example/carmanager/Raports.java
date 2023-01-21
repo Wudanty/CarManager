@@ -192,7 +192,7 @@ public class Raports extends AppCompatActivity {
                 RaportMonthlyMaintenance();
             }
         });
-        MileageBtn.setOnClickListener(new View.OnClickListener() {
+       /* MileageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 column = getLayoutInflater().inflate(R.layout.adapter_raports_mileage, null);
@@ -200,7 +200,7 @@ public class Raports extends AppCompatActivity {
                 columnNames.addView(column);
                 RaportMonthlyMileage();
             }
-        });
+        });*/
         MoneyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -380,9 +380,10 @@ public class Raports extends AppCompatActivity {
                     dateStrPlusOne = Mileage.listOfMIleage.get(i + 1).getMileageCheckDate();
                     LocalDate datePlusOne = LocalDate.parse(dateStrPlusOne);
                     monthOfYearPlusOne = datePlusOne.getMonthValue();
-                }
 
+                }
                 sumaBd = sumaBd.add(BigDecimal.valueOf(Mileage.listOfMIleage.get(i).getMileageValue())).setScale(0, RoundingMode.HALF_UP);
+
 
                 if (i == Mileage.listOfMIleage.size() - 1 || monthOfYear != monthOfYearPlusOne) {
 
