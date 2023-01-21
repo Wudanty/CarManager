@@ -349,11 +349,10 @@ public class Raports extends AppCompatActivity {
         Collections.reverse(adapterRekordRaports);
         listViewRaports.setAdapter(customAdapter);
         barChart.clear();
-        ArrayList barArrayList;
-        barArrayList = new ArrayList<>();
+        ArrayList barArrayList=new ArrayList<>();
         ArrayList<String> ar = new ArrayList<String>();
         for(AdapterRekordRaports anArray:adapterRekordRaports){
-            barArrayList.add(new BarEntry(adapterRekordRaports.indexOf(anArray),Integer.parseInt(anArray.getData2())));
+            barArrayList.add(new BarEntry(adapterRekordRaports.indexOf(anArray),(int)Double.parseDouble(anArray.getData1())));
             ar.add(String.valueOf(anArray.getDate()));
         }
         BarDataSet barDataSet= new BarDataSet(barArrayList,"Zł");
