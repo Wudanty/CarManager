@@ -21,6 +21,7 @@ import android.widget.ListView;
 import com.example.carmanager.models.Checkup;
 import com.example.carmanager.models.Fix;
 import com.example.carmanager.models.FuelFill;
+import com.example.carmanager.models.Insurance;
 import com.example.carmanager.models.Maintenance;
 import com.example.carmanager.models.Mileage;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -35,7 +36,7 @@ public class History extends AppCompatActivity {
     Button btnCar, btnMoreActivities, btnHistory, btnSettings, btnMainActivity;
     //Toolbar-----------------------------------------------
 
-    Button FuelFillBtn, MaintenanceBtn, CheckUpBtn, FixBtn, MileageBtn;
+    Button FuelFillBtn, MaintenanceBtn, CheckUpBtn, FixBtn, MileageBtn, InsuranceBtn;
     ListView ListViewHistory;
     LinearLayout layoutColumnNames;
     FloatingActionButton floatingButton;
@@ -64,6 +65,7 @@ public class History extends AppCompatActivity {
         CheckUpBtn = findViewById(R.id.buttonCheckUp);
         FixBtn = findViewById(R.id.buttonFix);
         MileageBtn = findViewById(R.id.buttonMileage);
+        InsuranceBtn = findViewById(R.id.buttonInsurance);
 
         ListViewHistory = findViewById(R.id.ListViewHistory);
         layoutColumnNames = findViewById(R.id.layoutColumnNames);
@@ -123,6 +125,8 @@ public class History extends AppCompatActivity {
         //Toolbar-----------------------------------------------
         listeners();
         initAdapter(1);
+        Insurance insurance = new Insurance(1,"01-01-1999","01-01-2000","Januszex",999.0,"OC+AC","sd223xc1");
+        dbManager.addInsuranceToDb(insurance);
     }
 
     private void listeners() {
@@ -152,6 +156,10 @@ public class History extends AppCompatActivity {
                         } else if (number == 5) {
                             Checkup object = (Checkup) ListViewHistory.getItemAtPosition(i);
                             deleteCheckUp(object);
+                        }
+                        else if (number == 6){
+                            Insurance object = (Insurance) ListViewHistory.getItemAtPosition(i);
+                            deleteInsurance(object);
                         }
 
 
@@ -270,6 +278,12 @@ public class History extends AppCompatActivity {
                 initAdapter(5);
             }
         });
+        InsuranceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initAdapter(6);
+            }
+        });
     }
 
     public void initAdapter(int type) {
@@ -309,6 +323,13 @@ public class History extends AppCompatActivity {
             columns = getLayoutInflater().inflate(R.layout.check_up_cell, null);
             ListViewHistory.setAdapter(adapter5);
         }
+        else if (type == 6){
+            number = 6;
+            Collections.reverse(Insurance.listOfInsurance);
+            AdapterInsurance adapter6 = new AdapterInsurance(getApplicationContext(), Insurance.listOfInsurance);
+            columns = getLayoutInflater().inflate(R.layout.insurance_cell, null);
+            ListViewHistory.setAdapter(adapter6);
+        }
 
         layoutColumnNames.removeAllViews();
         layoutColumnNames.addView(columns);
@@ -338,6 +359,9 @@ public class History extends AppCompatActivity {
     public void deleteCheckUp(Checkup object) {
         dbManager.deleteCheckupInDb(object);
         initAdapter(5);
+    }
+    public void deleteInsurance(Insurance object){
+        dbManager.deleteInsuranceInDb(object);
     }
 
     public void more(View view){
