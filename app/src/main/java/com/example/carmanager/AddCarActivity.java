@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ public class AddCarActivity extends AppCompatActivity {
     Button goNextButton;
     Spinner bodyTypeSpinner, fuelTypeSpinner;
     RadioButton manual, automatic;
+    RadioGroup radioGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,7 @@ public class AddCarActivity extends AppCompatActivity {
         fuelTypeSpinner = findViewById(R.id.spinnerFuelType);
         plateNumberEditText = findViewById(R.id.editTextRegistry);
         productionYearEditText = findViewById(R.id.editTextProdDate);
+        radioGroup = findViewById(R.id.shifterRadioGroup);
 
         goNextButton = findViewById(R.id.buttonAdd);
 
@@ -60,6 +64,8 @@ public class AddCarActivity extends AppCompatActivity {
 
                 Boolean parsingError, weightParseErr, tankVolumeParseErr, engineVolumeParseErr, enginePowerParseErr, prodYearParseErr;
                 //parsing
+                radioGroup.addView(manual);
+                radioGroup.addView(automatic);
                 try{
                     NewCar.newCar.setTankVolume(Double.parseDouble(getETString(tankVolumeEditText)));
                     tankVolumeParseErr = false;
@@ -117,8 +123,10 @@ public class AddCarActivity extends AppCompatActivity {
                     NewCar.newCar.setColour(getETString(colorEditText));
                     if(manual.isChecked()) {
                         NewCar.newCar.setShifterType("Manualna");
+                        //automatic.setChecked(false);
                     }else if(automatic.isChecked()){
                         NewCar.newCar.setShifterType("Automatyczna");
+                        //manual.setChecked(false);
                     }
                     NewCar.newCar.setFuelType(fuelTypeSpinner.getSelectedItem().toString());
                     NewCar.newCar.setRegistry(getETString(plateNumberEditText));
@@ -152,7 +160,23 @@ public class AddCarActivity extends AppCompatActivity {
 
 
 
+        manual.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    automatic.setChecked(false);
+                }
+            }
+        });
 
+        automatic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    manual.setChecked(false);
+                }
+            }
+        });
 
 
 
