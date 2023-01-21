@@ -348,17 +348,18 @@ public class Raports extends AppCompatActivity {
 
         Collections.reverse(adapterRekordRaports);
         listViewRaports.setAdapter(customAdapter);
-
-
-
-
-
-
-
-
-
-
-
+        barChart.clear();
+        ArrayList barArrayList;
+        barArrayList = new ArrayList<>();
+        ArrayList<String> ar = new ArrayList<String>();
+        for(AdapterRekordRaports anArray:adapterRekordRaports){
+            barArrayList.add(new BarEntry(adapterRekordRaports.indexOf(anArray),Integer.parseInt(anArray.getData2())));
+            ar.add(String.valueOf(anArray.getDate()));
+        }
+        BarDataSet barDataSet= new BarDataSet(barArrayList,"Zł");
+        BarData barData = new BarData(barDataSet);
+        barChart.setData(barData);
+        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(ar));
     }
     public void RaportMonthlyMileage(){
         customAdapter = new AdapterRekordInflater(this, R.layout.adapter_raports_mileage, adapterRekordRaports);
