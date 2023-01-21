@@ -91,8 +91,8 @@ public class SettingsActivity extends AppCompatActivity {
                 //DbManager dbManager = new DbManager(getApplicationContext());
                 AlertDialog.Builder alert = new AlertDialog.Builder(SettingsActivity.this);
                 alert.setTitle("Wyczyść Dane");
-                alert.setMessage("Po wcisnięciu przycisku dane zostaną usunięte a aplikacja zatrzyma działanie wymagając ponownego uruchomienia");
-                alert.setPositiveButton("Tak", new DialogInterface.OnClickListener() {
+                alert.setMessage("Po wcisnięciu przycisku dane zostaną usunięte, a aplikacja zatrzyma działanie, wymagając ponownego uruchomienia");
+                alert.setPositiveButton("Usuń", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -103,7 +103,7 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                 });
 
-                alert.setNegativeButton("Nie", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
