@@ -345,9 +345,6 @@ public class Raports extends AppCompatActivity {
 
             firstMonth=1;
         }
-
-        Collections.reverse(adapterRekordRaports);
-        listViewRaports.setAdapter(customAdapter);
         barChart.clear();
         ArrayList barArrayList=new ArrayList<>();
         ArrayList<String> ar = new ArrayList<String>();
@@ -359,6 +356,8 @@ public class Raports extends AppCompatActivity {
         BarData barData = new BarData(barDataSet);
         barChart.setData(barData);
         barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(ar));
+        Collections.reverse(adapterRekordRaports);
+        listViewRaports.setAdapter(customAdapter);
     }
     public void RaportMonthlyMileage(){
         customAdapter = new AdapterRekordInflater(this, R.layout.adapter_raports_mileage, adapterRekordRaports);
@@ -451,9 +450,6 @@ public class Raports extends AppCompatActivity {
                 }
             }
         }
-        Collections.reverse(adapterRekordRaports);
-
-        listViewRaports.setAdapter(customAdapter);
         barChart.clear();
         ArrayList barArrayList;
         barArrayList = new ArrayList<>();
@@ -466,6 +462,8 @@ public class Raports extends AppCompatActivity {
         BarData barData = new BarData(barDataSet);
         barChart.setData(barData);
         barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(ar));
+        Collections.reverse(adapterRekordRaports);
+        listViewRaports.setAdapter(customAdapter);
     }
     public void RaportMonthlyMaintenance(){
 
@@ -507,9 +505,6 @@ public class Raports extends AppCompatActivity {
                 }
             }
         }
-        Collections.reverse(adapterRekordRaports);
-
-        listViewRaports.setAdapter(customAdapter);
         barChart.clear();
         ArrayList barArrayList = new ArrayList<>();
         ArrayList<String> ar = new ArrayList<String>();
@@ -521,6 +516,8 @@ public class Raports extends AppCompatActivity {
         BarData barData = new BarData(barDataSet);
         barChart.setData(barData);
         barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(ar));
+        Collections.reverse(adapterRekordRaports);
+        listViewRaports.setAdapter(customAdapter);
     }
     public void LoadMonthyFuel(){
         customAdapter = new AdapterRekordInflater(this, R.layout.adapter_raports_fuel, adapterRekordRaports);
@@ -566,9 +563,6 @@ public class Raports extends AppCompatActivity {
                 }
             }
         }
-        Collections.reverse(adapterRekordRaports);
-
-        listViewRaports.setAdapter(customAdapter);
         barChart.clear();
         ArrayList barArrayList=new ArrayList<>();
         ArrayList<String> ar = new ArrayList<String>();
@@ -580,6 +574,8 @@ public class Raports extends AppCompatActivity {
         BarData barData = new BarData(barDataSet);
         barChart.setData(barData);
         barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(ar));
+        Collections.reverse(adapterRekordRaports);
+        listViewRaports.setAdapter(customAdapter);
     }
 
 
