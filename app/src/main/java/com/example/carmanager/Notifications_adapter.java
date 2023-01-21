@@ -31,25 +31,25 @@ public class Notifications_adapter extends ArrayAdapter<Notification> {
         TextView NotiType = convertView.findViewById(R.id.listtext4);
         TextView Pow = convertView.findViewById(R.id.listtext3);
         TextView NotiKmOrData = convertView.findViewById(R.id.listtext4);
-
-        NotiName.setText(getItem(position).getName()+"");
-        NotiDes.setText(getItem(position).getDescription()+"");
-        NotiCar.setText(dbManager.getCarById(getItem(position).getCarId()).getCarNickname());
-        if(getItem(position).getNotificationType()==1){
-        NotiType.setText("Data");
-        NotiKmOrData.setText(getItem(position).getDate().toString());
+        try {
+            NotiName.setText(getItem(position).getName() + "");
+            NotiDes.setText(getItem(position).getDescription() + "");
+            NotiCar.setText(dbManager.getCarById(getItem(position).getCarId()).getCarNickname());
+            if (getItem(position).getNotificationType() == 1) {
+                NotiType.setText("Data");
+                NotiKmOrData.setText(getItem(position).getDate().toString());
+            } else if (getItem(position).getNotificationType() == 0) {
+                NotiType.setText("Km");
+                NotiKmOrData.setText(getItem(position).getKilometre().toString() + " Km");
+            }
+            if (getItem(position).getImportance() == 0) {
+                Pow.setText("Nie");
+            } else {
+                Pow.setText("Tak");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        else if(getItem(position).getNotificationType()==0){
-            NotiType.setText("Km");
-            NotiKmOrData.setText(getItem(position).getKilometre().toString()+" Km");
-        }
-        if (getItem(position).getImportance()==0){
-            Pow.setText("Nie");
-        }
-        else {
-            Pow.setText("Tak");
-        }
-
         return convertView;
     }
 }

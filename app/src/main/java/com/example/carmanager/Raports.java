@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -24,9 +25,12 @@ import com.example.carmanager.models.Insurance;
 import com.example.carmanager.models.Maintenance;
 import com.example.carmanager.models.Mileage;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.google.android.material.slider.LabelFormatter;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -80,16 +84,24 @@ public class Raports extends AppCompatActivity {
         btnMainActivity = findViewById(R.id.mainActivity);
         btnHistory = findViewById(R.id.history);
 
-        ArrayList barArrayList;
-        barArrayList = new ArrayList<>();
-        barArrayList.add(new BarEntry(2f,10));
-        barArrayList.add(new BarEntry(3f,10));
-        barArrayList.add(new BarEntry(4f,10));
-        barArrayList.add(new BarEntry(5f,10));
+
+
+//        ArrayList barArrayList;
+//        barArrayList = new ArrayList<>();
+//        for(AdapterRekordRaports anArray:adapterRekordRaports){
+//            barArrayList.add(new BarEntry(adapterRekordRaports.indexOf(anArray),Integer.parseInt(anArray.getData1())));
+//        }
+//        BarDataSet barDataSet= new BarDataSet(barArrayList,"Wykres");
+//        BarData barData = new BarData(barDataSet);
+//        barChart.setData(barData);
+
         barChart = findViewById(R.id.barChart);
-        BarDataSet barDataSet= new BarDataSet(barArrayList,"Wykres");
-        BarData barData = new BarData(barDataSet);
-        barChart.setData(barData);
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setGranularityEnabled(true);
+        barChart.getXAxis().setLabelCount(12);
+        xAxis.setGranularity(1f);
+        xAxis.setTextSize(5);
 
 
 
@@ -388,9 +400,18 @@ public class Raports extends AppCompatActivity {
                 }
             }
         }
-        Collections.reverse(adapterRekordRaports);
-
-        listViewRaports.setAdapter(customAdapter);
+//        Collections.reverse(adapterRekordRaports);
+//        ArrayList barArrayList;
+//        barArrayList = new ArrayList<>();
+//        ArrayList<String> ar = new ArrayList<String>();
+//        for(AdapterRekordRaports anArray:adapterRekordRaports){
+//            barArrayList.add(new BarEntry(adapterRekordRaports.indexOf(anArray),Integer.parseInt(anArray.getData2())));
+//            ar.add(String.valueOf(anArray.getDate()));
+//        }
+//        BarDataSet barDataSet= new BarDataSet(barArrayList,"Zł");
+//        BarData barData = new BarData(barDataSet);
+//        barChart.setData(barData);
+//        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(ar));
     }
     public void RaportMonthlyRepairs(){
         dbManager.fillFixArrayList();
@@ -433,6 +454,18 @@ public class Raports extends AppCompatActivity {
         Collections.reverse(adapterRekordRaports);
 
         listViewRaports.setAdapter(customAdapter);
+        barChart.clear();
+        ArrayList barArrayList;
+        barArrayList = new ArrayList<>();
+        ArrayList<String> ar = new ArrayList<String>();
+        for(AdapterRekordRaports anArray:adapterRekordRaports){
+            barArrayList.add(new BarEntry(adapterRekordRaports.indexOf(anArray),Integer.parseInt(anArray.getData2())));
+            ar.add(String.valueOf(anArray.getDate()));
+        }
+        BarDataSet barDataSet= new BarDataSet(barArrayList,"Zł");
+        BarData barData = new BarData(barDataSet);
+        barChart.setData(barData);
+        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(ar));
     }
     public void RaportMonthlyMaintenance(){
 
@@ -474,11 +507,20 @@ public class Raports extends AppCompatActivity {
                 }
             }
         }
-        Log.d("test","test2");
         Collections.reverse(adapterRekordRaports);
 
         listViewRaports.setAdapter(customAdapter);
-        Log.d("test","test4");
+        barChart.clear();
+        ArrayList barArrayList = new ArrayList<>();
+        ArrayList<String> ar = new ArrayList<String>();
+        for(AdapterRekordRaports anArray:adapterRekordRaports){
+            barArrayList.add(new BarEntry(adapterRekordRaports.indexOf(anArray),Integer.parseInt(anArray.getData2())));
+            ar.add(String.valueOf(anArray.getDate()));
+        }
+        BarDataSet barDataSet= new BarDataSet(barArrayList,"Zł");
+        BarData barData = new BarData(barDataSet);
+        barChart.setData(barData);
+        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(ar));
     }
     public void LoadMonthyFuel(){
         customAdapter = new AdapterRekordInflater(this, R.layout.adapter_raports_fuel, adapterRekordRaports);
@@ -527,6 +569,17 @@ public class Raports extends AppCompatActivity {
         Collections.reverse(adapterRekordRaports);
 
         listViewRaports.setAdapter(customAdapter);
+        barChart.clear();
+        ArrayList barArrayList=new ArrayList<>();
+        ArrayList<String> ar = new ArrayList<String>();
+        for(AdapterRekordRaports anArray:adapterRekordRaports){
+            barArrayList.add(new BarEntry(adapterRekordRaports.indexOf(anArray),Integer.parseInt(anArray.getData2())));
+            ar.add(String.valueOf(anArray.getDate()));
+        }
+        BarDataSet barDataSet= new BarDataSet(barArrayList,"Zł");
+        BarData barData = new BarData(barDataSet);
+        barChart.setData(barData);
+        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(ar));
     }
 
 

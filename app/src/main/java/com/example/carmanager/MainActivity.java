@@ -27,17 +27,15 @@ public class MainActivity extends AppCompatActivity {
 
     public androidx.appcompat.widget.Toolbar toolbar;
     Button btnCar, btnMoreActivities, btnHistory, btnSettings, btnMainActivity,btnDataCar,btnDetailsCar;
-    LinearLayout dataLayout, detailsLayout;
+    LinearLayout dataLayout, detailsLayout,layout_all,layout_empty;
     FloatingActionButton floatingButton;
     TextView text_nazwa,text_marka,text_model,text_tablica,text_rok,text_polisa,text_vin;
     TextView text_poj,text_moc,text_przebieg,text_waga,text_paliwo,text_nadwozie,text_kolor,text_skrzynia;
-    ImageView imageCar1,imageCar2,imageCar3;
+    ImageView imageCar1,imageCar2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_main);
         DbManager dbManager = DbManager.instanceOfDatabase(this);
 
@@ -51,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         btnDetailsCar = findViewById(R.id.button_details);
         dataLayout = findViewById(R.id.ll_car_data);
         detailsLayout = findViewById(R.id.ll_details);
+        layout_all = findViewById(R.id.layout_all);
+        layout_empty =findViewById(R.id.layout_empty);
         floatingButton = findViewById(R.id.fab);
 
         imageCar1 = findViewById(R.id.image_car1);
@@ -71,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
         text_nadwozie = findViewById(R.id.nadwozie_v);
         text_kolor = findViewById(R.id.kolor_v);
         text_skrzynia = findViewById(R.id.skrzynia_v);
-
-        imageCar3 = findViewById(R.id.image_car2);
         SharedPreferences myPrefs;
 
 
@@ -80,9 +78,16 @@ public class MainActivity extends AppCompatActivity {
             myPrefs = getSharedPreferences("activeCar", MODE_PRIVATE);
             int carId = myPrefs.getInt("activeCarId",0);
             Car object = dbManager.getCarById(carId);
-            //imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
-            //imageCar2.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
-            //imageCar3.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
+            if(object==null){
+                layout_empty.setVisibility(View.VISIBLE);
+                layout_all.setVisibility(View.GONE);
+            }
+            else {
+                layout_empty.setVisibility(View.GONE);
+                layout_all.setVisibility(View.VISIBLE);
+            }
+            imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
+            imageCar2.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
             text_nazwa.setText(object.getCarNickname());
             text_marka.setText(object.getBrand());
             text_model.setText(object.getModel());
