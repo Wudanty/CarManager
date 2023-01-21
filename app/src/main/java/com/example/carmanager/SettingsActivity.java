@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -33,6 +35,7 @@ public class SettingsActivity extends AppCompatActivity {
                 editor.apply();
      */
     SwitchMaterial nightMode, notifications;
+    Button clearDB;
 
 
     //Toolbar-----------------------------------------------
@@ -51,6 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         nightMode = findViewById(R.id.switchNightMode);
         notifications = findViewById(R.id.switchNotifications);
+        clearDB = findViewById(R.id.buttonClearDB);
 
         nightMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -81,16 +85,36 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        clearDB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //DbManager dbManager = new DbManager(getApplicationContext());
+                AlertDialog.Builder alert = new AlertDialog.Builder(SettingsActivity.this);
+                alert.setTitle("Wyczyść Dane");
+                alert.setMessage("Po wcisnięciu przycisku dane zostaną usunięte a aplikacja zatrzyma działanie wymagając ponownego uruchomienia");
+                alert.setPositiveButton("Tak", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
+                        getApplicationContext().deleteDatabase("CarData");
+                        finishAffinity();
+                        System.exit(0);
+                        //dialog.dismiss();
+                    }
+                });
 
+                alert.setNegativeButton("Nie", new DialogInterface.OnClickListener() {
 
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
+                alert.show();
 
-
-
-
-
-
+            }
+        });
 
 
         //Toolbar-----------------------------------------------
