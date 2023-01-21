@@ -86,5 +86,19 @@
         android:textStyle="bold"
         app:cornerRadius="0dp"
         android:backgroundTint="@color/purple_700"/>
-
+    <Button
+        android:id="@+id/btnCarInsurance"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="12dp"
+        android:alpha="0.90"
+        android:gravity="center"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="Ubezpieczenie"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:cornerRadius="0dp"
+        android:backgroundTint="@color/purple_700"/>
 </LinearLayout>

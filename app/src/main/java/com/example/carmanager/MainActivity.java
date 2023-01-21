@@ -249,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnRepairs = (Button) linearLayout.findViewById(R.id.btnRepairs);
         Button btnCarInspection = (Button) linearLayout.findViewById(R.id.btnCarInspection);
         Button btnOperatingElements = (Button) linearLayout.findViewById(R.id.btnOperatingElements);
+        Button btnInsurance = (Button) linearLayout.findViewById(R.id.btnCarInsurance);
 
         final AlertDialog builder = new AlertDialog.Builder(this)
                 .setView(linearLayout)
@@ -267,6 +268,14 @@ public class MainActivity extends AppCompatActivity {
         builder.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         builder.getWindow().setAttributes(lp);
 
+        btnInsurance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AdditionsInsurance.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
         btnFuel.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override

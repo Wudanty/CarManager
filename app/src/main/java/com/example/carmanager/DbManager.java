@@ -385,7 +385,7 @@ public class DbManager extends SQLiteOpenHelper {
         Mileage.listOfMIleage.clear();
         Checkup.listOfCheckup.clear();
 
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_TANKOWANIE + " WHERE " + TANKOWANIE_ID_AUTA + " = " + carID, null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_TANKOWANIE + " WHERE " + TANKOWANIE_ID_AUTA + " = " + carID+" ORDER BY "+ TANKOWANIE_DATA+ " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -403,7 +403,7 @@ public class DbManager extends SQLiteOpenHelper {
                 }
             }
         }
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAPRAWA + " WHERE " + NAPRAWA_ID_AUTA + " = " + carID, null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAPRAWA + " WHERE " + NAPRAWA_ID_AUTA + " = " + carID+" ORDER BY "+ NAPRAWA_DATA+ " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -419,7 +419,7 @@ public class DbManager extends SQLiteOpenHelper {
                 }
             }
         }
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_EKSPLOATACYJNE + " WHERE " + EKSPLOATACYJNE_ID_AUTA + " = " + carID, null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_EKSPLOATACYJNE + " WHERE " + EKSPLOATACYJNE_ID_AUTA + " = " + carID +" ORDER BY "+ EKSPLOATACYJNE_DATA+ " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -437,7 +437,7 @@ public class DbManager extends SQLiteOpenHelper {
                 }
             }
         }
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEBIEG + " WHERE " + PRZEBIEG_ID_AUTA + " = " + carID, null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEBIEG + " WHERE " + PRZEBIEG_ID_AUTA + " = " + carID +" ORDER BY "+ PRZEBIEG_DATA+ " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -451,7 +451,7 @@ public class DbManager extends SQLiteOpenHelper {
                 }
             }
         }
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEGLAD + " WHERE " + PRZEGLAD_ID_AUTA + " = " + carID, null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEGLAD + " WHERE " + PRZEGLAD_ID_AUTA + " = " + carID +" ORDER BY "+ PRZEGLAD_KIEDY+ " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);

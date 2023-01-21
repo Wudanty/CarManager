@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -65,6 +66,10 @@ public class CarActivity extends AppCompatActivity {
 
         dbManager.fillCarArrayList();
 
+        String uri = "@drawable/images";  // where myresource (without the extension) is the file
+        int imageResource = getResources().getIdentifier(uri, null, getPackageName());
+        Drawable res = getResources().getDrawable(imageResource);
+
         SharedPreferences sharedPref =  getSharedPreferences("activeCar", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -93,6 +98,7 @@ public class CarActivity extends AppCompatActivity {
                 brandTextView.setText(selectedCar.getBrand());
                 nicknameTextView.setText("\""+selectedCar.getCarNickname()+"\"");
                 plateNumber.setText(selectedCar.getRegistry());
+                selectedCarPicture.setImageDrawable(res);
                 try {
                     selectedCarPicture.setImageBitmap(BitmapFactory.decodeByteArray(selectedCar.getPicture(), 0, selectedCar.getPicture().length));
 

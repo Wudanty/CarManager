@@ -59,14 +59,14 @@
             android:text="Eksploat."
             android:textSize="8dp" />
 
-        <Button
+        <!--<Button
             android:id="@+id/buttonMileage"
             android:layout_width="0dp"
             android:textSize="8dp"
             android:layout_height="37dp"
             android:layout_weight="1"
             app:cornerRadius="0sp"
-            android:text="Przebieg" />
+            android:text="Przebieg" />-->
         <Button
             android:id="@+id/buttonMoney"
             android:layout_width="0dp"
@@ -96,7 +96,8 @@
         android:id="@+id/barChart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        tools:ignore="MissingClass">
 
     </com.github.mikephil.charting.charts.BarChart>
 
