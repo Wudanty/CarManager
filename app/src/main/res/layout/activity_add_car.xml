@@ -271,6 +271,7 @@
                 android:text="Rodzaj Skrzyni Biegów:" />
 
             <RadioGroup
+                android:id="@+id/shifterRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0">
