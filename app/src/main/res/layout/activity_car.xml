@@ -71,6 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
         <ImageView
             android:id="@+id/imageViewCarSelect"
             android:layout_width="match_parent"

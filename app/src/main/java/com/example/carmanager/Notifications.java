@@ -44,7 +44,7 @@ public class Notifications extends AppCompatActivity {
     Spinner spino,selectCarSpinner;
     ListView notification_list;
     Car car=null;
-    String[] option = {"Paliwo","Mandat","Naprawa"};
+    String[] option = {"Paliwo","Mandat","Naprawa","Wymiana","Ubezpieczenie","Przegląd","Myjnia","Parking","Inne"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,7 +114,7 @@ public class Notifications extends AppCompatActivity {
                 dbManager.fillNotificationArrayList();
                 notification_list.deferNotifyDataSetChanged();
                 notification_list.setAdapter(notifications_adapter);
-                if(Notification.listOfNotification==null) {
+                if(Notification.listOfNotification.size()==0) {
                     layout_list.setVisibility(View.GONE);
                     layout_empty.setVisibility(View.VISIBLE);
                 }

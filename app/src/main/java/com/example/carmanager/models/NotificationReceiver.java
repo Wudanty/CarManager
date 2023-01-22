@@ -42,7 +42,7 @@ public class NotificationReceiver extends BroadcastReceiver {
                         Date currentTime = Calendar.getInstance().getTime();
                         Date date = format.parse(notification.getDate());
                         if (currentTime.after(date) || currentTime.equals(date)) {
-                            createNotification(notification.getName(), notification.getDescription(), context);
+                            createNotification(notification.getName(),dbManager.getCarById(notification.getCarId()).getCarNickname(), notification.getDescription(), context);
                             if (notification.getImportance() == 1) {
                                 Calendar cal = Calendar.getInstance();
                                 cal.setTime(date);
@@ -59,7 +59,7 @@ public class NotificationReceiver extends BroadcastReceiver {
                 } else if (notification.getNotificationType() == 0) {
                     dbManager.fillMileageArrayList();
                     if (notification.getKilometre() <= Mileage.listOfMIleage.get(Mileage.listOfMIleage.size() - 1).getMileageValue()) {
-                        createNotification(notification.getName(), notification.getDescription(), context);
+                        createNotification(notification.getName(), dbManager.getCarById(notification.getCarId()).getCarNickname(),notification.getDescription(), context);
                         if (notification.getImportance() == 1) {
                             Notification not = new Notification(notification.getNotificationId(), notification.getCarId(), notification.getDate(), notification.getDescription(), notification.getImportance(), notification.getNotificationType(), notification.getKilometre() + Integer.valueOf(notification.getPowtarzanie()), notification.getName(), notification.getPowtarzanie());
                             dbManager.updateNotificationInDb(not);
@@ -72,10 +72,10 @@ public class NotificationReceiver extends BroadcastReceiver {
         }
     }
 
-    private void createNotification(String title,String content,Context context) {
+    private void createNotification(String title,String carname,String content,Context context) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "CHANNEL_ID")
                 .setSmallIcon(R.drawable.notification)
-                .setContentTitle("Przypomienie o "+title)
+                .setContentTitle("Przypomienie o "+title+" dla samochodu "+carname)
                 .setContentText(content)
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
