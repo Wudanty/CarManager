@@ -3,6 +3,7 @@ package com.example.carmanager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -37,15 +38,17 @@ public class AdditionMileage extends AppCompatActivity {
 
         ldt = java.time.LocalDate.now();
         tvMileageDate.setText(ldt.toString());
-
+        dbManager.fillMileageArrayList();
         extras = getIntent().getExtras();
 
         if(extras != null)
         {
-
             idToEdit = extras.getInt("id");
-            dbManager.fillMileageArrayList();
-            object = Mileage.listOfMIleage.get(idToEdit);
+            for (int i = 0; i < Mileage.listOfMIleage.size(); i++) {
+                if (Mileage.listOfMIleage.get(i).getMileageId() == idToEdit) {
+                    object = Mileage.listOfMIleage.get(i);
+                }}
+
 
             ldt = LocalDate.parse(object.getMileageCheckDate());
 
@@ -74,7 +77,8 @@ public class AdditionMileage extends AppCompatActivity {
             mileage = new Mileage(sh.getInt("activeCarId",0), strMileageDate, Double.parseDouble(String.valueOf(intMileage)));
             dbManager.addMileageToDb(mileage);
         }
-
+        Intent intent = new Intent(view.getContext(), History.class);
+        startActivity(intent);
         finish();
     }
 

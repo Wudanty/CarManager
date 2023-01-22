@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class AddictionFuel extends AppCompatActivity {
     String data, strMonth, strDay;
     Bundle extras;
     int idToEdit;
+    FuelFill object = null;
     SharedPreferences sh;
 
     @SuppressLint("MissingInflatedId")
@@ -71,8 +73,10 @@ public class AddictionFuel extends AppCompatActivity {
         {
             idToEdit = extras.getInt("id");
             dbManager.fillFuelFillArrayList();
-            FuelFill object = FuelFill.listOfFuelFill.get(idToEdit);
-
+            for (int i = 0; i < FuelFill.listOfFuelFill.size(); i++) {
+                if (FuelFill.listOfFuelFill.get(i).getFillId() == idToEdit) {
+                    object = FuelFill.listOfFuelFill.get(i);
+                }}
             tvFuelText.setText("EDYCJA TANKOWANIA");
             ldt = LocalDate.parse(object.getFillDate());
             tvFuelDate.setText(object.getFillDate());
@@ -81,7 +85,7 @@ public class AddictionFuel extends AppCompatActivity {
             etFuelFullPrice.setText(String.valueOf(object.getPrice()));
             etFuelWhere.setText(object.getStationName());
             spinnerFuelType.setSelection(listFuelTypes.indexOf(object.getFuelType()));
-            Log.d("test",FuelFill.listOfFuelFill.get(idToEdit).getPrice()+"");
+          //  Log.d("test",FuelFill.listOfFuelFill.get(idToEdit).getPrice()+"");
 
 
         }
@@ -106,7 +110,6 @@ public class AddictionFuel extends AppCompatActivity {
 
 
         if(extras != null){
-            FuelFill object = FuelFill.listOfFuelFill.get(idToEdit);
             fuelFill = new FuelFill(object.getFillId(),sh.getInt("activeCarId",0), fuelDate,fuelPrice,fuelFullPrice,fuelWhere,fuelAmount,fuelType);
             dbManager.updateFuelFillInDb(fuelFill);
         }
@@ -114,6 +117,8 @@ public class AddictionFuel extends AppCompatActivity {
             fuelFill = new FuelFill(sh.getInt("activeCarId",0), fuelDate,fuelPrice,fuelFullPrice,fuelWhere,fuelAmount,fuelType);
             dbManager.addFuelFIllToDb(fuelFill);
         }
+        Intent intent = new Intent(view.getContext(), History.class);
+        startActivity(intent);
         finish();
 
 

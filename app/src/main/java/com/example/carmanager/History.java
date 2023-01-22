@@ -155,6 +155,10 @@ public class History extends AppCompatActivity {
                             Checkup object = (Checkup) ListViewHistory.getItemAtPosition(i);
                             deleteCheckUp(object);
                         }
+                        else if (number == 6){
+                            Insurance object = (Insurance) ListViewHistory.getItemAtPosition(i);
+                            deleteInsurance(object);
+                        }
 
 
                     }
@@ -167,33 +171,45 @@ public class History extends AppCompatActivity {
                         if (number == 1) {
                             FuelFill object = (FuelFill) ListViewHistory.getItemAtPosition(i);
                             Intent intent = new Intent(view.getContext(), AddictionFuel.class);
-                            intent.putExtra("id",i);
+                            intent.putExtra("id",object.getFillId());
                             startActivity(intent);
+                            finish();
 
                         } else if (number == 2) {
                             Fix object = (Fix) ListViewHistory.getItemAtPosition(i);
                             Intent intent = new Intent(view.getContext(), AdditionRepairs.class);
-                            intent.putExtra("id",i);
+                            intent.putExtra("id",object.getFixId());
                             startActivity(intent);
+                            finish();
 
                         } else if (number == 3) {
                             Maintenance object = (Maintenance) ListViewHistory.getItemAtPosition(i);
                             Intent intent = new Intent(view.getContext(), AdditionOperatingElements.class);
-                            intent.putExtra("id",i);
+                            intent.putExtra("id",object.getMaintenanceId());
                             startActivity(intent);
+                            finish();
 
                         } else if (number == 4) {
                             Mileage object = (Mileage) ListViewHistory.getItemAtPosition(i);
                             Intent intent = new Intent(view.getContext(), AdditionMileage.class);
-                            intent.putExtra("id",i);
+                            intent.putExtra("id",object.getMileageId());
                             startActivity(intent);
+                            finish();
 
                         } else if (number == 5) {
                             Checkup object = (Checkup) ListViewHistory.getItemAtPosition(i);
                             Intent intent = new Intent(view.getContext(), AdditionCheckup.class);
-                            intent.putExtra("id",i);
+                            intent.putExtra("id",object.getCheckupId());
                             startActivity(intent);
+                            finish();
 
+                        }
+                        else if(number == 6){
+                            Insurance object = (Insurance) ListViewHistory.getItemAtPosition(i);
+                            Intent intent = new Intent(view.getContext(), AdditionsInsurance.class);
+                            intent.putExtra("id",object.getInsuranceId());
+                            startActivity(intent);
+                            finish();
                         }
                     }
                 });
@@ -237,6 +253,7 @@ public class History extends AppCompatActivity {
                     });
                     builder.show();
                 }
+
 
             }
         });
@@ -320,7 +337,7 @@ public class History extends AppCompatActivity {
             number = 6;
             Collections.reverse(Insurance.listOfInsurance);
             AdapterInsurance adapter6 = new AdapterInsurance(getApplicationContext(), Insurance.listOfInsurance);
-            columns = getLayoutInflater().inflate(R.layout.check_up_cell, null);
+            columns = getLayoutInflater().inflate(R.layout.insurance_cell, null);
             ListViewHistory.setAdapter(adapter6);
         }
 
@@ -352,6 +369,10 @@ public class History extends AppCompatActivity {
     public void deleteCheckUp(Checkup object) {
         dbManager.deleteCheckupInDb(object);
         initAdapter(5);
+    }
+    public void deleteInsurance(Insurance object){
+        dbManager.deleteInsuranceInDb(object);
+        initAdapter(6);
     }
 
     public void more(View view){

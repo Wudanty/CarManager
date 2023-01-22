@@ -25,7 +25,7 @@ public class AdapterInsurance extends ArrayAdapter<Insurance> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         if (convertView == null)
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.fix_cell, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.insurance_cell, parent, false);
 
         TextView odKiedy = convertView.findViewById(R.id.textViewOdKiedy);
         TextView doKiedy = convertView.findViewById(R.id.textViewDoKiedy);
