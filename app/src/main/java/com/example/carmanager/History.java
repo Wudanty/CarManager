@@ -21,6 +21,7 @@ import android.widget.ListView;
 import com.example.carmanager.models.Checkup;
 import com.example.carmanager.models.Fix;
 import com.example.carmanager.models.FuelFill;
+import com.example.carmanager.models.Insurance;
 import com.example.carmanager.models.Maintenance;
 import com.example.carmanager.models.Mileage;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -35,7 +36,7 @@ public class History extends AppCompatActivity {
     Button btnCar, btnMoreActivities, btnHistory, btnSettings, btnMainActivity;
     //Toolbar-----------------------------------------------
 
-    Button FuelFillBtn, MaintenanceBtn, CheckUpBtn, FixBtn, MileageBtn;
+    Button FuelFillBtn, MaintenanceBtn, CheckUpBtn, FixBtn, MileageBtn, InsuranceBtn;
     ListView ListViewHistory;
     LinearLayout layoutColumnNames;
     FloatingActionButton floatingButton;
@@ -64,6 +65,7 @@ public class History extends AppCompatActivity {
         CheckUpBtn = findViewById(R.id.buttonCheckUp);
         FixBtn = findViewById(R.id.buttonFix);
         MileageBtn = findViewById(R.id.buttonMileage);
+        InsuranceBtn = findViewById(R.id.buttonInsurance);
 
         ListViewHistory = findViewById(R.id.ListViewHistory);
         layoutColumnNames = findViewById(R.id.layoutColumnNames);
@@ -270,6 +272,12 @@ public class History extends AppCompatActivity {
                 initAdapter(5);
             }
         });
+        InsuranceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initAdapter(6);
+            }
+        });
     }
 
     public void initAdapter(int type) {
@@ -308,6 +316,12 @@ public class History extends AppCompatActivity {
             AdapterCheckUp adapter5 = new AdapterCheckUp(getApplicationContext(), Checkup.listOfCheckup);
             columns = getLayoutInflater().inflate(R.layout.check_up_cell, null);
             ListViewHistory.setAdapter(adapter5);
+        } else if (type == 6) {
+            number = 6;
+            Collections.reverse(Insurance.listOfInsurance);
+            AdapterInsurance adapter6 = new AdapterInsurance(getApplicationContext(), Insurance.listOfInsurance);
+            columns = getLayoutInflater().inflate(R.layout.check_up_cell, null);
+            ListViewHistory.setAdapter(adapter6);
         }
 
         layoutColumnNames.removeAllViews();
@@ -344,7 +358,7 @@ public class History extends AppCompatActivity {
         final LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.more, null);
         Button btnContacts=linearLayout.findViewById(R.id.btnContacts);
         Button btnReminder=linearLayout.findViewById(R.id.btnReminder);
-        Button btnSettings=linearLayout.findViewById(R.id.btnContacts);
+        Button btnSettings=linearLayout.findViewById(R.id.btnSettings);
         final AlertDialog builder = new AlertDialog.Builder(this)
                 .setView(linearLayout)
                 .setCancelable(true)
@@ -377,6 +391,14 @@ public class History extends AppCompatActivity {
                 builder.cancel();
             }
         });
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(History.this, SettingsActivity.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
     }
     public void additions(View view) {
         final LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.addition_menu, null);
@@ -385,6 +407,7 @@ public class History extends AppCompatActivity {
         Button btnRepairs = (Button) linearLayout.findViewById(R.id.btnRepairs);
         Button btnCarInspection = (Button) linearLayout.findViewById(R.id.btnCarInspection);
         Button btnOperatingElements = (Button) linearLayout.findViewById(R.id.btnOperatingElements);
+        Button btnInsurance = (Button) linearLayout.findViewById(R.id.btnCarInsurance);
 
         final AlertDialog builder = new AlertDialog.Builder(this)
                 .setView(linearLayout)
@@ -402,7 +425,14 @@ public class History extends AppCompatActivity {
         lp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         builder.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         builder.getWindow().setAttributes(lp);
-
+        btnInsurance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(History.this, AdditionsInsurance.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
         btnFuel.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override

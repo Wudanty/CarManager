@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -65,6 +66,10 @@ public class CarActivity extends AppCompatActivity {
 
         dbManager.fillCarArrayList();
 
+        String uri = "@drawable/images";  // where myresource (without the extension) is the file
+        int imageResource = getResources().getIdentifier(uri, null, getPackageName());
+        Drawable res = getResources().getDrawable(imageResource);
+
         SharedPreferences sharedPref =  getSharedPreferences("activeCar", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -93,6 +98,7 @@ public class CarActivity extends AppCompatActivity {
                 brandTextView.setText(selectedCar.getBrand());
                 nicknameTextView.setText("\""+selectedCar.getCarNickname()+"\"");
                 plateNumber.setText(selectedCar.getRegistry());
+                selectedCarPicture.setImageDrawable(res);
                 try {
                     selectedCarPicture.setImageBitmap(BitmapFactory.decodeByteArray(selectedCar.getPicture(), 0, selectedCar.getPicture().length));
 
@@ -229,7 +235,7 @@ public class CarActivity extends AppCompatActivity {
         final LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.more, null);
         Button btnContacts=linearLayout.findViewById(R.id.btnContacts);
         Button btnReminder=linearLayout.findViewById(R.id.btnReminder);
-        Button btnSettings=linearLayout.findViewById(R.id.btnContacts);
+        Button btnSettings=linearLayout.findViewById(R.id.btnSettings);
         final AlertDialog builder = new AlertDialog.Builder(this)
                 .setView(linearLayout)
                 .setCancelable(true)
@@ -258,6 +264,14 @@ public class CarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CarActivity.this, Notifications.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CarActivity.this, SettingsActivity.class);
                 startActivity(intent);
                 builder.cancel();
             }

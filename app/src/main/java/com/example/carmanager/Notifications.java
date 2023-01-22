@@ -38,7 +38,7 @@ public class Notifications extends AppCompatActivity {
     DbManager dbManager = DbManager.instanceOfDatabase(this);
     Button button_add,button_add_a,button_list;
     Button btnCar, btnMoreActivities, btnHistory, btnSettings, btnMainActivity;
-    LinearLayout layout_add,layout_list,layout_empty,layout_Data,layout_KM;
+    LinearLayout layout_add,layout_list,layout_empty,layout_Data,layout_KM,layout_empty_car,layout_all;
     CheckBox checkBoxKm, checkBoxDate,checkBoxPowt1,checkBoxPowt2;
     EditText editTextKm,editTextDate,editTextDes,editTextPowKm,editTextPowDate;
     Spinner spino,selectCarSpinner;
@@ -55,6 +55,7 @@ public class Notifications extends AppCompatActivity {
         btnMoreActivities = findViewById(R.id.more);
         btnMainActivity = findViewById(R.id.mainActivity);
         btnHistory = findViewById(R.id.history);
+        btnSettings=findViewById(R.id.settings);
         checkBoxKm = findViewById(R.id.checkBox);
         checkBoxDate = findViewById(R.id.checkBox2);
         checkBoxPowt1= findViewById(R.id.checkBoxPow1);
@@ -69,6 +70,8 @@ public class Notifications extends AppCompatActivity {
         layout_add = findViewById(R.id.layout_add);
         layout_list = findViewById(R.id.layout_list);
         layout_empty = findViewById(R.id.empty_lay);
+        layout_empty_car = findViewById(R.id.layout_empty_car);
+        layout_all = findViewById(R.id.layout_all);
         layout_Data = findViewById(R.id.layout_Data);
         layout_KM = findViewById(R.id.layout_KM);
         button_add_a = findViewById(R.id.button_data);
@@ -79,6 +82,15 @@ public class Notifications extends AppCompatActivity {
         ArrayAdapter ad = new ArrayAdapter(this,android.R.layout.simple_spinner_item, option);
         spino.setAdapter(ad);
         dbManager.fillCarArrayList();
+        if(Car.listOfCars.size()==0){
+            layout_empty_car.setVisibility(View.VISIBLE);
+            layout_all.setVisibility(View.GONE);
+
+        }
+        else {
+            layout_empty_car.setVisibility(View.GONE);
+            layout_all.setVisibility(View.VISIBLE);
+        }
         Noti_car_adapter noti_car_adapter = new Noti_car_adapter(getApplicationContext(),Car.listOfCars);
         selectCarSpinner.setAdapter(noti_car_adapter);
         dbManager.fillNotificationArrayList();
@@ -201,6 +213,14 @@ public class Notifications extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 more(null);
+            }
+        });
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentSP = new Intent(Notifications.this, Raports.class);
+                intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity( intentSP );
             }
         });
     }
