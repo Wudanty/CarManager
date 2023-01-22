@@ -127,7 +127,11 @@ public class AddCarActivity extends AppCompatActivity {
                     if(!parsingError) {
                         Intent intentSP = new Intent(AddCarActivity.this, AddCarActivity2.class);
                         intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intentSP);
+                        if(NewCar.newCar.getShifterType().equals(null)){
+                            Toast.makeText(getApplicationContext(),"Proszę wybrać typ skrzyni biegów.",Toast.LENGTH_SHORT).show();
+                        }else {
+                            startActivity(intentSP);
+                        }
                     }
 
                 }catch (Exception e){
