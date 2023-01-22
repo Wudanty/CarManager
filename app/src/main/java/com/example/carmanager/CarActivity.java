@@ -61,8 +61,6 @@ public class CarActivity extends AppCompatActivity {
         deleteCar = findViewById(R.id.deleteCarButton);
         addCar = findViewById(R.id.buttonAdd);
         selectedCarPicture = findViewById(R.id.imageViewCarSelect);
-        selectedCarPicture.getLayoutParams().height = 200;
-        selectedCarPicture.getLayoutParams().width = WindowManager.LayoutParams.MATCH_PARENT;
 
         dbManager.fillCarArrayList();
 
