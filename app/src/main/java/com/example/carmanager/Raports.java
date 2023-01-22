@@ -25,6 +25,7 @@ import com.example.carmanager.models.Insurance;
 import com.example.carmanager.models.Maintenance;
 import com.example.carmanager.models.Mileage;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -96,6 +97,9 @@ public class Raports extends AppCompatActivity {
 //        barChart.setData(barData);
 
         barChart = findViewById(R.id.barChart);
+        Description description = new Description();
+        description.setText("");
+        barChart.setDescription(description);
         XAxis xAxis = barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setGranularityEnabled(true);
