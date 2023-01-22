@@ -55,6 +55,7 @@ public class Notifications extends AppCompatActivity {
         btnMoreActivities = findViewById(R.id.more);
         btnMainActivity = findViewById(R.id.mainActivity);
         btnHistory = findViewById(R.id.history);
+        btnSettings=findViewById(R.id.settings);
         checkBoxKm = findViewById(R.id.checkBox);
         checkBoxDate = findViewById(R.id.checkBox2);
         checkBoxPowt1= findViewById(R.id.checkBoxPow1);
@@ -212,6 +213,14 @@ public class Notifications extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 more(null);
+            }
+        });
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentSP = new Intent(Notifications.this, Raports.class);
+                intentSP.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity( intentSP );
             }
         });
     }

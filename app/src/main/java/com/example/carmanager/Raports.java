@@ -25,6 +25,7 @@ import com.example.carmanager.models.Insurance;
 import com.example.carmanager.models.Maintenance;
 import com.example.carmanager.models.Mileage;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -96,6 +97,9 @@ public class Raports extends AppCompatActivity {
 //        barChart.setData(barData);
 
         barChart = findViewById(R.id.barChart);
+        Description description = new Description();
+        description.setText("");
+        barChart.setDescription(description);
         XAxis xAxis = barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setGranularityEnabled(true);
@@ -584,7 +588,7 @@ public class Raports extends AppCompatActivity {
         final LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.more, null);
         Button btnContacts=linearLayout.findViewById(R.id.btnContacts);
         Button btnReminder=linearLayout.findViewById(R.id.btnReminder);
-        Button btnSettings=linearLayout.findViewById(R.id.btnContacts);
+        Button btnSettings=linearLayout.findViewById(R.id.btnSettings);
         final AlertDialog builder = new AlertDialog.Builder(this)
                 .setView(linearLayout)
                 .setCancelable(true)
@@ -613,6 +617,14 @@ public class Raports extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Raports.this, Notifications.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Raports.this, SettingsActivity.class);
                 startActivity(intent);
                 builder.cancel();
             }
