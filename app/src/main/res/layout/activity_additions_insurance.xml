@@ -161,24 +161,24 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
        >
+
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:text="OPIS: "
             android:layout_gravity="start"
-            android:paddingTop="10dp"
-            />
+            android:text="ROODZAJ: "
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/etInsuranceNote"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:textSize="20sp"
-            android:textColor="@color/black"
+            android:layout_height="wrap_content"
             android:background="@null"
             android:gravity="start"
+            android:textColor="@color/black"
+            android:textSize="20sp"
 
             />
 

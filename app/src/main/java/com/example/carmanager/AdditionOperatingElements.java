@@ -3,6 +3,7 @@ package com.example.carmanager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -64,7 +65,10 @@ public class AdditionOperatingElements extends AppCompatActivity {
         if(extras != null) {
             idToEdit = extras.getInt("id");
             dbManager.fillFuelFillArrayList();
-            object = Maintenance.listOfMaintance.get(idToEdit);
+            for (int i = 0; i < Maintenance.listOfMaintance.size(); i++) {
+                if (Maintenance.listOfMaintance.get(i).getMaintenanceId() == idToEdit) {
+                    object = Maintenance.listOfMaintance.get(i);
+                }}
 
             ldt = LocalDate.parse(object.getMaintenanceDate());
             try {
@@ -201,7 +205,8 @@ public class AdditionOperatingElements extends AppCompatActivity {
 
 
 
-
+        Intent intent = new Intent(view.getContext(), History.class);
+        startActivity(intent);
         finish();
     }
 

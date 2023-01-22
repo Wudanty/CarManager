@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -69,8 +70,10 @@ public class AdditionCheckup extends AppCompatActivity {
         if(extras != null) {
             idToEdit = extras.getInt("id");
             dbManager.fillFuelFillArrayList();
-            object = Checkup.listOfCheckup.get(idToEdit);
-
+            for (int i = 0; i < Checkup.listOfCheckup.size(); i++) {
+                if (Checkup.listOfCheckup.get(i).getCheckupId() == idToEdit) {
+                    object = Checkup.listOfCheckup.get(i);
+                }}
             ldt = LocalDate.parse(object.getDate());
             ldt2 = LocalDate.parse(object.getExpirationDate());
 
@@ -173,7 +176,8 @@ public class AdditionCheckup extends AppCompatActivity {
         }
 
 
-
+        Intent intent = new Intent(view.getContext(), History.class);
+        startActivity(intent);
         finish();
     }
 

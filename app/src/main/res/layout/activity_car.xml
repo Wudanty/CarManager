@@ -67,19 +67,17 @@
             app:cornerRadius="0dp"
 
             />
-
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/imageViewCarSelect"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/imageViewCarSelect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/images" />
+            app:srcCompat="@drawable/images" />
         </LinearLayout>
-
         <TextView
             android:id="@+id/nicknameTextView"
             android:layout_width="match_parent"

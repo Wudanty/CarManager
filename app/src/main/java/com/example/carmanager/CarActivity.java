@@ -62,6 +62,7 @@ public class CarActivity extends AppCompatActivity {
         addCar = findViewById(R.id.buttonAdd);
         selectedCarPicture = findViewById(R.id.imageViewCarSelect);
 
+
         dbManager.fillCarArrayList();
 
         String uri = "@drawable/images";  // where myresource (without the extension) is the file
@@ -96,7 +97,6 @@ public class CarActivity extends AppCompatActivity {
                 brandTextView.setText(selectedCar.getBrand());
                 nicknameTextView.setText("\""+selectedCar.getCarNickname()+"\"");
                 plateNumber.setText(selectedCar.getRegistry());
-                selectedCarPicture.setImageDrawable(res);
                 try {
                     selectedCarPicture.setImageBitmap(BitmapFactory.decodeByteArray(selectedCar.getPicture(), 0, selectedCar.getPicture().length));
 

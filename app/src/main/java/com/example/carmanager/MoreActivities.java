@@ -133,7 +133,6 @@ public class MoreActivities extends AppCompatActivity {
                             Intent intent = new Intent(view.getContext(), AdditionContact.class);
                             intent.putExtra("id",object.getContactId());
                             startActivity(intent);
-                            finish();
                     }
                 });
                 builder.show();
