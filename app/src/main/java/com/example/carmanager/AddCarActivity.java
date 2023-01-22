@@ -31,6 +31,7 @@ public class AddCarActivity extends AppCompatActivity {
     Button goNextButton;
     Spinner bodyTypeSpinner, fuelTypeSpinner;
     RadioButton manual, automatic;
+    RadioButton radioButton;
     RadioGroup radioGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +49,12 @@ public class AddCarActivity extends AppCompatActivity {
         vinNumberEditText = findViewById(R.id.editTextVin);
         bodyTypeSpinner = findViewById(R.id.spinnerBodyType);
         colorEditText = findViewById(R.id.editTextColour);
-        manual = findViewById(R.id.radioButtonManual);
-        automatic = findViewById(R.id.radioButtonAutomatic);
+        //manual = findViewById(R.id.radio_one);
+        //automatic = findViewById(R.id.radio_two);
         fuelTypeSpinner = findViewById(R.id.spinnerFuelType);
         plateNumberEditText = findViewById(R.id.editTextRegistry);
         productionYearEditText = findViewById(R.id.editTextProdDate);
-        radioGroup = findViewById(R.id.shifterRadioGroup);
+        radioGroup = findViewById(R.id.radioGroup);
 
         goNextButton = findViewById(R.id.buttonAdd);
 
@@ -64,9 +65,6 @@ public class AddCarActivity extends AppCompatActivity {
 
                 Boolean parsingError, weightParseErr, tankVolumeParseErr, engineVolumeParseErr, enginePowerParseErr, prodYearParseErr;
                 //parsing
-                radioGroup.removeAllViews();
-                radioGroup.addView(manual);
-                radioGroup.addView(automatic);
                 try{
                     NewCar.newCar.setTankVolume(Double.parseDouble(getETString(tankVolumeEditText)));
                     tankVolumeParseErr = false;
@@ -122,13 +120,6 @@ public class AddCarActivity extends AppCompatActivity {
                     NewCar.newCar.setVin(getETString(vinNumberEditText));
                     NewCar.newCar.setBodyType(bodyTypeSpinner.getSelectedItem().toString());
                     NewCar.newCar.setColour(getETString(colorEditText));
-                    if(manual.isChecked()) {
-                        NewCar.newCar.setShifterType("Manualna");
-                        //automatic.setChecked(false);
-                    }else if(automatic.isChecked()){
-                        NewCar.newCar.setShifterType("Automatyczna");
-                        //manual.setChecked(false);
-                    }
                     NewCar.newCar.setFuelType(fuelTypeSpinner.getSelectedItem().toString());
                     NewCar.newCar.setRegistry(getETString(plateNumberEditText));
                     NewCar.newCar.setProductionDate(Integer.parseInt(getETString(productionYearEditText)));
@@ -155,30 +146,6 @@ public class AddCarActivity extends AppCompatActivity {
         toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle(null);
-
-
-
-
-
-
-        manual.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                    automatic.setChecked(false);
-                }
-            }
-        });
-
-        automatic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                    manual.setChecked(false);
-                }
-            }
-        });
-
 
 
         btnCar.setOnClickListener(new View.OnClickListener() {
@@ -227,5 +194,10 @@ public class AddCarActivity extends AppCompatActivity {
 
     String getETString(EditText editText){
         return String.valueOf(editText.getText());
+    }
+
+    public void checkRadio(View v) {
+        radioButton = findViewById(radioGroup.getCheckedRadioButtonId());
+        NewCar.newCar.setShifterType(radioButton.getText().toString());
     }
 }
