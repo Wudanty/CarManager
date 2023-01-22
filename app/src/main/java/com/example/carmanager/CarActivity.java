@@ -61,8 +61,7 @@ public class CarActivity extends AppCompatActivity {
         deleteCar = findViewById(R.id.deleteCarButton);
         addCar = findViewById(R.id.buttonAdd);
         selectedCarPicture = findViewById(R.id.imageViewCarSelect);
-        selectedCarPicture.getLayoutParams().height = 200;
-        selectedCarPicture.getLayoutParams().width = WindowManager.LayoutParams.MATCH_PARENT;
+
 
         dbManager.fillCarArrayList();
 
@@ -98,7 +97,6 @@ public class CarActivity extends AppCompatActivity {
                 brandTextView.setText(selectedCar.getBrand());
                 nicknameTextView.setText("\""+selectedCar.getCarNickname()+"\"");
                 plateNumber.setText(selectedCar.getRegistry());
-                selectedCarPicture.setImageDrawable(res);
                 try {
                     selectedCarPicture.setImageBitmap(BitmapFactory.decodeByteArray(selectedCar.getPicture(), 0, selectedCar.getPicture().length));
 
