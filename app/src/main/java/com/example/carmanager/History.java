@@ -21,6 +21,7 @@ import android.widget.ListView;
 import com.example.carmanager.models.Checkup;
 import com.example.carmanager.models.Fix;
 import com.example.carmanager.models.FuelFill;
+import com.example.carmanager.models.Insurance;
 import com.example.carmanager.models.Maintenance;
 import com.example.carmanager.models.Mileage;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -35,7 +36,7 @@ public class History extends AppCompatActivity {
     Button btnCar, btnMoreActivities, btnHistory, btnSettings, btnMainActivity;
     //Toolbar-----------------------------------------------
 
-    Button FuelFillBtn, MaintenanceBtn, CheckUpBtn, FixBtn, MileageBtn;
+    Button FuelFillBtn, MaintenanceBtn, CheckUpBtn, FixBtn, MileageBtn, InsuranceBtn;
     ListView ListViewHistory;
     LinearLayout layoutColumnNames;
     FloatingActionButton floatingButton;
@@ -64,6 +65,7 @@ public class History extends AppCompatActivity {
         CheckUpBtn = findViewById(R.id.buttonCheckUp);
         FixBtn = findViewById(R.id.buttonFix);
         MileageBtn = findViewById(R.id.buttonMileage);
+        InsuranceBtn = findViewById(R.id.buttonInsurance);
 
         ListViewHistory = findViewById(R.id.ListViewHistory);
         layoutColumnNames = findViewById(R.id.layoutColumnNames);
@@ -270,6 +272,12 @@ public class History extends AppCompatActivity {
                 initAdapter(5);
             }
         });
+        InsuranceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initAdapter(6);
+            }
+        });
     }
 
     public void initAdapter(int type) {
@@ -308,6 +316,12 @@ public class History extends AppCompatActivity {
             AdapterCheckUp adapter5 = new AdapterCheckUp(getApplicationContext(), Checkup.listOfCheckup);
             columns = getLayoutInflater().inflate(R.layout.check_up_cell, null);
             ListViewHistory.setAdapter(adapter5);
+        } else if (type == 6) {
+            number = 6;
+            Collections.reverse(Insurance.listOfInsurance);
+            AdapterInsurance adapter6 = new AdapterInsurance(getApplicationContext(), Insurance.listOfInsurance);
+            columns = getLayoutInflater().inflate(R.layout.check_up_cell, null);
+            ListViewHistory.setAdapter(adapter6);
         }
 
         layoutColumnNames.removeAllViews();
