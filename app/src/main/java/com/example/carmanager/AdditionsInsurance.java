@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -58,8 +59,10 @@ public class AdditionsInsurance extends AppCompatActivity {
         if(extras != null){
             idToEdit = extras.getInt("id");
             dbManager.fillMileageArrayList();
-            object = Insurance.listOfInsurance.get(idToEdit);
-
+            for (int i = 0; i < Insurance.listOfInsurance.size(); i++) {
+                if (Insurance.listOfInsurance.get(i).getInsuranceId() == idToEdit) {
+                    object = Insurance.listOfInsurance.get(i);
+                }}
             etInsurancePrice.setText(object.getPrice().toString());
             etInsuranceCompany.setText(object.getProvider().toString());
             etInsuranceNumber.setText(object.getInsuranceNumber().toString());
@@ -109,7 +112,8 @@ public class AdditionsInsurance extends AppCompatActivity {
             insurance = new Insurance(sh.getInt("activeCarId",0),InsuranceFromDate,InsuranceNextDate,InsuranceCompany,InsurancePrice,InsuranceNote,InsuranceNumber);
             dbManager.addInsuranceToDb(insurance);
         }
-
+        Intent intent = new Intent(view.getContext(), History.class);
+        startActivity(intent);
         finish();
 
     }

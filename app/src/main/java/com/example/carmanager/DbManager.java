@@ -384,8 +384,9 @@ public class DbManager extends SQLiteOpenHelper {
         Maintenance.listOfMaintance.clear();
         Mileage.listOfMIleage.clear();
         Checkup.listOfCheckup.clear();
+        Insurance.listOfInsurance.clear();
 
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_TANKOWANIE + " WHERE " + TANKOWANIE_ID_AUTA + " = " + carID+" ORDER BY "+ TANKOWANIE_DATA+ " ASC", null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_TANKOWANIE + " WHERE " + TANKOWANIE_ID_AUTA + " = " + carID + " ORDER BY " + TANKOWANIE_DATA + " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -403,7 +404,7 @@ public class DbManager extends SQLiteOpenHelper {
                 }
             }
         }
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAPRAWA + " WHERE " + NAPRAWA_ID_AUTA + " = " + carID+" ORDER BY "+ NAPRAWA_DATA+ " ASC", null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_NAPRAWA + " WHERE " + NAPRAWA_ID_AUTA + " = " + carID + " ORDER BY " + NAPRAWA_DATA + " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -419,7 +420,7 @@ public class DbManager extends SQLiteOpenHelper {
                 }
             }
         }
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_EKSPLOATACYJNE + " WHERE " + EKSPLOATACYJNE_ID_AUTA + " = " + carID +" ORDER BY "+ EKSPLOATACYJNE_DATA+ " ASC", null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_EKSPLOATACYJNE + " WHERE " + EKSPLOATACYJNE_ID_AUTA + " = " + carID + " ORDER BY " + EKSPLOATACYJNE_DATA + " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -437,7 +438,7 @@ public class DbManager extends SQLiteOpenHelper {
                 }
             }
         }
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEBIEG + " WHERE " + PRZEBIEG_ID_AUTA + " = " + carID +" ORDER BY "+ PRZEBIEG_DATA+ " ASC", null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEBIEG + " WHERE " + PRZEBIEG_ID_AUTA + " = " + carID + " ORDER BY " + PRZEBIEG_DATA + " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -451,7 +452,7 @@ public class DbManager extends SQLiteOpenHelper {
                 }
             }
         }
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEGLAD + " WHERE " + PRZEGLAD_ID_AUTA + " = " + carID +" ORDER BY "+ PRZEGLAD_KIEDY+ " ASC", null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEGLAD + " WHERE " + PRZEGLAD_ID_AUTA + " = " + carID + " ORDER BY " + PRZEGLAD_KIEDY + " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
@@ -469,6 +470,28 @@ public class DbManager extends SQLiteOpenHelper {
                 }
             }
         }
+
+
+
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_UBEZPIECZENIE + " WHERE " + UBEZPIECZENIE_ID_AUTA + " = " + carID + " ORDER BY " + UBEZPIECZENIE_KIEDY + " ASC", null)) {
+            if (result.getCount() != 0) {
+                while (result.moveToNext()) {
+                    int id = result.getInt(0);
+                    int carId = result.getInt(1);
+                    String startDate = result.getString(2);
+                    String endDate = result.getString(3);
+                    String provider = result.getString(4);
+                    Double price = result.getDouble(5);
+                    String insuranceType = result.getString(6);
+                    String insuranceNumber = result.getString(7);
+
+                    Insurance insurance = new Insurance(id, carId, startDate, endDate, provider, price, insuranceType, insuranceNumber);
+                    Insurance.listOfInsurance.add(insurance);
+
+                }
+            }
+        }
+
     }
 
     //CAR
@@ -849,7 +872,7 @@ public class DbManager extends SQLiteOpenHelper {
                     String name = result.getString(7);
                     String pow = result.getString(8);
 
-                    Notification notification = new Notification(id, carId, date, description, importance, type, kolometre, name,pow);
+                    Notification notification = new Notification(id, carId, date, description, importance, type, kolometre, name, pow);
                     Notification.listOfNotification.add(notification);
                 }
             }
@@ -950,7 +973,7 @@ public class DbManager extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Checkup.listOfCheckup.clear();
 
-        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEGLAD+ " ORDER BY " + PRZEGLAD_KIEDY + " ASC", null)) {
+        try (Cursor result = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_PRZEGLAD + " ORDER BY " + PRZEGLAD_KIEDY + " ASC", null)) {
             if (result.getCount() != 0) {
                 while (result.moveToNext()) {
                     int id = result.getInt(0);
