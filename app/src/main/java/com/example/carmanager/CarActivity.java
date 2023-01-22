@@ -61,8 +61,7 @@ public class CarActivity extends AppCompatActivity {
         deleteCar = findViewById(R.id.deleteCarButton);
         addCar = findViewById(R.id.buttonAdd);
         selectedCarPicture = findViewById(R.id.imageViewCarSelect);
-        selectedCarPicture.getLayoutParams().height = 200;
-        selectedCarPicture.getLayoutParams().width = WindowManager.LayoutParams.MATCH_PARENT;
+
 
         dbManager.fillCarArrayList();
 
@@ -98,7 +97,6 @@ public class CarActivity extends AppCompatActivity {
                 brandTextView.setText(selectedCar.getBrand());
                 nicknameTextView.setText("\""+selectedCar.getCarNickname()+"\"");
                 plateNumber.setText(selectedCar.getRegistry());
-                selectedCarPicture.setImageDrawable(res);
                 try {
                     selectedCarPicture.setImageBitmap(BitmapFactory.decodeByteArray(selectedCar.getPicture(), 0, selectedCar.getPicture().length));
 
@@ -235,7 +233,7 @@ public class CarActivity extends AppCompatActivity {
         final LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.more, null);
         Button btnContacts=linearLayout.findViewById(R.id.btnContacts);
         Button btnReminder=linearLayout.findViewById(R.id.btnReminder);
-        Button btnSettings=linearLayout.findViewById(R.id.btnContacts);
+        Button btnSettings=linearLayout.findViewById(R.id.btnSettings);
         final AlertDialog builder = new AlertDialog.Builder(this)
                 .setView(linearLayout)
                 .setCancelable(true)
@@ -264,6 +262,14 @@ public class CarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CarActivity.this, Notifications.class);
+                startActivity(intent);
+                builder.cancel();
+            }
+        });
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CarActivity.this, SettingsActivity.class);
                 startActivity(intent);
                 builder.cancel();
             }
