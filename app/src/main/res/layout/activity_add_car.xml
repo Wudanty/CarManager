@@ -271,31 +271,29 @@
                 android:text="Rodzaj Skrzyni Biegów:" />
 
             <RadioGroup
-                android:id="@+id/shifterRadioGroup"
+                android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="horizontal"
                 android:layout_weight="0">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
                     <RadioButton
-                        android:id="@+id/radioButtonManual"
+                        android:id="@+id/radio_one"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:onClick="checkRadio"
+                        android:checked="true"
                         android:text="Manualna" />
 
                     <RadioButton
-                        android:id="@+id/radioButtonAutomatic"
+                        android:id="@+id/radio_two"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:onClick="checkRadio"
                         android:text="Automatyczna" />
-                </LinearLayout>
+
 
             </RadioGroup>
 
