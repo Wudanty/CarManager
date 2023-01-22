@@ -64,6 +64,7 @@ public class AddCarActivity extends AppCompatActivity {
 
                 Boolean parsingError, weightParseErr, tankVolumeParseErr, engineVolumeParseErr, enginePowerParseErr, prodYearParseErr;
                 //parsing
+                radioGroup.removeAllViews();
                 radioGroup.addView(manual);
                 radioGroup.addView(automatic);
                 try{
