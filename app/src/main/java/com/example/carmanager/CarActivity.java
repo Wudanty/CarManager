@@ -108,6 +108,14 @@ public class CarActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+//                modelTextView.setText("");
+//                brandTextView.setText("");
+//                nicknameTextView.setText("");
+//                plateNumber.setText("");
+//                try {
+//                    selectedCarPicture.setImageBitmap(BitmapFactory.decodeByteArray(selectedCar.getPicture(), 0, selectedCar.getPicture().length));
+//
+//                }catch(Exception e){};
 
             }
         });
@@ -146,10 +154,13 @@ public class CarActivity extends AppCompatActivity {
                 selectCarSpinner.setAdapter(selectedCarAdapter);
 
 
-                modelTextView.setText(selectedCar.getModel());
-                brandTextView.setText(selectedCar.getBrand());
-                nicknameTextView.setText("\""+selectedCar.getCarNickname()+"\"");
-                plateNumber.setText(selectedCar.getRegistry());
+                modelTextView.setText("");
+                brandTextView.setText("");
+                nicknameTextView.setText("");
+                plateNumber.setText("");
+                try {
+                    selectedCarPicture.setImageResource(R.drawable.images);
+                }catch(Exception e){};
 
             }
         });

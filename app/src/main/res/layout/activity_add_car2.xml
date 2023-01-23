@@ -107,34 +107,26 @@
             android:id="@+id/editTextMultiLineDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
+            android:layout_weight="1"
             android:ems="10"
             android:gravity="start|top"
             android:inputType="textMultiLine"
-            android:lines="14"
-            />
+            android:lines="14" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/buttonsLayout"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="end">
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <Button
+                android:id="@+id/buttonAdd"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/buttonAdd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="ZAPISZ"
-                    app:cornerRadius="0dp"/>
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="wrap_content"
+                android:text="ZAPISZ"
+                app:cornerRadius="0dp" />
+        </LinearLayout>
 
     </LinearLayout>
+
 </LinearLayout>
