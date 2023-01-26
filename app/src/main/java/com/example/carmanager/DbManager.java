@@ -502,7 +502,7 @@ public class DbManager extends SQLiteOpenHelper {
         contentValues.put(AUTO_MARKA, car.getBrand());
         contentValues.put(AUTO_MODEL, car.getModel());
         contentValues.put(AUTO_ROCZNIK, car.getProductionDate());
-        contentValues.put(AUTO_POJ_SILNIKA, car.getTankVolume());
+        contentValues.put(AUTO_POJ_SILNIKA, car.getEngineCapacity());
         contentValues.put(AUTO_VIN, car.getVin());
         contentValues.put(AUTO_OPIS, car.getDescription());
         contentValues.put(AUTO_PALIWO, car.getFuelType());
@@ -588,7 +588,7 @@ public class DbManager extends SQLiteOpenHelper {
         contentValues.put(AUTO_MARKA, car.getBrand());
         contentValues.put(AUTO_MODEL, car.getModel());
         contentValues.put(AUTO_ROCZNIK, car.getProductionDate());
-        contentValues.put(AUTO_POJ_SILNIKA, car.getTankVolume());
+        contentValues.put(AUTO_POJ_SILNIKA, car.getEngineCapacity());
         contentValues.put(AUTO_VIN, car.getVin());
         contentValues.put(AUTO_OPIS, car.getDescription());
         contentValues.put(AUTO_PALIWO, car.getFuelType());

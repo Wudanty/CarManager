@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DbManager dbManager = DbManager.instanceOfDatabase(this);
-
         //Toolbar-----------------------------------------------
         btnCar = findViewById(R.id.car);
         btnMoreActivities = findViewById(R.id.more);
@@ -74,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
         text_skrzynia = findViewById(R.id.skrzynia_v);
         SharedPreferences myPrefs;
 
-
         try {
             myPrefs = getSharedPreferences("activeCar", MODE_PRIVATE);
             int carId = myPrefs.getInt("activeCarId",0);
@@ -92,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
                 imageCar2.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
             } catch (Exception e) {
-                e.printStackTrace();
+                imageCar1.setImageResource(R.drawable.images);
+                imageCar2.setImageResource(R.drawable.images);
             }
             text_nazwa.setText(object.getCarNickname());
             text_marka.setText(object.getBrand());

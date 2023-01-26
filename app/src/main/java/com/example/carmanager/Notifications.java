@@ -118,6 +118,10 @@ public class Notifications extends AppCompatActivity {
                     layout_list.setVisibility(View.GONE);
                     layout_empty.setVisibility(View.VISIBLE);
                 }
+                else{
+                    layout_list.setVisibility(View.VISIBLE);
+                    layout_empty.setVisibility(View.GONE);
+                }
             }
         });
         notification_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
