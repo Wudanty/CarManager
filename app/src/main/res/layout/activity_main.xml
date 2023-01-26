@@ -137,6 +137,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/my_border"
                         android:text="Nr. VIN:" />
+
                 </LinearLayout>
 
                 <LinearLayout
