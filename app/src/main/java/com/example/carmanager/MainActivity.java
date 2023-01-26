@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.carmanager.models.Car;
 import com.example.carmanager.models.Checkup;
+import com.example.carmanager.models.Insurance;
+import com.example.carmanager.models.Mileage;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Objects;
 
@@ -61,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         text_rok = findViewById(R.id.rok_v);
         text_polisa = findViewById(R.id.polisa_v);
         text_vin = findViewById(R.id.vin_v);
-
         imageCar2 = findViewById(R.id.image_car2);
         text_poj = findViewById(R.id.poj_v);
         text_moc = findViewById(R.id.moc_v);
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             myPrefs = getSharedPreferences("activeCar", MODE_PRIVATE);
             int carId = myPrefs.getInt("activeCarId",0);
             Car object = dbManager.getCarById(carId);
+            dbManager.getCarHistory(object.getCarId());
             if(object==null){
                 layout_empty.setVisibility(View.VISIBLE);
                 layout_all.setVisibility(View.GONE);
@@ -86,20 +88,43 @@ public class MainActivity extends AppCompatActivity {
                 layout_empty.setVisibility(View.GONE);
                 layout_all.setVisibility(View.VISIBLE);
             }
-            imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
-            imageCar2.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
+            try {
+                imageCar1.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
+                imageCar2.setImageBitmap(BitmapFactory.decodeByteArray(object.getPicture(), 0, object.getPicture().length));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             text_nazwa.setText(object.getCarNickname());
             text_marka.setText(object.getBrand());
             text_model.setText(object.getModel());
             text_tablica.setText(object.getRegistry());
             text_rok.setText(object.getProductionDate().toString());
-            text_polisa.setText(object.getTankVolume().toString());
-            text_vin.setText(object.getVin());
+            text_vin.setText(object.getVin().toString());
+            try{
+                if(Insurance.listOfInsurance.size()==0){
+                    text_polisa.setText("Brak");
+                }
+                else {
+                    text_polisa.setText(Insurance.listOfInsurance.get(0).getInsuranceNumber());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-            text_poj.setText(object.getEngineCapacity().toString());
-            text_moc.setText(String.valueOf(object.getEnginePower()));
-            text_przebieg.setText(String.valueOf(object.getEnginePower()));
-            text_waga.setText(object.getWeight().toString());
+
+            text_poj.setText(object.getEngineCapacity().toString()+" cm³");
+            text_moc.setText(String.valueOf(object.getEnginePower()+" KM"));
+            try{
+                if(Mileage.listOfMIleage.size()==0){
+                    text_przebieg.setText("Brak");
+                }
+                else {
+                    text_przebieg.setText(Mileage.listOfMIleage.get(Mileage.listOfMIleage.size()-1).getMileageValue().toString()+" km");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            text_waga.setText(object.getWeight().toString()+" kg");
             text_paliwo.setText(object.getFuelType());
             text_nadwozie.setText(object.getBodyType());
             text_kolor.setText(object.getColour());
