@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".History"
+    android:orientation="vertical">
+    <include layout="@layout/toolbar"/>
+    <TextView
+        android:paddingTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="HISTORIA"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/buttonFuel"
+            android:layout_width="0dp"
+            android:layout_height="37dp"
+            android:layout_weight="1"
+            android:textSize="8dp"
+            android:text="Paliwo"
+            app:cornerRadius="0sp"
+            android:insetBottom="0dp"/>
+
+        <Button
+            android:id="@+id/buttonFix"
+            android:layout_width="0dp"
+            android:textSize="8dp"
+            android:layout_height="37dp"
+            android:layout_weight="1"
+            android:text="Naprawy"
+            app:cornerRadius="0sp"
+            android:insetBottom="0dp"/>
+
+        <Button
+            android:id="@+id/buttonMaintenance"
+            android:layout_width="0dp"
+            android:layout_height="37dp"
+            android:layout_weight="1"
+            app:cornerRadius="0sp"
+            android:text="Eksploat."
+            android:textSize="8dp"
+            android:insetBottom="0dp"/>
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/buttonMileage"
+            android:layout_width="0dp"
+            android:textSize="8dp"
+            android:layout_height="37dp"
+            android:layout_weight="1"
+            app:cornerRadius="0sp"
+            android:text="Przebieg"
+            android:insetTop="0dp"/>
+
+        <Button
+            android:id="@+id/buttonCheckUp"
+            android:layout_width="0dp"
+            android:textSize="8dp"
+            android:layout_height="37dp"
+            android:layout_weight="1"
+            app:cornerRadius="0sp"
+            android:text="Przegląd"
+            android:insetTop="0dp"/>
+            <Button
+                android:id="@+id/buttonInsurance"
+                android:layout_width="0dp"
+                android:textSize="8dp"
+                android:layout_height="37dp"
+                android:layout_weight="1"
+                app:cornerRadius="0sp"
+                android:text="Ubezpieczenie"
+                android:insetTop="0dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutColumnNames"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+    <ListView
+        android:id="@+id/ListViewHistory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1">
+
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:srcCompat="@drawable/ic_baseline_add_24" />
+    </LinearLayout>
+
+</LinearLayout>

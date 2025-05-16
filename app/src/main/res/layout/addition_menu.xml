@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="230dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+
+  >
+
+    <Button
+        android:id="@+id/btnFuel"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="12dp"
+        android:alpha="0.90"
+        android:gravity="center"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="Paliwo"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:cornerRadius="0sp"
+        android:backgroundTint="@color/purple_700"/>
+
+    <Button
+        android:id="@+id/btnMileage"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="12dp"
+        android:alpha="0.90"
+        android:gravity="center"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="Przebieg"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:cornerRadius="0dp"
+        android:backgroundTint="@color/purple_700"/>
+
+    <Button
+        android:id="@+id/btnRepairs"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="12dp"
+        android:alpha="0.90"
+        android:gravity="center"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="Naprawy"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:cornerRadius="0dp"
+        android:backgroundTint="@color/purple_700"/>
+
+    <Button
+        android:id="@+id/btnOperatingElements"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="12dp"
+        android:alpha="0.90"
+        android:gravity="center"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="Części wymienne"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:cornerRadius="0dp"
+        android:backgroundTint="@color/purple_700"/>
+
+    <Button
+        android:id="@+id/btnCarInspection"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="12dp"
+        android:alpha="0.90"
+        android:gravity="center"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="Przegląd"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:cornerRadius="0dp"
+        android:backgroundTint="@color/purple_700"/>
+    <Button
+        android:id="@+id/btnCarInsurance"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="12dp"
+        android:alpha="0.90"
+        android:gravity="center"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="Ubezpieczenie"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:cornerRadius="0dp"
+        android:backgroundTint="@color/purple_700"/>
+</LinearLayout>

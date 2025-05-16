@@ -1,0 +1,17 @@
+<resources>
+    <string-array name="spinnerItemsFuelType">
+        <item>Benzyna</item>
+        <item>LPG</item>
+        <item>Ropa</item>
+        <item>Wodór</item>
+    </string-array>
+    <string-array name="spinnerItemsBodyType">
+        <item>Sedan</item>
+        <item>Hatchback</item>
+        <item>SUV</item>
+        <item>Coupe</item>
+        <item>Combi</item>
+        <item>Van</item>
+        <item>Cabrio</item>
+    </string-array>
+</resources>
